@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Octane Calculator</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #000; }
+body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; color: #fff; }
+
+.page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #F04A2B 0%, #D93E29 40%, #B03328 100%);
+}
+
+.bg-shape {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card {
+    background: linear-gradient(180deg, #1e1e1e, #141414);
+    border-radius: 18px;
+    padding: 32px;
+    width: 360px;
+    max-width: 95%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    z-index: 2;
+    position: relative;
+    margin: 40px 0;
+}
+
+.card h2 {
+    text-align: center;
+    margin: 0 0 18px 0;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+.card label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #bbb;
+}
+
+.card input,
+.card select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.card input:focus,
+.card select:focus {
+    box-shadow: 0 0 0 2px rgba(217,62,41,0.6);
+}
+
+.btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background: #D93E29;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn:hover { background: #b83222; }
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 16px;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: #aaa;
+    background: transparent;
+    border: none;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.tab:hover { color: #fff; }
+
+.tab.active {
+    color: #fff;
+    font-weight: bold;
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 20%; width: 60%; height: 3px;
+    background: #D93E29;
+    border-radius: 2px;
+}
+
+.result {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 18px;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.note {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #aaa;
+    text-align: center;
+    line-height: 1.4;
+    white-space: pre-line;
+}
+
+@media (max-width: 480px) {
+    .page-wrapper { padding: 16px 8px; align-items: flex-start; }
+    .card { padding: 20px 16px; border-radius: 12px; max-width: 100%; margin: 20px 0; }
+    .card h2 { font-size: 18px; }
+    .card label { font-size: 12px; }
+    .card input, .card select { font-size: 13px; padding: 9px; }
+    .btn { font-size: 14px; padding: 11px; }
+    .tab { font-size: 11px; padding: 8px 0; }
+    .result { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <svg class="bg-shape" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0,100 C25,70 60,40 100,30 L100,100 Z" fill="#000" />
+    </svg>
+
+    <div class="card">
+
+        <h2>Fuel Blending Tool</h2>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('final', this)">Calcular mezcla</button>
+            <button class="tab" onclick="showTab('needed', this)">Calcular dosis</button>
+            <button class="tab" onclick="showTab('ethanol', this)">Etanol %</button>
+        </div>
+
+        <div id="additiveSection">
+            <label>Aditivo / Mezcla</label>
+            <select id="additive" onchange="handleAdditiveChange()">
+                <option value="vp">VP Octane Booster</option>
+                <option value="boostane">Boostane Professional</option>
+                <option value="e85">E85</option>
+            </select>
+        </div>
+
+        <!-- Tab 1: Calculate Final Octane -->
+        <div id="tabFinal">
+            <label>Galones de gasolina</label>
+            <input type="number" id="gallons" step="0.1" value="16">
+
+            <label>Octanaje base</label>
+            <input type="number" id="baseOctane" step="0.1" value="87">
+
+            <div id="boosterField">
+                <label>Onzas de aditivo</label>
+                <input type="number" id="boosterOz" step="0.1" value="16">
+            </div>
+
+            <div id="e85Fields" style="display:none;">
+                <label>Galones de E85</label>
+                <input type="number" id="e85Gallons" step="0.1" value="5">
+
+                <label>Octanaje del E85</label>
+                <input type="number" id="e85Octane" step="0.1" value="100">
+            </div>
+
+            <button class="btn" onclick="calculateFinal()">Calcular</button>
+        </div>
+
+        <!-- Tab 2: Calculate Needed Amount -->
+        <div id="tabNeeded" style="display:none;">
+            <label>Galones de gasolina</label>
+            <input type="number" id="gallonsTarget" step="0.1" value="16">
+
+            <label>Octanaje base</label>
+            <input type="number" id="baseOctaneTarget" step="0.1" value="87">
+
+            <label>Octanaje objetivo</label>
+            <input type="number" id="targetOctane" step="0.1" value="91">
+
+            <button class="btn" onclick="calculateNeeded()">Calcular</button>
+        </div>
+
+        <!-- Tab 3: Ethanol % -->
+        <div id="tabEthanol" style="display:none;">
+
+            <div class="tabs" style="margin-top:10px;">
+                <button class="tab active" onclick="showEthanolTab('fill', this)">Llenar tanque</button>
+                <button class="tab" onclick="showEthanolTab('increase', this)">Subir mezcla</button>
+            </div>
+
+            <div id="ethFill">
+                <label>Capacidad total del tanque (gal)</label>
+                <input type="number" id="tankCapacity" step="0.1" value="16">
+
+                <label>Combustible actual en tanque (gal)</label>
+                <input type="number" id="currentFuel" step="0.1" value="4">
+
+                <label>% etanol actual</label>
+                <input type="number" id="currentEthanol" step="1" value="0">
+
+                <label>% etanol deseado</label>
+                <input type="number" id="targetEthanolFill" step="1" value="10">
+
+                <label>% etanol del E85</label>
+                <input type="number" id="e85PercentFill" step="1" value="85">
+
+                <button class="btn" onclick="calculateFill()">Calcular</button>
+            </div>
+
+            <div id="ethIncrease" style="display:none;">
+                <label>Combustible actual (gal)</label>
+                <input type="number" id="currentFuelOnly" step="0.1" value="10">
+
+                <label>% etanol actual</label>
+                <input type="number" id="currentEthanolOnly" step="1" value="0">
+
+                <label>% etanol deseado</label>
+                <input type="number" id="targetEthanolOnly" step="1" value="10">
+
+                <label>% etanol del E85</label>
+                <input type="number" id="e85PercentOnly" step="1" value="85">
+
+                <button class="btn" onclick="calculateIncrease()">Calcular</button>
+            </div>
+
+        </div>
+
+        <div class="result" id="result"></div>
+        <div class="note" id="note"></div>
+
+    </div>
+
+</div>
+
+<script>
+function showTab(tab, btn) {
+    document.getElementById('tabFinal').style.display = tab === 'final' ? 'block' : 'none';
+    document.getElementById('tabNeeded').style.display = tab === 'needed' ? 'block' : 'none';
+    document.getElementById('tabEthanol').style.display = tab === 'ethanol' ? 'block' : 'none';
+    document.getElementById('additiveSection').style.display = tab === 'ethanol' ? 'none' : 'block';
+    btn.parentElement.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('result').innerText = '';
+    document.getElementById('note').innerText = '';
+}
+
+function showEthanolTab(tab, btn) {
+    document.getElementById('ethFill').style.display = tab === 'fill' ? 'block' : 'none';
+    document.getElementById('ethIncrease').style.display = tab === 'increase' ? 'block' : 'none';
+    btn.parentElement.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('result').innerText = '';
+    document.getElementById('note').innerText = '';
+}
+
+function handleAdditiveChange() {
+    var additive = document.getElementById('additive').value;
+    document.getElementById('boosterField').style.display = additive === 'e85' ? 'none' : 'block';
+    document.getElementById('e85Fields').style.display = additive === 'e85' ? 'block' : 'none';
+}
+
+function getData(additive) {
+    if (additive === 'vp') return { factor: 3.3, note: '* Basado en gr\u00e1fica VP. Zona segura: ~10 oz / 10 gal' };
+    return { factor: 10.8, note: '* Basado en tabla Boostane Professional. C\u00e1lculo estimado' };
+}
+
+function calculateFinal() {
+    var additive = document.getElementById('additive').value;
+    var gallons = parseFloat(document.getElementById('gallons').value);
+    var baseOctane = parseFloat(document.getElementById('baseOctane').value);
+
+    if (additive === 'e85') {
+        var e85Gallons = parseFloat(document.getElementById('e85Gallons').value);
+        var e85Octane = parseFloat(document.getElementById('e85Octane').value);
+        if (isNaN(gallons) || isNaN(baseOctane) || isNaN(e85Gallons) || isNaN(e85Octane)) {
+            document.getElementById('result').innerText = 'Valores inv\u00e1lidos'; return;
+        }
+        var finalOctane = ((gallons * baseOctane) + (e85Gallons * e85Octane)) / (gallons + e85Gallons);
+        document.getElementById('result').innerText = 'Octanaje final \u2248 ' + finalOctane.toFixed(1);
+        document.getElementById('note').innerText = '* Promedio ponderado volum\u00e9trico (mezcla real)';
+    } else {
+        var boosterOz = parseFloat(document.getElementById('boosterOz').value);
+        if (isNaN(gallons) || isNaN(baseOctane) || isNaN(boosterOz) || gallons <= 0) {
+            document.getElementById('result').innerText = 'Valores inv\u00e1lidos'; return;
+        }
+        var data = getData(additive);
+        var finalOctane = baseOctane + (boosterOz / gallons) * data.factor;
+        document.getElementById('result').innerText = 'Octanaje final \u2248 ' + finalOctane.toFixed(1);
+        document.getElementById('note').innerText = data.note;
+    }
+}
+
+function calculateNeeded() {
+    var additive = document.getElementById('additive').value;
+    var gallons = parseFloat(document.getElementById('gallonsTarget').value);
+    var baseOctane = parseFloat(document.getElementById('baseOctaneTarget').value);
+    var targetOctane = parseFloat(document.getElementById('targetOctane').value);
+
+    if (isNaN(gallons) || isNaN(baseOctane) || isNaN(targetOctane) || targetOctane <= baseOctane) {
+        document.getElementById('result').innerText = 'Valores inv\u00e1lidos'; return;
+    }
+
+    if (additive === 'e85') {
+        var required = (gallons * (targetOctane - baseOctane)) / (100 - targetOctane);
+        document.getElementById('result').innerText = 'Galones de E85 necesarios \u2248 ' + required.toFixed(2);
+        document.getElementById('note').innerText = '* C\u00e1lculo volum\u00e9trico te\u00f3rico';
+    } else {
+        var data = getData(additive);
+        var requiredOz = ((targetOctane - baseOctane) * gallons) / data.factor;
+        document.getElementById('result').innerText = 'Cantidad necesaria \u2248 ' + requiredOz.toFixed(1) + ' oz';
+        document.getElementById('note').innerText = data.note;
+    }
+}
+
+function calculateFill() {
+    var T = parseFloat(document.getElementById('tankCapacity').value);
+    var C = parseFloat(document.getElementById('currentFuel').value);
+    var E0 = parseFloat(document.getElementById('currentEthanol').value) / 100;
+    var Et = parseFloat(document.getElementById('targetEthanolFill').value) / 100;
+    var E85 = parseFloat(document.getElementById('e85PercentFill').value) / 100;
+
+    if (isNaN(T) || isNaN(C) || isNaN(E0) || isNaN(Et) || isNaN(E85) || C > T) {
+        document.getElementById('result').innerText = 'Valores inv\u00e1lidos'; return;
+    }
+
+    var x = ((Et * T) - (E0 * C)) / E85;
+    var gasoline = (T - C) - x;
+
+    if (x < 0 || gasoline < 0) {
+        document.getElementById('result').innerText = 'No es posible lograr ese % llenando el tanque.'; return;
+    }
+
+    document.getElementById('result').innerText =
+        'Agregar:\nE85 \u2248 ' + x.toFixed(2) + ' gal\nGasolina \u2248 ' + gasoline.toFixed(2) + ' gal';
+    document.getElementById('note').innerText = '* C\u00e1lculo volum\u00e9trico real';
+}
+
+function calculateIncrease() {
+    var C = parseFloat(document.getElementById('currentFuelOnly').value);
+    var E0 = parseFloat(document.getElementById('currentEthanolOnly').value) / 100;
+    var Et = parseFloat(document.getElementById('targetEthanolOnly').value) / 100;
+    var E85 = parseFloat(document.getElementById('e85PercentOnly').value) / 100;
+
+    if (isNaN(C) || isNaN(E0) || isNaN(Et) || isNaN(E85) || Et <= E0) {
+        document.getElementById('result').innerText = 'Valores inv\u00e1lidos'; return;
+    }
+
+    var x = (C * (Et - E0)) / (E85 - Et);
+
+    if (x < 0) {
+        document.getElementById('result').innerText = 'No es posible lograr ese % agregando solo E85.'; return;
+    }
+
+    document.getElementById('result').innerText = 'Agregar E85 \u2248 ' + x.toFixed(2) + ' gal';
+    document.getElementById('note').innerText = '* C\u00e1lculo volum\u00e9trico real';
+}
+</script>
+
+</body>
+</html>

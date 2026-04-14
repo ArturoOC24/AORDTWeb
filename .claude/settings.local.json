@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebSearch",
+      "WebFetch(domain:www.findglocal.com)",
+      "WebFetch(domain:www.hptuners.com)",
+      "WebFetch(domain:www.scribd.com)",
+      "WebFetch(domain:forum.hptuners.com)",
+      "WebFetch(domain:support.hptuners.com)",
+      "WebFetch(domain:www.mxamotorsports.com)",
+      "WebFetch(domain:hptuners.performanceplus.com)",
+      "Bash(python -m http.server 8080 --bind 0.0.0.0)",
+      "Bash(python -m http.server 3000 --bind 0.0.0.0)",
+      "Bash(python -m http.server 80 --bind 0.0.0.0)",
+      "Bash(gh api:*)",
+      "Bash(python -c \"from PIL import Image; print\\('Pillow available'\\)\")",
+      "Bash(python -c \"import cairosvg; print\\('cairosvg available'\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import cairosvg; print\\('cairosvg import works'\\)\")",
+      "Bash(python)",
+      "Bash(python -c \"import cairo; print\\(cairo.version\\); print\\(cairo.cairo_version_string\\(\\)\\)\")"
+    ]
+  }
+}
