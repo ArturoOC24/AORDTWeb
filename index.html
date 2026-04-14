@@ -628,6 +628,32 @@
       line-height: 1.7;
     }
 
+    /* ─── GALERÍA CTA ─── */
+    .galeria-cta {
+      background: var(--dark-card);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .galeria-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--white);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .galeria-cta-btn:hover {
+      background: rgba(230,57,70,0.15);
+      transform: translateY(-2px);
+    }
+
     /* ─── SOCIAL SECTION ─── */
     .social-section { background: var(--dark-card); }
     .social-cards {
@@ -1329,6 +1355,19 @@
           <p>Como parte de nuestro servicio, asesoramos a nuestros clientes sobre qué modificaciones hacer, en qué orden y según su presupuesto para sacar el máximo provecho a su vehículo.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA CTA -->
+  <section class="galeria-cta">
+    <div class="section-inner" style="text-align:center;">
+      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.2rem); margin-bottom:12px;">¿QUIERES VER RESULTADOS REALES?</h2>
+      <p class="section-desc" style="margin-bottom:28px;">Gráficas de potencia, videos de pulls en dyno y detalles de cada trabajo.</p>
+      <a href="galeria.html" class="galeria-cta-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Ver Galería
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </section>
 
