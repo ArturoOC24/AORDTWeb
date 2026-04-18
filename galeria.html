@@ -491,11 +491,23 @@
     const resultsEl  = document.getElementById('results');
     const stateMsgEl = document.getElementById('stateMsg');
 
-    fetch('posts.json')
-      .then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      })
+    const POSTS_URLS = [
+      'https://aordynotuning.com/posts.json',
+      'posts.json'
+    ];
+
+    function fetchPosts(urls) {
+      return urls.reduce((chain, url) =>
+        chain.catch(() =>
+          fetch(url).then(res => {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+        ), Promise.reject()
+      );
+    }
+
+    fetchPosts(POSTS_URLS)
       .then(posts => {
         stateMsgEl.remove();
         if (!posts.length) {
