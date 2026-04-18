@@ -162,6 +162,7 @@
       overflow: hidden;
       background: #000;
     }
+    /* Vertical genérico (Reels, etc.) */
     .result-video.vertical {
       padding-bottom: 0;
       height: auto;
@@ -175,6 +176,20 @@
       max-width: 380px;
       aspect-ratio: 9/16;
       height: auto;
+    }
+    /* TikTok: 325x740 (incluye header + descripción) */
+    .result-video.tiktok {
+      padding-bottom: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      background: #000;
+    }
+    .result-video.tiktok iframe {
+      position: relative;
+      width: 325px;
+      height: 740px;
+      max-width: 100%;
     }
     .result-video iframe {
       position: absolute;
@@ -508,9 +523,11 @@
 
       // Backward compat: support legacy "youtube" field
       const videoSrc = post.video_url || (post.youtube ? 'https://www.youtube.com/embed/' + post.youtube : null);
-      const isVertical = videoSrc && (videoSrc.includes('tiktok.com') || videoSrc.includes('facebook.com/plugins/video') && videoSrc.includes('reel'));
+      const isTikTok   = videoSrc && videoSrc.includes('tiktok.com');
+      const isVertical = videoSrc && !isTikTok && (videoSrc.includes('facebook.com/plugins/video') && videoSrc.includes('reel'));
+      const videoClass = isTikTok ? ' tiktok' : isVertical ? ' vertical' : '';
       const videoHTML = videoSrc
-        ? `<div class="result-video${isVertical ? ' vertical' : ''}">
+        ? `<div class="result-video${videoClass}">
              <iframe src="${videoSrc}" allowfullscreen loading="lazy"></iframe>
            </div>`
         : `<div class="result-video">
