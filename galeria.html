@@ -26,7 +26,6 @@
 
     :root {
       --red: #e63946;
-      --green: #006847;
       --white: #ffffff;
       --dark: #0a0a0a;
       --dark-card: #111111;
@@ -36,7 +35,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
       background: var(--dark);
@@ -62,11 +60,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img { height: 44px; width: auto; }
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a {
@@ -78,8 +72,7 @@
       text-transform: uppercase;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links a.active { color: var(--white); }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -100,7 +93,7 @@
       padding: 140px 24px 60px;
       text-align: center;
     }
-    .page-header .section-tag {
+    .section-tag {
       display: inline-block;
       font-size: 0.7rem;
       font-weight: 700;
@@ -124,7 +117,23 @@
       line-height: 1.7;
     }
 
-    /* ─── RESULT POSTS ─── */
+    /* ─── LOADING / ERROR ─── */
+    .state-msg {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--gray);
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(255,255,255,0.08);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── RESULTS ─── */
     .results {
       max-width: 1000px;
       margin: 0 auto;
@@ -139,11 +148,16 @@
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.06);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
+    .result-post.visible { opacity: 1; transform: translateY(0); }
 
+    /* Video */
     .result-video {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
       background: #000;
@@ -151,16 +165,13 @@
     .result-video iframe {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       border: none;
     }
-    /* Placeholder for when there's no video yet */
     .result-video-placeholder {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -168,18 +179,16 @@
       background: var(--dark-surface);
       color: var(--gray);
       gap: 12px;
+      font-size: 0.85rem;
     }
     .result-video-placeholder svg {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       stroke: var(--gray);
       fill: none;
     }
 
-    .result-body {
-      padding: 32px;
-    }
-
+    /* Body */
+    .result-body { padding: 32px; }
     .result-header {
       display: flex;
       align-items: center;
@@ -202,7 +211,6 @@
       border-radius: 100px;
       padding: 4px 12px;
     }
-
     .result-desc {
       color: var(--gray);
       line-height: 1.7;
@@ -210,9 +218,10 @@
       margin-bottom: 28px;
     }
 
+    /* Specs */
     .result-specs {
       display: flex;
-      gap: 24px;
+      gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 28px;
     }
@@ -222,10 +231,10 @@
       padding: 12px 20px;
       text-align: center;
       flex: 1;
-      min-width: 120px;
+      min-width: 110px;
     }
     .result-spec-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--gray);
@@ -237,15 +246,14 @@
       letter-spacing: 1px;
     }
     .result-spec-value.before { color: var(--gray); }
-    .result-spec-value.after { color: var(--red); }
-    .result-spec-value.gain { color: var(--gold); }
+    .result-spec-value.after  { color: var(--red); }
+    .result-spec-value.gain   { color: var(--gold); }
 
-    /* ─── DYNO CHART ─── */
+    /* Chart */
     .dyno-chart {
       background: var(--dark-surface);
       border-radius: 16px;
       padding: 24px;
-      position: relative;
     }
     .dyno-chart-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -260,10 +268,7 @@
       border-left: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .dyno-chart-area svg {
-      width: 100%;
-      height: 100%;
-    }
+    .dyno-chart-area svg { width: 100%; height: 100%; }
     .dyno-chart-legend {
       display: flex;
       gap: 24px;
@@ -278,26 +283,13 @@
       color: var(--gray);
     }
     .dyno-legend-dot {
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       border-radius: 50%;
     }
     .dyno-legend-dot.stock { background: var(--gray); }
     .dyno-legend-dot.tuned { background: var(--red); }
 
-    /* Y-axis labels */
-    .dyno-y-labels {
-      position: absolute;
-      top: 0; left: -36px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.3);
-    }
-
-    /* ─── BACK LINK ─── */
+    /* Back */
     .back-section {
       text-align: center;
       padding: 0 24px 80px;
@@ -315,7 +307,7 @@
     .back-link:hover { color: var(--white); }
     .back-link svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
 
-    /* ─── FOOTER ─── */
+    /* Footer */
     footer {
       text-align: center;
       padding: 40px 24px;
@@ -324,7 +316,7 @@
       border-top: 1px solid rgba(255,255,255,0.06);
     }
     footer span { color: var(--red); }
-    footer img { height: 36px; width: auto; margin-bottom: 12px; }
+    footer img { height: 36px; width: auto; margin: 0 auto 12px; display: block; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
@@ -333,9 +325,7 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 64px;
-        left: 0;
-        right: 0;
+        top: 64px; left: 0; right: 0;
         background: rgba(10,10,10,0.97);
         backdrop-filter: blur(12px);
         padding: 24px;
@@ -344,8 +334,8 @@
       }
       .hamburger { display: flex; }
       .result-specs { flex-direction: column; }
-      .result-body { padding: 24px; }
-      .result-header h2 { font-size: 1.5rem; }
+      .result-body { padding: 20px; }
+      .result-header h2 { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -375,176 +365,12 @@
     <p>Cada vehículo es diferente. Aquí mostramos resultados reales medidos en nuestro dinamómetro Dyno Dynamics, con gráficas de potencia antes y después de la reprogramación.</p>
   </div>
 
-  <!-- RESULTS -->
-  <div class="results">
-
-    <!-- POST 1 -->
-    <article class="result-post">
-      <div class="result-video">
-        <!-- Replace with: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe> -->
-        <div class="result-video-placeholder">
-          <svg viewBox="0 0 24 24" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>Video próximamente</span>
-        </div>
-      </div>
-      <div class="result-body">
-        <div class="result-header">
-          <h2>Ford Mustang GT 5.0 — Stage 2</h2>
-          <span class="result-tag">Naturally Aspirated</span>
-        </div>
-        <p class="result-desc">Reprogramación Stage 2 con headers, intake y escape completo. Se optimizó la curva de torque en rango medio para mejor respuesta en calle. Calibración realizada con monitoreo de AFR, knock y temperaturas en tiempo real.</p>
-
-        <div class="result-specs">
-          <div class="result-spec">
-            <div class="result-spec-label">HP Stock</div>
-            <div class="result-spec-value before">435 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">HP Tune</div>
-            <div class="result-spec-value after">488 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Ganancia</div>
-            <div class="result-spec-value gain">+53 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Torque</div>
-            <div class="result-spec-value gain">+41 lb-ft</div>
-          </div>
-        </div>
-
-        <div class="dyno-chart">
-          <div class="dyno-chart-title">Curva de Potencia (HP)</div>
-          <div class="dyno-chart-area">
-            <svg viewBox="0 0 400 200" preserveAspectRatio="none">
-              <!-- Grid lines -->
-              <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Stock curve -->
-              <polyline points="0,190 40,180 80,160 120,130 160,100 200,75 240,55 280,40 320,35 360,38 400,42" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-              <!-- Tuned curve -->
-              <polyline points="0,185 40,172 80,148 120,115 160,82 200,55 240,32 280,15 320,10 360,14 400,20" fill="none" stroke="#e63946" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="dyno-chart-legend">
-            <div class="dyno-legend-item"><div class="dyno-legend-dot stock"></div> Stock</div>
-            <div class="dyno-legend-item"><div class="dyno-legend-dot tuned"></div> Después de tune</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- POST 2 -->
-    <article class="result-post">
-      <div class="result-video">
-        <div class="result-video-placeholder">
-          <svg viewBox="0 0 24 24" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>Video próximamente</span>
-        </div>
-      </div>
-      <div class="result-body">
-        <div class="result-header">
-          <h2>Chevrolet Camaro SS 6.2 — E85 Tune</h2>
-          <span class="result-tag">E85</span>
-        </div>
-        <p class="result-desc">Conversión completa a E85 con reprogramación dedicada. El mayor octanaje del E85 permitió adelantar el timing y optimizar la mezcla aire/combustible para ganancias significativas en toda la banda de potencia.</p>
-
-        <div class="result-specs">
-          <div class="result-spec">
-            <div class="result-spec-label">HP Stock</div>
-            <div class="result-spec-value before">455 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">HP Tune</div>
-            <div class="result-spec-value after">502 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Ganancia</div>
-            <div class="result-spec-value gain">+47 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Torque</div>
-            <div class="result-spec-value gain">+38 lb-ft</div>
-          </div>
-        </div>
-
-        <div class="dyno-chart">
-          <div class="dyno-chart-title">Curva de Potencia (HP)</div>
-          <div class="dyno-chart-area">
-            <svg viewBox="0 0 400 200" preserveAspectRatio="none">
-              <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Stock -->
-              <polyline points="0,188 40,175 80,155 120,125 160,95 200,68 240,48 280,33 320,28 360,30 400,34" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-              <!-- E85 Tune -->
-              <polyline points="0,183 40,168 80,142 120,108 160,76 200,48 240,25 280,12 320,8 360,12 400,18" fill="none" stroke="#e63946" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="dyno-chart-legend">
-            <div class="dyno-legend-item"><div class="dyno-legend-dot stock"></div> Stock (93 oct)</div>
-            <div class="dyno-legend-item"><div class="dyno-legend-dot tuned"></div> E85 Tune</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- POST 3 -->
-    <article class="result-post">
-      <div class="result-video">
-        <div class="result-video-placeholder">
-          <svg viewBox="0 0 24 24" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>Video próximamente</span>
-        </div>
-      </div>
-      <div class="result-body">
-        <div class="result-header">
-          <h2>VW Golf R 2.0T — Stage 1</h2>
-          <span class="result-tag">Turbo</span>
-        </div>
-        <p class="result-desc">Reprogramación Stage 1 en un auto completamente stock. Se aumentó la presión de boost, se optimizó el mapa de ignición y la inyección de combustible. Resultado: un auto completamente diferente sin tocar una sola pieza.</p>
-
-        <div class="result-specs">
-          <div class="result-spec">
-            <div class="result-spec-label">HP Stock</div>
-            <div class="result-spec-value before">288 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">HP Tune</div>
-            <div class="result-spec-value after">352 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Ganancia</div>
-            <div class="result-spec-value gain">+64 HP</div>
-          </div>
-          <div class="result-spec">
-            <div class="result-spec-label">Torque</div>
-            <div class="result-spec-value gain">+72 lb-ft</div>
-          </div>
-        </div>
-
-        <div class="dyno-chart">
-          <div class="dyno-chart-title">Curva de Potencia (HP)</div>
-          <div class="dyno-chart-area">
-            <svg viewBox="0 0 400 200" preserveAspectRatio="none">
-              <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Stock -->
-              <polyline points="0,192 40,185 80,170 120,145 160,110 200,80 240,58 280,48 320,50 360,60 400,72" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-              <!-- Stage 1 Tune -->
-              <polyline points="0,190 40,178 80,155 120,118 160,72 200,38 240,18 280,10 320,15 360,28 400,42" fill="none" stroke="#e63946" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="dyno-chart-legend">
-            <div class="dyno-legend-item"><div class="dyno-legend-dot stock"></div> Stock</div>
-            <div class="dyno-legend-item"><div class="dyno-legend-dot tuned"></div> Stage 1</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
+  <!-- POSTS CONTAINER -->
+  <div class="results" id="results">
+    <div class="state-msg" id="stateMsg">
+      <div class="spinner"></div>
+      <p>Cargando trabajos...</p>
+    </div>
   </div>
 
   <!-- BACK -->
@@ -562,47 +388,129 @@
   </footer>
 
   <script>
-    // Mobile menu toggle
+    // ─── Nav hamburger ───
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+    const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('open');
       const spans = hamburger.querySelectorAll('span');
       if (navLinks.classList.contains('open')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-        spans[1].style.opacity = '0';
+        spans[1].style.opacity   = '0';
         spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
       } else {
-        spans[0].style.transform = '';
-        spans[1].style.opacity = '';
-        spans[2].style.transform = '';
+        spans[0].style.transform = spans[2].style.transform = '';
+        spans[1].style.opacity   = '';
       }
     });
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
-        const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = '';
-        spans[1].style.opacity = '';
-        spans[2].style.transform = '';
+        hamburger.querySelectorAll('span').forEach(s => {
+          s.style.transform = '';
+          s.style.opacity   = '';
+        });
       });
     });
 
-    // Animate on scroll
+    // ─── Scroll animation observer ───
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+
+    // ─── Build a post element from JSON data ───
+    function renderPost(post) {
+      const article = document.createElement('article');
+      article.className = 'result-post';
+
+      const videoHTML = post.youtube
+        ? `<div class="result-video">
+             <iframe src="https://www.youtube.com/embed/${post.youtube}" allowfullscreen loading="lazy"></iframe>
+           </div>`
+        : `<div class="result-video">
+             <div class="result-video-placeholder">
+               <svg viewBox="0 0 24 24" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+               <span>Video próximamente</span>
+             </div>
+           </div>`;
+
+      article.innerHTML = `
+        ${videoHTML}
+        <div class="result-body">
+          <div class="result-header">
+            <h2>${post.titulo}</h2>
+            <span class="result-tag">${post.tag}</span>
+          </div>
+          <p class="result-desc">${post.descripcion}</p>
+          <div class="result-specs">
+            <div class="result-spec">
+              <div class="result-spec-label">HP Stock</div>
+              <div class="result-spec-value before">${post.stock_hp} HP</div>
+            </div>
+            <div class="result-spec">
+              <div class="result-spec-label">HP Tune</div>
+              <div class="result-spec-value after">${post.tuned_hp} HP</div>
+            </div>
+            <div class="result-spec">
+              <div class="result-spec-label">Ganancia HP</div>
+              <div class="result-spec-value gain">+${post.gain_hp} HP</div>
+            </div>
+            <div class="result-spec">
+              <div class="result-spec-label">Ganancia Torque</div>
+              <div class="result-spec-value gain">+${post.gain_tq} lb-ft</div>
+            </div>
+          </div>
+          <div class="dyno-chart">
+            <div class="dyno-chart-title">Curva de Potencia (HP)</div>
+            <div class="dyno-chart-area">
+              <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                <line x1="0" y1="50"  x2="400" y2="50"  stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <polyline points="${post.chart_stock}" fill="none" stroke="#888888"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                <polyline points="${post.chart_tuned}" fill="none" stroke="#e63946"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="dyno-chart-legend">
+              <div class="dyno-legend-item">
+                <div class="dyno-legend-dot stock"></div>${post.leyenda_stock}
+              </div>
+              <div class="dyno-legend-item">
+                <div class="dyno-legend-dot tuned"></div>${post.leyenda_tuned}
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+      return article;
+    }
+
+    // ─── Fetch posts.json and render ───
+    const resultsEl  = document.getElementById('results');
+    const stateMsgEl = document.getElementById('stateMsg');
+
+    fetch('posts.json')
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(posts => {
+        stateMsgEl.remove();
+        if (!posts.length) {
+          resultsEl.innerHTML = '<div class="state-msg"><p>Próximamente — estamos preparando el contenido.</p></div>';
+          return;
         }
+        posts.forEach(post => {
+          const el = renderPost(post);
+          resultsEl.appendChild(el);
+          observer.observe(el);
+        });
+      })
+      .catch(() => {
+        stateMsgEl.innerHTML = '<p>No se pudieron cargar los trabajos. Intenta de nuevo más tarde.</p>';
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.result-post').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
   </script>
 </body>
 </html>

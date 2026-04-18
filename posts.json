@@ -1,0 +1,47 @@
+[
+  {
+    "id": "mustang-gt-stage2",
+    "titulo": "Ford Mustang GT 5.0 — Stage 2",
+    "tag": "Naturally Aspirated",
+    "descripcion": "Reprogramación Stage 2 con headers, intake y escape completo. Se optimizó la curva de torque en rango medio para mejor respuesta en calle. Calibración realizada con monitoreo de AFR, knock y temperaturas en tiempo real.",
+    "youtube": null,
+    "stock_hp": 435,
+    "tuned_hp": 488,
+    "gain_hp": 53,
+    "gain_tq": 41,
+    "chart_stock": "0,190 40,180 80,160 120,130 160,100 200,75 240,55 280,40 320,35 360,38 400,42",
+    "chart_tuned": "0,185 40,172 80,148 120,115 160,82 200,55 240,32 280,15 320,10 360,14 400,20",
+    "leyenda_stock": "Stock",
+    "leyenda_tuned": "Después de tune"
+  },
+  {
+    "id": "camaro-ss-e85",
+    "titulo": "Chevrolet Camaro SS 6.2 — E85 Tune",
+    "tag": "E85",
+    "descripcion": "Conversión completa a E85 con reprogramación dedicada. El mayor octanaje del E85 permitió adelantar el timing y optimizar la mezcla aire/combustible para ganancias significativas en toda la banda de potencia.",
+    "youtube": null,
+    "stock_hp": 455,
+    "tuned_hp": 502,
+    "gain_hp": 47,
+    "gain_tq": 38,
+    "chart_stock": "0,188 40,175 80,155 120,125 160,95 200,68 240,48 280,33 320,28 360,30 400,34",
+    "chart_tuned": "0,183 40,168 80,142 120,108 160,76 200,48 240,25 280,12 320,8 360,12 400,18",
+    "leyenda_stock": "Stock (93 oct)",
+    "leyenda_tuned": "E85 Tune"
+  },
+  {
+    "id": "golf-r-stage1",
+    "titulo": "VW Golf R 2.0T — Stage 1",
+    "tag": "Turbo",
+    "descripcion": "Reprogramación Stage 1 en un auto completamente stock. Se aumentó la presión de boost, se optimizó el mapa de ignición y la inyección de combustible. Resultado: un auto completamente diferente sin tocar una sola pieza.",
+    "youtube": null,
+    "stock_hp": 288,
+    "tuned_hp": 352,
+    "gain_hp": 64,
+    "gain_tq": 72,
+    "chart_stock": "0,192 40,185 80,170 120,145 160,110 200,80 240,58 280,48 320,50 360,60 400,72",
+    "chart_tuned": "0,190 40,178 80,155 120,118 160,72 200,38 240,18 280,10 320,15 360,28 400,42",
+    "leyenda_stock": "Stock",
+    "leyenda_tuned": "Stage 1"
+  }
+]
