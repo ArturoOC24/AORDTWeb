@@ -88,9 +88,42 @@
       transition: transform 0.3s, opacity 0.3s;
     }
 
+    /* ─── BANNER EN CONSTRUCCIÓN ─── */
+    .wip-banner {
+      background: repeating-linear-gradient(
+        -45deg,
+        #1a1100,
+        #1a1100 10px,
+        #221800 10px,
+        #221800 20px
+      );
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding: 12px 24px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 64px; /* nav height */
+    }
+    .wip-banner svg {
+      width: 18px; height: 18px;
+      stroke: var(--gold);
+      fill: none;
+      flex-shrink: 0;
+    }
+    .wip-banner span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     /* ─── PAGE HEADER ─── */
     .page-header {
-      padding: 140px 24px 60px;
+      padding: 60px 24px 60px;
       text-align: center;
     }
     .section-tag {
@@ -410,6 +443,13 @@
       </button>
     </div>
   </nav>
+
+  <!-- BANNER EN CONSTRUCCIÓN -->
+  <div class="wip-banner">
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Página en construcción — El contenido es de ejemplo</span>
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
