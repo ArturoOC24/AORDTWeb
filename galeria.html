@@ -157,10 +157,24 @@
     /* Video */
     .result-video {
       position: relative;
-      padding-bottom: 56.25%;
+      padding-bottom: 56.25%; /* 16:9 default */
       height: 0;
       overflow: hidden;
       background: #000;
+    }
+    .result-video.vertical {
+      padding-bottom: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      background: #000;
+    }
+    .result-video.vertical iframe {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 9/16;
+      height: auto;
     }
     .result-video iframe {
       position: absolute;
@@ -494,8 +508,9 @@
 
       // Backward compat: support legacy "youtube" field
       const videoSrc = post.video_url || (post.youtube ? 'https://www.youtube.com/embed/' + post.youtube : null);
+      const isVertical = videoSrc && (videoSrc.includes('tiktok.com') || videoSrc.includes('facebook.com/plugins/video') && videoSrc.includes('reel'));
       const videoHTML = videoSrc
-        ? `<div class="result-video">
+        ? `<div class="result-video${isVertical ? ' vertical' : ''}">
              <iframe src="${videoSrc}" allowfullscreen loading="lazy"></iframe>
            </div>`
         : `<div class="result-video">
