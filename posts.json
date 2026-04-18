@@ -1,5 +1,20 @@
 [
   {
+    "id": "prueba-video",
+    "titulo": "Subaru WRX STI — Turbo Tune (PRUEBA)",
+    "tag": "Turbo",
+    "descripcion": "Este es un post de prueba para verificar que el video de YouTube se embebe correctamente. Los datos son de ejemplo y serán reemplazados por resultados reales del taller.",
+    "youtube": "Q5mHPo2yDG8",
+    "stock_hp": 310,
+    "tuned_hp": 380,
+    "gain_hp": 70,
+    "gain_tq": 55,
+    "chart_stock": "0,192 40,182 80,162 120,132 160,95 200,68 240,50 280,42 320,44 360,50 400,58",
+    "chart_tuned": "0,188 40,172 80,145 120,105 160,65 200,38 240,20 280,12 320,16 360,24 400,34",
+    "leyenda_stock": "Stock",
+    "leyenda_tuned": "Turbo Tune"
+  },
+  {
     "id": "mustang-gt-stage2",
     "titulo": "Ford Mustang GT 5.0 — Stage 2",
     "tag": "Naturally Aspirated",
