@@ -289,6 +289,30 @@
     .dyno-legend-dot.stock { background: var(--gray); }
     .dyno-legend-dot.tuned { background: var(--red); }
 
+    /* Infinite scroll sentinel */
+    .scroll-sentinel {
+      height: 1px;
+    }
+    .load-more-spinner {
+      display: none;
+      text-align: center;
+      padding: 32px;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    .load-more-spinner .spinner { margin-bottom: 8px; }
+    .load-more-spinner.active { display: block; }
+    .all-loaded {
+      display: none;
+      text-align: center;
+      padding: 32px;
+      color: var(--gray);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .all-loaded.active { display: block; }
+
     /* Back */
     .back-section {
       text-align: center;
@@ -373,6 +397,14 @@
     </div>
   </div>
 
+  <!-- INFINITE SCROLL -->
+  <div class="load-more-spinner" id="loadMoreSpinner">
+    <div class="spinner"></div>
+    <p>Cargando más trabajos...</p>
+  </div>
+  <div class="all-loaded" id="allLoaded">— Fin —</div>
+  <div class="scroll-sentinel" id="scrollSentinel"></div>
+
   <!-- BACK -->
   <div class="back-section">
     <a href="index.html" class="back-link">
@@ -414,9 +446,46 @@
     });
 
     // ─── Scroll animation observer ───
-    const observer = new IntersectionObserver((entries) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08 });
+
+    // ─── Infinite scroll state ───
+    const BATCH = 3;
+    let allPosts = [];
+    let currentIndex = 0;
+    let loading = false;
+
+    const loadMoreSpinner = document.getElementById('loadMoreSpinner');
+    const allLoadedEl     = document.getElementById('allLoaded');
+    const sentinelEl      = document.getElementById('scrollSentinel');
+
+    function loadNextBatch() {
+      if (loading || currentIndex >= allPosts.length) return;
+      loading = true;
+      loadMoreSpinner.classList.add('active');
+
+      setTimeout(() => {
+        const batch = allPosts.slice(currentIndex, currentIndex + BATCH);
+        batch.forEach(post => {
+          const el = renderPost(post);
+          resultsEl.appendChild(el);
+          fadeObserver.observe(el);
+        });
+        currentIndex += batch.length;
+        loading = false;
+        loadMoreSpinner.classList.remove('active');
+
+        if (currentIndex >= allPosts.length) {
+          allLoadedEl.classList.add('active');
+          sentinelObserver.disconnect();
+        }
+      }, 600);
+    }
+
+    const sentinelObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) loadNextBatch();
+    }, { rootMargin: '200px' });
 
     // ─── Build a post element from JSON data ───
     function renderPost(post) {
@@ -551,11 +620,9 @@
           resultsEl.innerHTML = '<div class="state-msg"><p>Próximamente — estamos preparando el contenido.</p></div>';
           return;
         }
-        posts.forEach(post => {
-          const el = renderPost(post);
-          resultsEl.appendChild(el);
-          observer.observe(el);
-        });
+        allPosts = posts;
+        loadNextBatch();
+        sentinelObserver.observe(sentinelEl);
       })
       .catch(() => {
         stateMsgEl.innerHTML = '<p>No se pudieron cargar los trabajos. Intenta de nuevo más tarde.</p>';
