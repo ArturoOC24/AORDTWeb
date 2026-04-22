@@ -498,19 +498,8 @@
       'Series', 'Series2', 'Trim', 'Trim2'
     ];
 
-    // Keys already shown in summary or used for processing — exclude from full table
+    // Only exclude API meta fields — all vehicle fields show in full table
     const SUMMARY_KEYS = new Set([
-      'ModelYear', 'Make', 'Model', 'Trim', 'Series', 'BodyClass',
-      'DisplacementL', 'EngineCylinders', 'EngineHP',
-      'TransmissionStyle', 'TransmissionSpeeds',
-      'DriveType', 'FuelTypePrimary',
-      'PlantCity', 'PlantState', 'PlantCountry',
-      'Manufacturer', 'VehicleType', 'GVWR',
-      // Induction detection fields
-      'ForcedInductionType', 'OtherEngineInfo', 'ValveTrainDesign',
-      'EngineConfiguration', 'EngineModel', 'FuelInjectionType',
-      'Series2', 'Trim2',
-      // Meta
       'ErrorCode', 'ErrorText', 'Count', 'Message', 'SearchCriteria'
     ]);
 
