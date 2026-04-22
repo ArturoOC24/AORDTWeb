@@ -196,6 +196,16 @@
                   </svg>
                   Fuel Blending
                 </a>
+                <div class="nav-dropdown-divider"></div>
+                <a href="vin.html"${active === 'vin' ? ' class="active"' : ''}>
+                  <svg viewBox="0 0 24 24" stroke-width="2">
+                    <rect x="2" y="6" width="20" height="13" rx="2"/>
+                    <circle cx="7.5" cy="12.5" r="1.5"/>
+                    <line x1="12" y1="10" x2="19" y2="10"/>
+                    <line x1="12" y1="14" x2="17" y2="14"/>
+                  </svg>
+                  Decodificador VIN
+                </a>
               </div>
             </div>
             <button class="hamburger" id="hamburger" aria-label="Menú">
