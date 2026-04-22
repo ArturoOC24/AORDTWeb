@@ -481,6 +481,11 @@
           <div id="vinSummary" class="vin-summary-list"></div>
         </div>
 
+        <div id="vinInductionWarning" class="vin-induction-warning" style="display:none;">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>NHTSA no reporta el tipo de inducción forzada para este vehículo. El campo <strong>Motor</strong> no incluye turbo/supercargador pero esto no confirma que sea aspiración natural. Verifica las especificaciones del fabricante.</span>
+        </div>
+
         <!-- C) Full table (collapsible) -->
         <div>
           <button class="vin-toggle-btn" id="toggleFullBtn" onclick="toggleFullTable()">
@@ -495,11 +500,6 @@
               <tbody id="vinTableBody"></tbody>
             </table>
           </div>
-        </div>
-
-        <div id="vinInductionWarning" class="vin-induction-warning" style="display:none;">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>NHTSA no reporta el tipo de inducción forzada para este vehículo. El campo <strong>Motor</strong> no incluye turbo/supercargador pero esto no confirma que sea aspiración natural. Verifica las especificaciones del fabricante.</span>
         </div>
 
         <p class="vin-credit">Datos: <a href="https://vpic.nhtsa.dot.gov/api/" target="_blank" rel="noopener">NHTSA vPIC Public API</a> &mdash; resultados pueden variar según el registro del fabricante.</p>
