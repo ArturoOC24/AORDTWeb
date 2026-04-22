@@ -532,9 +532,9 @@
     }
 
     function detectInduction(r) {
-      const combined = INDUCTION_FIELDS.map(f => (r[f] || '').toLowerCase()).join(' ');
-      const hasTurbo  = combined.includes('turbo');
-      const hasSuper  = combined.includes('supercharg');
+      const combined  = INDUCTION_FIELDS.map(f => (r[f] || '').toLowerCase()).join(' ');
+      const hasTurbo  = combined.includes('turbo')      || (r.Turbo        || '').toLowerCase() === 'yes';
+      const hasSuper  = combined.includes('supercharg') || (r.Supercharger || '').toLowerCase() === 'yes';
       if (hasTurbo && hasSuper) return 'T+SC';
       if (hasTurbo)  return 'T';
       if (hasSuper)  return 'SC';
