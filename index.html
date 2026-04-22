@@ -986,19 +986,83 @@
       line-height: 1.4;
       white-space: pre-line;
     }
-    .nav-calc-btn {
+    /* ─── HERRAMIENTAS DROPDOWN ─── */
+    .nav-dropdown {
+      position: relative;
+    }
+    .nav-dropdown-btn {
       background: var(--red);
       color: var(--white);
       border: none;
-      padding: 7px 16px;
+      padding: 7px 14px;
       border-radius: 6px;
       font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
     }
-    .nav-calc-btn:hover { background: #c22d38; transform: translateY(-1px); }
+    .nav-dropdown-btn:hover { background: #c22d38; transform: translateY(-1px); }
+    .nav-dropdown-btn svg {
+      width: 12px; height: 12px;
+      stroke: currentColor;
+      fill: none;
+      transition: transform 0.2s;
+    }
+    .nav-dropdown.open .nav-dropdown-btn svg { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 6px;
+      min-width: 180px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      z-index: 200;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a,
+    .nav-dropdown-menu button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-dropdown-menu a:hover,
+    .nav-dropdown-menu button:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+    }
+    .nav-dropdown-menu svg {
+      width: 15px; height: 15px;
+      stroke: currentColor;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .nav-dropdown-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 4px 0;
+    }
 
     /* ─── WHATSAPP FORM MODAL ─── */
     .wa-modal-overlay {
@@ -1159,6 +1223,14 @@
         border-bottom: 1px solid rgba(255,255,255,0.06);
       }
       .hamburger { display: flex; }
+      .nav-dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background: rgba(255,255,255,0.04);
+        border-radius: 8px;
+        margin-top: 4px;
+      }
       .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .highlight-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1180,7 +1252,18 @@
         <li><a href="#redes">Redes</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <button class="nav-calc-btn" onclick="openCalc()">Calculadora</button>
+      <div class="nav-dropdown" id="toolsDropdown">
+        <button class="nav-dropdown-btn" onclick="toggleToolsMenu()">
+          Herramientas
+          <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <button onclick="openCalc(); closeToolsMenu();">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+            Fuel Blending
+          </button>
+        </div>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
@@ -2139,6 +2222,19 @@
         });
       }
     }
+
+    // ─── Tools dropdown ───
+    function toggleToolsMenu() {
+      document.getElementById('toolsDropdown').classList.toggle('open');
+    }
+    function closeToolsMenu() {
+      document.getElementById('toolsDropdown').classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('toolsDropdown').contains(e.target)) {
+        closeToolsMenu();
+      }
+    });
 
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
