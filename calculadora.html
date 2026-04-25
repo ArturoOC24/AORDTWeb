@@ -214,6 +214,63 @@
       color: var(--gold);
       font-weight: 600;
     }
+    .gauge-lvl-lbl {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    /* ─── GAUGE SLIDER ─── */
+    .gauge-slider-wrap { margin-top: 6px; }
+    .gauge-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+      background: linear-gradient(
+        to right,
+        var(--red) var(--pct, 50%),
+        rgba(255,255,255,0.15) var(--pct, 50%)
+      );
+    }
+    .gauge-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--red);
+      cursor: pointer;
+      border: 3px solid #1e1e1e;
+      box-shadow: 0 0 0 2px rgba(230,57,70,0.5);
+    }
+    .gauge-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--red);
+      cursor: pointer;
+      border: 3px solid #1e1e1e;
+      box-shadow: 0 0 0 2px rgba(230,57,70,0.5);
+      box-sizing: border-box;
+    }
+    .gauge-slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+    .gauge-slider-ticks span {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      flex: 1;
+    }
+    .gauge-slider-ticks span:first-child { text-align: left;  color: rgba(255,255,255,0.5); }
+    .gauge-slider-ticks span:last-child  { text-align: right; color: rgba(255,255,255,0.5); }
 
     /* ─── OCTANE PRESETS ─── */
     .calc-preset-group {
@@ -333,18 +390,13 @@
             <label id="lblGaugeTank1">Capacidad del tanque (gal)</label>
             <input type="number" id="gaugeCapacity1" step="0.1" value="16" oninput="updateGauge(1)">
             <label>Nivel del combustible</label>
-            <select id="gaugeLevel1" onchange="updateGauge(1)">
-              <option value="0">E — Vacío</option>
-              <option value="0.125">1/8</option>
-              <option value="0.25">1/4</option>
-              <option value="0.375">3/8</option>
-              <option value="0.5" selected>1/2</option>
-              <option value="0.625">5/8</option>
-              <option value="0.75">3/4</option>
-              <option value="0.875">7/8</option>
-              <option value="1">F — Lleno</option>
-            </select>
-            <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1">8.0</span> <span class="gauge-unit-vol">gal</span></div>
+            <div class="gauge-slider-wrap">
+              <input type="range" id="gaugeLevel1" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge(1)" style="--pct:50%">
+              <div class="gauge-slider-ticks">
+                <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+              </div>
+            </div>
+            <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1">8.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1">50%</span></div>
             <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
           </div>
 
@@ -368,18 +420,13 @@
               <label id="lblGaugeTank1e">Capacidad contenedor E85 (gal)</label>
               <input type="number" id="gaugeCapacity1e" step="0.1" value="10" oninput="updateGauge('1e')">
               <label>Nivel</label>
-              <select id="gaugeLevel1e" onchange="updateGauge('1e')">
-                <option value="0">E — Vacío</option>
-                <option value="0.125">1/8</option>
-                <option value="0.25">1/4</option>
-                <option value="0.375">3/8</option>
-                <option value="0.5" selected>1/2</option>
-                <option value="0.625">5/8</option>
-                <option value="0.75">3/4</option>
-                <option value="0.875">7/8</option>
-                <option value="1">F — Lleno</option>
-              </select>
-              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1e">5.0</span> <span class="gauge-unit-vol">gal</span></div>
+              <div class="gauge-slider-wrap">
+                <input type="range" id="gaugeLevel1e" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge('1e')" style="--pct:50%">
+                <div class="gauge-slider-ticks">
+                  <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+                </div>
+              </div>
+              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1e">5.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1e">½</span></div>
             </div>
             <label>% de alcohol del E85</label>
             <input type="number" id="calcE85Alcohol" step="1" value="85">
@@ -396,18 +443,13 @@
               <label id="lblGaugeTank1g">Capacidad del tanque 2 (gal)</label>
               <input type="number" id="gaugeCapacity1g" step="0.1" value="10" oninput="updateGauge('1g')">
               <label>Nivel</label>
-              <select id="gaugeLevel1g" onchange="updateGauge('1g')">
-                <option value="0">E — Vacío</option>
-                <option value="0.125">1/8</option>
-                <option value="0.25">1/4</option>
-                <option value="0.375">3/8</option>
-                <option value="0.5" selected>1/2</option>
-                <option value="0.625">5/8</option>
-                <option value="0.75">3/4</option>
-                <option value="0.875">7/8</option>
-                <option value="1">F — Lleno</option>
-              </select>
-              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1g">5.0</span> <span class="gauge-unit-vol">gal</span></div>
+              <div class="gauge-slider-wrap">
+                <input type="range" id="gaugeLevel1g" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge('1g')" style="--pct:50%">
+                <div class="gauge-slider-ticks">
+                  <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+                </div>
+              </div>
+              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1g">5.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1g">½</span></div>
             </div>
             <label>Octanaje de la segunda gasolina</label>
             <div class="calc-preset-group">
@@ -443,18 +485,13 @@
             <label id="lblGaugeTank2">Capacidad del tanque (gal)</label>
             <input type="number" id="gaugeCapacity2" step="0.1" value="16" oninput="updateGauge(2)">
             <label>Nivel del combustible</label>
-            <select id="gaugeLevel2" onchange="updateGauge(2)">
-              <option value="0">E — Vacío</option>
-              <option value="0.125">1/8</option>
-              <option value="0.25">1/4</option>
-              <option value="0.375">3/8</option>
-              <option value="0.5" selected>1/2</option>
-              <option value="0.625">5/8</option>
-              <option value="0.75">3/4</option>
-              <option value="0.875">7/8</option>
-              <option value="1">F — Lleno</option>
-            </select>
-            <div class="calc-gauge-computed">&asymp; <span id="gaugeVal2">8.0</span> <span class="gauge-unit-vol">gal</span></div>
+            <div class="gauge-slider-wrap">
+              <input type="range" id="gaugeLevel2" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge(2)" style="--pct:50%">
+              <div class="gauge-slider-ticks">
+                <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+              </div>
+            </div>
+            <div class="calc-gauge-computed">&asymp; <span id="gaugeVal2">8.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl2">½</span></div>
             <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
           </div>
 
@@ -503,18 +540,13 @@
             <input type="number" id="calcCurrentFuel" step="0.1" value="4">
             <div class="calc-gauge-wrap" id="gaugeWrap3f" style="display:none;">
               <label>Nivel del combustible</label>
-              <select id="gaugeLevel3f" onchange="updateGauge('3f')">
-                <option value="0">E — Vacío</option>
-                <option value="0.125">1/8</option>
-                <option value="0.25" selected>1/4</option>
-                <option value="0.375">3/8</option>
-                <option value="0.5">1/2</option>
-                <option value="0.625">5/8</option>
-                <option value="0.75">3/4</option>
-                <option value="0.875">7/8</option>
-                <option value="1">F — Lleno</option>
-              </select>
-              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3f">4.0</span> <span class="gauge-unit-vol">gal</span></div>
+              <div class="gauge-slider-wrap">
+                <input type="range" id="gaugeLevel3f" class="gauge-slider" min="0" max="1" step="0.01" value="0.25" oninput="updateGauge('3f')" style="--pct:25%">
+                <div class="gauge-slider-ticks">
+                  <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+                </div>
+              </div>
+              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3f">4.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl3f">25%</span></div>
               <p class="calc-note" style="text-align:left;margin-top:6px;">* Usa la capacidad del tanque ya ingresada arriba.</p>
             </div>
 
@@ -538,18 +570,13 @@
               <label id="lblGaugeTank3i">Capacidad del tanque (gal)</label>
               <input type="number" id="gaugeCapacity3i" step="0.1" value="16" oninput="updateGauge('3i')">
               <label>Nivel del combustible</label>
-              <select id="gaugeLevel3i" onchange="updateGauge('3i')">
-                <option value="0">E — Vacío</option>
-                <option value="0.125">1/8</option>
-                <option value="0.25">1/4</option>
-                <option value="0.375">3/8</option>
-                <option value="0.5">1/2</option>
-                <option value="0.625">5/8</option>
-                <option value="0.75" selected>3/4</option>
-                <option value="0.875">7/8</option>
-                <option value="1">F — Lleno</option>
-              </select>
-              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3i">12.0</span> <span class="gauge-unit-vol">gal</span></div>
+              <div class="gauge-slider-wrap">
+                <input type="range" id="gaugeLevel3i" class="gauge-slider" min="0" max="1" step="0.01" value="0.75" oninput="updateGauge('3i')" style="--pct:75%">
+                <div class="gauge-slider-ticks">
+                  <span>E</span><span>25%</span><span>50%</span><span>75%</span><span>F</span>
+                </div>
+              </div>
+              <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3i">12.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl3i">75%</span></div>
               <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
             </div>
 
@@ -661,6 +688,12 @@
 
     // ─── Gauge mode ───
     var gaugeModes = {}; // id → 'direct' | 'gauge'
+    function levelName(v) {
+      var pct = Math.round(parseFloat(v) * 100);
+      if (pct === 0)   return 'E';
+      if (pct === 100) return 'F';
+      return pct + '%';
+    }
 
     function toggleGauge(id) {
       var mode = gaugeModes[id] === 'gauge' ? 'direct' : 'gauge';
@@ -686,12 +719,15 @@
     function updateGauge(id) {
       var m = GAUGE_MAP[id];
       if (!m) return;
+      var lvlEl = document.getElementById(m.lvl);
       var cap = parseFloat(document.getElementById(m.cap).value);
-      var lvl = parseFloat(document.getElementById(m.lvl).value);
+      var lvl = parseFloat(lvlEl.value);
       if (isNaN(cap) || isNaN(lvl)) return;
       var val = cap * lvl;
       document.getElementById(m.out).textContent = val.toFixed(2);
-      // Only push to target if gauge mode is active
+      var lblEl = document.getElementById('gaugeLbl' + id);
+      if (lblEl) lblEl.textContent = levelName(lvl);
+      if (lvlEl.type === 'range') lvlEl.style.setProperty('--pct', (lvl * 100) + '%');
       if (gaugeModes[id] === 'gauge') {
         document.getElementById(m.target).value = val.toFixed(2);
         saveCalcValues();
@@ -723,7 +759,8 @@
       'calcTargetEthanolFill','calcE85PercentFill','calcCurrentFuelOnly',
       'calcCurrentEthanolOnly','calcTargetEthanolOnly','calcE85PercentOnly',
       'calcGas2Volume','calcGas2Octane','calcGas2OctaneTarget',
-      'gaugeCapacity1','gaugeCapacity1e','gaugeCapacity1g','gaugeCapacity2','gaugeCapacity3i'
+      'gaugeCapacity1','gaugeCapacity1e','gaugeCapacity1g','gaugeCapacity2','gaugeCapacity3i',
+      'gaugeLevel1','gaugeLevel1e','gaugeLevel1g','gaugeLevel2','gaugeLevel3f','gaugeLevel3i'
     ];
     function saveCalcValues() {
       var data = {};
@@ -742,6 +779,7 @@
           if (el && data[id] !== undefined) el.value = data[id];
         });
         handleCalcAdditiveChange();
+        updateAllGauges();
       } catch(e) {}
     }
     document.querySelector('.calc-card').addEventListener('input',  saveCalcValues);
