@@ -116,23 +116,26 @@
 
   /* ── PCM page variables ── */
   :root {
-    --red:       #e63946;
-    --red-hover: #c22d38;
-    --white:     #ffffff;
-    --bg:        #0a0a0a;
-    --bg2:       #1a1a1a;
-    --bg3:       #222222;
-    --border:    rgba(255,255,255,0.07);
-    --text:      #ffffff;
-    --text2:     #888888;
-    --accent:    #f4a261;
-    --accent2:   #c96a2a;
-    --row-hover: rgba(255,255,255,0.03);
-    --expand-bg: #111111;
+    --red:          #e63946;
+    --red-hover:    #c22d38;
+    --white:        #ffffff;
+    --gray:         #888888;   /* required by nav.js */
+    --dark:         #0a0a0a;   /* required by nav.js */
+    --dark-surface: #1a1a1a;   /* required by nav.js dropdown bg */
+    --bg:           #0a0a0a;
+    --bg2:          #1a1a1a;
+    --bg3:          #222222;
+    --border:       rgba(255,255,255,0.07);
+    --text:         #ffffff;
+    --text2:        #888888;
+    --accent:       #f4a261;
+    --accent2:      #c96a2a;
+    --row-hover:    rgba(255,255,255,0.03);
+    --expand-bg:    #111111;
     --tab-active:   #e63946;
     --tab-inactive: #888888;
-    --shadow:    rgba(0,0,0,0.5);
-    --search-bg: #1a1a1a;
+    --shadow:       rgba(0,0,0,0.5);
+    --search-bg:    #1a1a1a;
   }
 
   body { font-size: 14px; }
@@ -148,7 +151,12 @@
     position: sticky;
     top: 64px;
     z-index: 99;
+    /* mobile horizontal scroll */
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .tabs::-webkit-scrollbar { display: none; }
   .tab {
     flex: none;
     padding: 12px 20px;
@@ -239,6 +247,9 @@
   /* TABLE */
   .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
   table { width: 100%; border-collapse: collapse; }
+
+  /* 2-LINE CELLS: secondary info stacked below primary, shown on mobile only */
+  .cell-sub { display: none; }
   thead tr { background: var(--bg3); }
   th {
     padding: 10px 14px;
@@ -378,6 +389,11 @@
     margin: 0;
   }
 
+  /* EXPAND META - shown on mobile inside expand row, hidden on desktop */
+  .expand-meta {
+    display: none;
+  }
+
   /* NO RESULTS */
   .no-results {
     text-align: center;
@@ -479,6 +495,7 @@
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
   }
   .compare-card-header h3 { font-size: 15px; font-weight: 700; margin: 0; }
   .compare-card.p01 .compare-card-header h3 { color: #f87171; }
@@ -500,6 +517,82 @@
     border-radius: 4px;
     font-size: 12px;
     color: #86efac;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    /* page header */
+    .page-header { padding: 72px 16px 28px; }
+    .page-header p { font-size: 0.82rem; }
+
+    /* tabs: smaller text/padding, already scrollable */
+    .tabs { justify-content: flex-start; padding: 0 8px; }
+    .tab { padding: 10px 14px; font-size: 12px; }
+
+    /* content */
+    .content { padding: 16px; }
+
+    /* filter bar: stack search below chips */
+    .filter-bar { padding: 10px 12px; gap: 6px; }
+    .search-box {
+      margin-left: 0;
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* tables */
+    th { padding: 8px 10px; font-size: 10px; }
+    td { padding: 8px 10px; font-size: 12px; }
+    /* hide low-priority columns */
+    .col-mobile-hide { display: none; }
+    /* show secondary cell info as a small line below the primary value */
+    .cell-sub {
+      display: block;
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 3px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* expand inner: single column */
+    .expand-inner { grid-template-columns: 1fr; }
+    .expand-row td { padding: 12px 14px; }
+
+    /* lookup card */
+    .lookup-card { padding: 16px; }
+    .lookup-grid { grid-template-columns: 1fr; gap: 10px; }
+
+    /* glossary */
+    .glossary-bar { padding: 0 14px; }
+    .glossary-body { column-count: 1; }
+
+    /* compare cards */
+    .compare-card { padding: 16px; }
+    .compare-card dl { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+
+    /* warn banner */
+    .warn-banner { padding: 10px 12px; font-size: 12px; }
+    /* show hidden column data inside expand row on mobile */
+    .expand-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      padding: 8px 0 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .expand-meta span { color: var(--text2); }
+    .expand-meta strong { color: var(--text); font-weight: 600; }
+  }
+
+  @media (max-width: 480px) {
+    .page-header h1 { font-size: clamp(1.7rem, 8vw, 2.5rem); }
+    .tab { padding: 9px 12px; font-size: 11px; }
+    .section-title { font-size: 14px; }
+    .compare-card dl { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -581,13 +674,13 @@
       <table id="p59-table">
         <thead>
           <tr>
-            <th>HW #</th>
-            <th>Service #</th>
-            <th>Año</th>
-            <th>Flash Chip</th>
-            <th>IAC / DBC</th>
-            <th>Throttle</th>
-            <th>Vehículos</th>
+            <th>HW #<span class="cell-sub">Service #</span></th>
+            <th class="col-mobile-hide">Service #</th>
+            <th class="col-mobile-hide">Año</th>
+            <th>Flash Chip<span class="cell-sub">Año</span></th>
+            <th>IAC / DBC<span class="cell-sub">Throttle</span></th>
+            <th class="col-mobile-hide">Throttle</th>
+            <th class="col-mobile-hide">Vehículos</th>
             <th></th>
           </tr>
         </thead>
@@ -629,13 +722,13 @@
       <table id="p01-table">
         <thead>
           <tr>
-            <th>Gen</th>
-            <th>HW #</th>
-            <th>Service #</th>
-            <th>Años</th>
-            <th>Nickname</th>
-            <th>Flash Chip</th>
-            <th>Vehículos</th>
+            <th>Gen<span class="cell-sub">HW #</span></th>
+            <th class="col-mobile-hide">HW #</th>
+            <th>Service #<span class="cell-sub">Años</span></th>
+            <th class="col-mobile-hide">Años</th>
+            <th class="col-mobile-hide">Nickname</th>
+            <th class="col-mobile-hide">Flash Chip</th>
+            <th class="col-mobile-hide">Vehículos</th>
             <th>Estado</th>
             <th></th>
           </tr>
@@ -695,7 +788,7 @@
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>OS #</th><th>Chip requerido</th><th>Throttle</th><th>Flex Fuel</th><th>Año típico</th><th>Mejor para</th><th>Notas</th>
+            <th>OS #<span class="cell-sub">Año</span></th><th>Chip req.<span class="cell-sub">Throttle</span></th><th class="col-mobile-hide">Throttle</th><th>Flex Fuel</th><th class="col-mobile-hide">Año típico</th><th class="col-mobile-hide">Mejor para</th><th class="col-mobile-hide">Notas</th>
           </tr></thead>
           <tbody id="os-p59-tbody"></tbody>
         </table>
@@ -708,7 +801,7 @@
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>OS #</th><th>Flex Fuel</th><th>Año típico</th><th>Vehículo origen</th><th>Notas</th>
+            <th>OS #<span class="cell-sub">Año</span></th><th>Flex Fuel</th><th class="col-mobile-hide">Año típico</th><th class="col-mobile-hide">Vehículo origen</th><th class="col-mobile-hide">Notas</th>
           </tr></thead>
           <tbody id="os-p01-tbody"></tbody>
         </table>
@@ -1017,17 +1110,31 @@ function renderP59() {
     const veh = r.vehicles.slice(0, 2).map(v => hl(v, q)).join("<br>");
     return `
     <tr onclick="expandRow('${r.hw}', this)">
-      <td><span class="hw-num">${hl(r.hw, q)}</span></td>
-      <td><span class="svc-num">${hl(r.service, q)}</span></td>
-      <td>${hl(r.year, q)}</td>
-      <td>${chipBadge}</td>
-      <td>${iacBadge}</td>
-      <td style="font-size:12px">${hl(r.throttle, q)}</td>
-      <td style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td>
+        <span class="hw-num">${hl(r.hw, q)}</span>
+        <span class="cell-sub">${hl(r.service, q)}</span>
+      </td>
+      <td class="col-mobile-hide"><span class="svc-num">${hl(r.service, q)}</span></td>
+      <td class="col-mobile-hide">${hl(r.year, q)}</td>
+      <td>
+        ${chipBadge}
+        <span class="cell-sub">${hl(r.year, q)}</span>
+      </td>
+      <td>
+        ${iacBadge}
+        <span class="cell-sub">${hl(r.throttle, q)}</span>
+      </td>
+      <td class="col-mobile-hide" style="font-size:12px">${hl(r.throttle, q)}</td>
+      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
       <td>${starBadge}<span class="chevron">▼</span></td>
     </tr>
     <tr class="expand-row" id="expand-${r.hw}">
       <td colspan="8">
+        <div class="expand-meta">
+          <span><strong>${hl(r.year, q)}</strong>${r.star ? ' &nbsp;<span class="badge badge-star" style="font-size:10px;vertical-align:middle">⭐ Ideal swap</span>' : ''}</span>
+          <span style="color:var(--accent);font-size:11px">${hl(r.throttle, q)}</span>
+          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} más` : ""}</span>
+        </div>
         <div class="expand-inner">
           <div class="expand-section">
             <h4>Todos los vehículos</h4>
@@ -1072,18 +1179,29 @@ function renderP01() {
     const genColor = r.gen === 3 ? "#4ade80" : "#f87171";
     return `
     <tr onclick="expandRow01('${r.service}', this)">
-      <td><span style="font-weight:700;color:${genColor}">Gen ${r.gen}</span></td>
-      <td><span class="hw-num" style="font-size:12px">${hl(r.hw, q)}</span></td>
-      <td><span class="svc-num">${hl(r.service, q)}</span></td>
-      <td>${hl(r.years, q)}</td>
-      <td>${hl(r.nickname, q)}</td>
-      <td style="font-size:11px">${hl(r.chip, q)}</td>
-      <td style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td>
+        <span style="font-weight:700;color:${genColor}">Gen ${r.gen}</span>
+        <span class="cell-sub" style="font-family:monospace">${hl(r.hw, q)}</span>
+      </td>
+      <td class="col-mobile-hide"><span class="hw-num" style="font-size:12px">${hl(r.hw, q)}</span></td>
+      <td>
+        <span class="svc-num">${hl(r.service, q)}</span>
+        <span class="cell-sub">${hl(r.years, q)}</span>
+      </td>
+      <td class="col-mobile-hide">${hl(r.years, q)}</td>
+      <td class="col-mobile-hide">${hl(r.nickname, q)}</td>
+      <td class="col-mobile-hide" style="font-size:11px">${hl(r.chip, q)}</td>
+      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
       <td>${statusBadge}</td>
       <td><span class="chevron">▼</span></td>
     </tr>
     <tr class="expand-row" id="expand01-${r.service.replace(/[^a-z0-9]/gi,'_')}">
       <td colspan="9">
+        <div class="expand-meta">
+          <span><strong>${hl(r.years, q)}</strong> &nbsp;·&nbsp; ${hl(r.nickname, q)}</span>
+          <span style="color:var(--text2);font-size:11px">${hl(r.chip, q)}</span>
+          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} más` : ""}</span>
+        </div>
         <div class="expand-inner">
           <div class="expand-section">
             <h4>Todos los vehículos</h4>
@@ -1142,13 +1260,19 @@ function renderOS() {
       ? `<span class="badge badge-flex">✅ Sí</span>`
       : `<span style="color:var(--text2);font-size:12px">-</span>`;
     return `<tr>
-      <td><span class="hw-num">${r.os}</span></td>
-      <td>${chipCell}</td>
-      <td style="font-size:12px">${r.throttle}</td>
+      <td>
+        <span class="hw-num">${r.os}</span>
+        <span class="cell-sub">${r.year}</span>
+      </td>
+      <td>
+        ${chipCell}
+        <span class="cell-sub">${r.throttle}</span>
+      </td>
+      <td class="col-mobile-hide" style="font-size:12px">${r.throttle}</td>
       <td>${flexCell}</td>
-      <td style="font-size:12px;color:var(--text2)">${r.year}</td>
-      <td style="font-size:12px">${r.best_for}</td>
-      <td style="font-size:12px;color:var(--text2)">${r.notes}</td>
+      <td class="col-mobile-hide" style="font-size:12px;color:var(--text2)">${r.year}</td>
+      <td class="col-mobile-hide" style="font-size:12px">${r.best_for}</td>
+      <td class="col-mobile-hide" style="font-size:12px;color:var(--text2)">${r.notes}</td>
     </tr>`;
   }).join("");
 
@@ -1158,11 +1282,14 @@ function renderOS() {
       ? `<span class="badge badge-flex">✅ Único</span>`
       : `<span style="color:var(--text2);font-size:12px">-</span>`;
     return `<tr>
-      <td><span class="hw-num">${r.os}</span></td>
+      <td>
+        <span class="hw-num">${r.os}</span>
+        <span class="cell-sub">${r.year}</span>
+      </td>
       <td>${flexCell}</td>
-      <td style="font-size:12px;color:var(--text2)">${r.year}</td>
-      <td style="font-size:12px">${r.origin}</td>
-      <td style="font-size:12px;color:var(--text2)">${r.notes}</td>
+      <td class="col-mobile-hide" style="font-size:12px;color:var(--text2)">${r.year}</td>
+      <td class="col-mobile-hide" style="font-size:12px">${r.origin}</td>
+      <td class="col-mobile-hide" style="font-size:12px;color:var(--text2)">${r.notes}</td>
     </tr>`;
   }).join("");
 }

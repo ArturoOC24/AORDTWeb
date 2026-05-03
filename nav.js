@@ -144,13 +144,12 @@
         border-bottom: 1px solid rgba(255,255,255,0.06);
       }
       .hamburger { display: flex; }
+      /* dropdown keeps its desktop absolute positioning and solid background;
+         just ensure it never overflows off the right edge of the screen */
       .nav-dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        background: rgba(255,255,255,0.04);
-        border-radius: 8px;
-        margin-top: 4px;
+        right: 0;
+        left: auto;
+        min-width: 210px;
       }
     }
   `;
@@ -212,7 +211,7 @@
                     <rect x="7" y="7" width="10" height="10" rx="1"/>
                     <path d="M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3"/>
                   </svg>
-                  Referencia PCM
+                  Referencia P01/P59
                 </a>
               </div>
             </div>
