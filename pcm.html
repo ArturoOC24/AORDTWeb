@@ -1,0 +1,1325 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<title>Referencia PCM P01/P59 - AOR Dyno Tuning</title>
+<meta name="description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup. Herramienta gratuita de AOR Dyno Tuning.">
+<meta name="author" content="AOR Dyno Tuning">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aordynotuning.com/pcm">
+
+<!-- Geo Tags -->
+<meta name="geo.region" content="MX-BCN">
+<meta name="geo.placename" content="Tijuana, Baja California">
+<meta name="geo.position" content="32.464167;-116.880167">
+<meta name="ICBM" content="32.464167, -116.880167">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Referencia PCM P01/P59 - AOR Dyno Tuning">
+<meta property="og:description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup.">
+<meta property="og:url" content="https://aordynotuning.com/pcm">
+<meta property="og:site_name" content="AOR Dyno Tuning">
+<meta property="og:locale" content="es_MX">
+<meta property="og:image" content="https://aordynotuning.com/logo_mascota.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Referencia PCM P01/P59 - AOR Dyno Tuning">
+<meta name="twitter:description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup.">
+<meta name="twitter:image" content="https://aordynotuning.com/logo_mascota.png">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Referencia PCM P01/P59",
+  "description": "Referencia técnica de hardware GM P01 y P59: versiones de HW, compatibilidad de chip Intel/AMD, IAC, OS compatibles y vehicle lookup.",
+  "url": "https://aordynotuning.com/pcm",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MXN" },
+  "author": {
+    "@type": "LocalBusiness",
+    "name": "AOR Dyno Tuning",
+    "url": "https://aordynotuning.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tijuana",
+      "addressRegion": "Baja California",
+      "addressCountry": "MX"
+    }
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="nav.js"></script>
+
+<style>
+  /* ── Base (previously from theme.css) ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main { flex: 1; padding-top: 64px; }
+  .page-header {
+    width: 100%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(230,57,70,0.10) 0%, transparent 60%), #0a0a0a;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 48px 24px 36px;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  .page-header p { font-size: 0.9rem; color: #888; max-width: 560px; margin: 0 auto; line-height: 1.6; }
+  .section-tag {
+    display: inline-block;
+    padding: 5px 16px;
+    border: 1px solid rgba(230,57,70,0.4);
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #e63946;
+    margin-bottom: 16px;
+  }
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 0.78rem;
+    color: #888;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer span { color: #e63946; }
+  footer img { height: 36px; width: auto; display: block; margin: 0 auto 12px; }
+
+  /* ── PCM page variables ── */
+  :root {
+    --red:       #e63946;
+    --red-hover: #c22d38;
+    --white:     #ffffff;
+    --bg:        #0a0a0a;
+    --bg2:       #1a1a1a;
+    --bg3:       #222222;
+    --border:    rgba(255,255,255,0.07);
+    --text:      #ffffff;
+    --text2:     #888888;
+    --accent:    #f4a261;
+    --accent2:   #c96a2a;
+    --row-hover: rgba(255,255,255,0.03);
+    --expand-bg: #111111;
+    --tab-active:   #e63946;
+    --tab-inactive: #888888;
+    --shadow:    rgba(0,0,0,0.5);
+    --search-bg: #1a1a1a;
+  }
+
+  body { font-size: 14px; }
+
+  /* TABS - sticky below fixed nav */
+  .tabs {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    padding: 0 24px;
+    gap: 4px;
+    position: sticky;
+    top: 64px;
+    z-index: 99;
+  }
+  .tab {
+    flex: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: var(--tab-inactive);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab::after { display: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--tab-active); border-bottom-color: var(--tab-active); font-weight: 600; }
+
+  /* CONTENT */
+  .content { padding: 24px; max-width: 1400px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* SECTION TITLE - override kit's huge Bebas version */
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    background: var(--bg2);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .filter-label { font-size: 11px; color: var(--text2); margin-right: 2px; }
+  .filter-group { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .filter-chip {
+    padding: 4px 12px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text2);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .filter-chip:hover { border-color: var(--accent); color: var(--text); }
+  .filter-chip.active { background: var(--red); color: var(--white); border-color: var(--red); font-weight: 600; }
+  .filter-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+  .search-box {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--search-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    min-width: 200px;
+  }
+  .search-box svg { color: var(--text2); flex-shrink: 0; }
+  .search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 13px;
+    width: 100%;
+  }
+  .search-box input::placeholder { color: var(--text2); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--bg3); }
+  th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--row-hover); }
+  tbody tr.expanded { background: var(--row-hover); }
+  td {
+    padding: 10px 14px;
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .hw-num { font-family: monospace; font-weight: 600; font-size: 13px; color: var(--accent); }
+  .svc-num { font-family: monospace; font-size: 12px; color: var(--text2); }
+  .expand-row { display: none; }
+  .expand-row.visible { display: table-row; }
+  .expand-row td {
+    background: var(--expand-bg);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .expand-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .expand-inner { grid-template-columns: 1fr; } }
+  .expand-section h4 { font-size: 11px; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .expand-section ul { list-style: none; }
+  .expand-section ul li { font-size: 12px; color: var(--text); padding: 2px 0; }
+  .expand-section ul li::before { content: "• "; color: var(--accent); }
+  .expand-section p { font-size: 12px; color: var(--text); }
+  .os-tag {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    margin: 2px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .os-tag:hover { border-color: var(--accent); }
+
+  /* BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    gap: 3px;
+  }
+  .badge-intel { background: rgba(0,113,197,0.2); color: #60a5fa; border: 1px solid rgba(0,113,197,0.4); }
+  .badge-amd { background: rgba(237,28,36,0.15); color: #f87171; border: 1px solid rgba(237,28,36,0.3); }
+  .badge-iac-yes { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .badge-iac-no { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+  .badge-warn { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+  .badge-ok { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .badge-star { background: rgba(240,165,0,0.2); color: #f0a500; border: 1px solid rgba(240,165,0,0.4); }
+  .badge-fragile { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-flex { background: rgba(139,92,246,0.15); color: #c084fc; border: 1px solid rgba(139,92,246,0.3); }
+
+  /* WARNING BANNER */
+  .warn-banner {
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.35);
+    border-left: 4px solid #f59e0b;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #fbbf24;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .warn-banner .icon { flex-shrink: 0; font-size: 16px; }
+  .warn-banner strong { color: #f59e0b; }
+
+  /* GLOSSARY BAR */
+  .glossary-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    font-size: 12px;
+  }
+  .glossary-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 0;
+    cursor: pointer;
+    color: var(--text2);
+    user-select: none;
+    width: fit-content;
+  }
+  .glossary-toggle:hover { color: var(--accent); }
+  .glossary-toggle .arrow { transition: transform 0.2s; display: inline-block; }
+  .glossary-toggle.open .arrow { transform: rotate(90deg); }
+  .glossary-body {
+    display: none;
+    padding: 10px 0 14px;
+    column-count: 3;
+    column-gap: 24px;
+  }
+  @media (max-width: 700px) { .glossary-body { column-count: 2; } }
+  .glossary-body.open { display: block; }
+  .glossary-entry {
+    break-inside: avoid;
+    margin-bottom: 7px;
+    line-height: 1.4;
+  }
+  .glossary-entry dt {
+    display: inline;
+    font-weight: 600;
+    color: var(--accent);
+    margin-right: 4px;
+  }
+  .glossary-entry dd {
+    display: inline;
+    color: var(--text2);
+    margin: 0;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--text2);
+    font-size: 13px;
+  }
+
+  /* VEHICLE LOOKUP */
+  .lookup-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+  .lookup-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .lookup-grid { grid-template-columns: 1fr; } }
+  .lookup-grid label { display: block; font-size: 11px; color: var(--text2); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .lookup-grid select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+  }
+  .lookup-grid select:focus { border-color: var(--accent); }
+  .lookup-btn {
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 10px 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .lookup-btn:hover { background: var(--red-hover); transform: translateY(-1px); }
+  .result-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 16px;
+    display: none;
+  }
+  .result-card.visible { display: block; }
+  .result-card h3 { font-size: 15px; color: var(--accent); margin-bottom: 12px; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .result-item label { display: block; font-size: 10px; text-transform: uppercase; color: var(--text2); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .result-item .val { font-size: 14px; color: var(--text); font-weight: 500; }
+  .result-item .val.mono { font-family: monospace; color: var(--accent); }
+  .result-note {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text2);
+    border-left: 3px solid var(--accent);
+  }
+  .result-link { margin-top: 12px; font-size: 12px; }
+  .result-link a { color: var(--accent); text-decoration: none; }
+  .result-link a:hover { text-decoration: underline; }
+  .no-match {
+    color: var(--text2);
+    font-size: 13px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  /* OS COMPAT */
+  .os-section { margin-bottom: 32px; }
+  .os-section .section-title { margin-bottom: 2px; }
+
+  /* highlight */
+  mark { background: rgba(240,165,0,0.3); color: var(--text); border-radius: 2px; }
+  .chevron { display: inline-block; transition: transform 0.2s; margin-left: 4px; font-size: 10px; color: var(--text2); }
+  tr.expanded .chevron { transform: rotate(180deg); }
+
+  /* P01 vs P59 quick compare - horizontal cards */
+  .compare-grid { display: flex; flex-direction: column; gap: 16px; }
+  .compare-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .compare-card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-card-header h3 { font-size: 15px; font-weight: 700; margin: 0; }
+  .compare-card.p01 .compare-card-header h3 { color: #f87171; }
+  .compare-card.p59 .compare-card-header h3 { color: #60a5fa; }
+  .compare-card-header span { font-size: 11px; color: var(--text2); }
+  .compare-card dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px 20px;
+  }
+  .compare-card dl > div { display: flex; flex-direction: column; gap: 3px; }
+  .compare-card dt { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+  .compare-card dd { font-size: 13px; color: var(--text); font-weight: 500; margin: 0; }
+  .compare-card-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(34,197,94,0.08);
+    border-left: 3px solid rgba(34,197,94,0.5);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #86efac;
+  }
+</style>
+</head>
+<body>
+
+<aor-nav active="pcm"></aor-nav>
+
+<div class="page-header" style="padding-top:88px">
+  <div class="section-tag">Referencia Técnica</div>
+  <h1>GM P01 / P59 PCM Hardware Reference</h1>
+  <p>P01 = 512KB · Rojo/Azul &nbsp;|&nbsp; P59 = 1MB · Verde/Azul · Motorola 68k · J1850 VPW</p>
+</div>
+
+<nav class="tabs">
+  <div class="tab active" data-tab="p59"    onclick="switchTab('p59')">P59 Hardware</div>
+  <div class="tab"        data-tab="p01"    onclick="switchTab('p01')">P01 Hardware</div>
+  <div class="tab"        data-tab="lookup" onclick="switchTab('lookup')">Vehicle Lookup</div>
+  <div class="tab"        data-tab="os"     onclick="switchTab('os')">OS Compatibility</div>
+  <div class="tab"        data-tab="best"   onclick="switchTab('best')">⭐ Mejor Combinación</div>
+</nav>
+
+<div class="glossary-bar">
+  <div class="glossary-toggle" onclick="toggleGlossary(this)" title="Glosario de abreviaturas">
+    <span class="arrow">▶</span> Abreviaturas / Glosario
+  </div>
+  <div class="glossary-body" id="glossary-body">
+    <dl class="glossary-entry"><dt>PCM</dt><dd>Powertrain Control Module - la computadora que controla motor y transmisión.</dd></dl>
+    <dl class="glossary-entry"><dt>OS</dt><dd>Operating System - el firmware base programado en el PCM (número de calibración GM).</dd></dl>
+    <dl class="glossary-entry"><dt>HW</dt><dd>Hardware - número de revisión del circuito físico del PCM.</dd></dl>
+    <dl class="glossary-entry"><dt>IAC</dt><dd>Idle Air Control - circuito para controlar el ralentí mediante un motor paso a paso. Requiere hardware específico en la placa.</dd></dl>
+    <dl class="glossary-entry"><dt>DBC</dt><dd>Drive By Cable - acelerador mecánico tradicional con cable físico entre pedal y cuerpo de aceleración.</dd></dl>
+    <dl class="glossary-entry"><dt>DBW</dt><dd>Drive By Wire - acelerador electrónico sin cable; el PCM controla el cuerpo de aceleración directamente.</dd></dl>
+    <dl class="glossary-entry"><dt>BDM</dt><dd>Background Debug Mode - puerto de depuración de bajo nivel del Motorola 68k; permite flashear el PCM directamente en la placa (bench flash).</dd></dl>
+    <dl class="glossary-entry"><dt>VPW</dt><dd>Variable Pulse Width - protocolo J1850 VPW usado por P01/P59 en el conector OBD-II. Velocidades: 10.4 Kbps (1X) o 41.6 Kbps (4X).</dd></dl>
+    <dl class="glossary-entry"><dt>4X</dt><dd>Modo VPW 4X - duplica la velocidad del bus a ~41.6 Kbps; reduce el tiempo de lectura/escritura del PCM.</dd></dl>
+    <dl class="glossary-entry"><dt>XDF</dt><dd>eXternal Data File - archivo de definición de mapas para TunerPro; describe dónde están las tablas y escalares en la memoria del PCM.</dd></dl>
+    <dl class="glossary-entry"><dt>Flex Fuel</dt><dd>Compatibilidad nativa con mezclas gasolina/etanol (E10–E85); requiere sensor de contenido de alcohol y OS con soporte.</dd></dl>
+    <dl class="glossary-entry"><dt>AMD / Intel</dt><dd>Fabricante del chip de flash soldado en la placa. Determina qué OS es compatible: algunos OS solo funcionan con chip Intel.</dd></dl>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ═══════════════ TAB: P59 ═══════════════ -->
+  <div id="tab-p59" class="tab-panel active">
+    <div class="section-title">P59 - Versiones de Hardware Físico</div>
+    <div class="section-sub">1MB Flash · Conectores Verde/Azul · Motorola 68k · GM 1999–2007</div>
+
+    <div class="warn-banner">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>Intel vs AMD flash:</strong> Los P59 con chip Intel (hw 12570558, 12575502, 12580786) solo funcionan correctamente con OS Intel-only.
+        Flashear un OS AMD en chip Intel no guarda parámetros (no brick, pero tampoco funciona).
+        Desde 2004 en adelante GM cambió a chips AMD.
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-label">Chip:</span>
+      <div class="filter-group" id="chip-filters">
+        <span class="filter-chip active" data-filter="chip" data-val="all" onclick="setFilter('chip','all',this)">Todos</span>
+        <span class="filter-chip" data-filter="chip" data-val="Intel" onclick="setFilter('chip','Intel',this)">⚠️ Intel only</span>
+        <span class="filter-chip" data-filter="chip" data-val="AMD" onclick="setFilter('chip','AMD',this)">AMD</span>
+      </div>
+      <div class="filter-sep"></div>
+      <span class="filter-label">IAC:</span>
+      <div class="filter-group" id="iac-filters">
+        <span class="filter-chip active" data-filter="iac" data-val="all" onclick="setFilter('iac','all',this)">Todos</span>
+        <span class="filter-chip" data-filter="iac" data-val="yes" onclick="setFilter('iac','yes',this)">✅ Con IAC (DBC)</span>
+        <span class="filter-chip" data-filter="iac" data-val="no" onclick="setFilter('iac','no',this)">❌ Sin IAC (DBW only)</span>
+      </div>
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="p59-search" placeholder="Buscar hw#, service#, vehículo..." oninput="renderP59()">
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="p59-table">
+        <thead>
+          <tr>
+            <th>HW #</th>
+            <th>Service #</th>
+            <th>Año</th>
+            <th>Flash Chip</th>
+            <th>IAC / DBC</th>
+            <th>Throttle</th>
+            <th>Vehículos</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="p59-tbody"></tbody>
+      </table>
+    </div>
+    <div id="p59-no-results" class="no-results" style="display:none">Sin resultados para los filtros seleccionados.</div>
+
+  </div>
+
+  <!-- ═══════════════ TAB: P01 ═══════════════ -->
+  <div id="tab-p01" class="tab-panel">
+    <div class="section-title">P01 - Versiones de Hardware Físico</div>
+    <div class="section-sub">512KB Flash · Conectores Rojo/Azul · Motorola 68k · GM 1997–2004 · Solo DBC (cable throttle)</div>
+
+    <div class="warn-banner">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>P01 1997–2000 son frágiles al flashear.</strong> Un error durante la escritura puede dañarlos permanentemente.
+        Si vas a tuner un 97-00, tener unidades de repuesto en el banco. El <strong>0411</strong> (2001-2004) es la única versión recomendada para trabajo de tuning.
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-label">Generación:</span>
+      <div class="filter-group">
+        <span class="filter-chip active" data-filter="p01gen" data-val="all" onclick="setFilterP01('all',this)">Todas</span>
+        <span class="filter-chip" data-filter="p01gen" data-val="1" onclick="setFilterP01('1',this)">Gen 1 (97-98)</span>
+        <span class="filter-chip" data-filter="p01gen" data-val="2" onclick="setFilterP01('2',this)">Gen 2 (99-00)</span>
+        <span class="filter-chip" data-filter="p01gen" data-val="3" onclick="setFilterP01('3',this)">Gen 3 "0411"</span>
+      </div>
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="p01-search" placeholder="Buscar..." oninput="renderP01()">
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="p01-table">
+        <thead>
+          <tr>
+            <th>Gen</th>
+            <th>HW #</th>
+            <th>Service #</th>
+            <th>Años</th>
+            <th>Nickname</th>
+            <th>Flash Chip</th>
+            <th>Vehículos</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="p01-tbody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ TAB: VEHICLE LOOKUP ═══════════════ -->
+  <div id="tab-lookup" class="tab-panel">
+    <div class="section-title">Vehicle → PCM Lookup</div>
+    <div class="section-sub">Selecciona año, modelo y motor para identificar el hardware PCM</div>
+
+    <div class="lookup-card">
+      <div class="lookup-grid">
+        <div>
+          <label>Año</label>
+          <select id="lk-year" onchange="updateModels()">
+            <option value="">-- Seleccionar --</option>
+          </select>
+        </div>
+        <div>
+          <label>Modelo</label>
+          <select id="lk-model" onchange="updateEngines()">
+            <option value="">-- Seleccionar --</option>
+          </select>
+        </div>
+        <div>
+          <label>Motor</label>
+          <select id="lk-engine">
+            <option value="">-- Seleccionar --</option>
+          </select>
+        </div>
+      </div>
+      <button class="lookup-btn" onclick="doLookup()">Buscar PCM</button>
+    </div>
+
+    <div class="result-card" id="lookup-result"></div>
+  </div>
+
+  <!-- ═══════════════ TAB: OS COMPAT ═══════════════ -->
+  <div id="tab-os" class="tab-panel">
+
+    <div class="warn-banner">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>OS Intel-only (12579405, 12593058):</strong> Solo funcionan correctamente en P59 con chip Intel (hw 12570558, 12575502, 12580786).
+        En chip AMD el OS carga pero no puede guardar parámetros. No hace brick, pero el PCM queda inutilizable para tuning hasta reflashear con OS correcto.
+      </div>
+    </div>
+
+    <div class="os-section">
+      <div class="section-title">P59 - OS Numbers &amp; Compatibilidad de Hardware</div>
+      <div class="section-sub">1MB · Conectores Verde/Azul</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>OS #</th><th>Chip requerido</th><th>Throttle</th><th>Flex Fuel</th><th>Año típico</th><th>Mejor para</th><th>Notas</th>
+          </tr></thead>
+          <tbody id="os-p59-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="os-section">
+      <div class="section-title">P01 - OS Numbers &amp; Compatibilidad de Hardware</div>
+      <div class="section-sub">512KB · Conectores Rojo/Azul · Solo hw 09386530 (0411) recomendado</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>OS #</th><th>Flex Fuel</th><th>Año típico</th><th>Vehículo origen</th><th>Notas</th>
+          </tr></thead>
+          <tbody id="os-p01-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ TAB: MEJOR COMBINACIÓN ═══════════════ -->
+  <div id="tab-best" class="tab-panel">
+    <div class="section-title">⭐ Mejor Combinación para LS Swap / Tuning</div>
+    <div class="section-sub">Las unidades más versátiles y recomendadas según tipo de PCM</div>
+
+    <div class="compare-grid">
+
+      <div class="compare-card p59">
+        <div class="compare-card-header">
+          <h3>P59 - HW 12589161</h3>
+          <span>El hardware P59 más deseable para swaps LS</span>
+        </div>
+        <dl>
+          <div><dt>HW #</dt><dd>12589161</dd></div>
+          <div><dt>Service #</dt><dd>12589462</dd></div>
+          <div><dt>Años</dt><dd>2004–2007</dd></div>
+          <div><dt>Flash</dt><dd>AMD AM29F800BB (1MB)</dd></div>
+          <div><dt>Conectores</dt><dd>Verde + Azul</dd></div>
+          <div><dt>IAC / DBC</dt><dd>✅ Sí</dd></div>
+          <div><dt>Throttle</dt><dd>DBC + DBW</dd></div>
+          <div><dt>OS recomendado</dt><dd>12587603</dd></div>
+          <div><dt>BDM pads</dt><dd>✅ Accesibles</dd></div>
+          <div><dt>Origen</dt><dd>Express Van 5.3/6.0 2004-2007</dd></div>
+        </dl>
+        <div class="compare-card-note">
+          ✅ AMD · IAC presente · BDM accesible · OS universal 12587603 - Ideal para cualquier swap LS con cable throttle.
+        </div>
+      </div>
+
+      <div class="compare-card p01">
+        <div class="compare-card-header">
+          <h3>P01 - HW 09386530 "0411"</h3>
+          <span>El único P01 recomendado para tuning</span>
+        </div>
+        <dl>
+          <div><dt>HW #</dt><dd>09386530</dd></div>
+          <div><dt>Service #</dt><dd>12200411</dd></div>
+          <div><dt>Años</dt><dd>2001–2004</dd></div>
+          <div><dt>Flash</dt><dd>Intel AB28F400B5 (512KB)</dd></div>
+          <div><dt>Conectores</dt><dd>Rojo + Azul</dd></div>
+          <div><dt>Throttle</dt><dd>DBC (cable) únicamente</dd></div>
+          <div><dt>OS recomendado</dt><dd>12212156 / 12216125</dd></div>
+          <div><dt>BDM pads</dt><dd>✅ Accesibles</dd></div>
+          <div><dt>Origen</dt><dd>Camaro/Firebird 01-02, Corvette 01-02, Silverado 01-04</dd></div>
+        </dl>
+        <div class="compare-card-note">
+          ✅ Procesador actualizado (2001+), robusto al flashear - OS 12212156 = más features · 12216125 = único P01 con Flex Fuel nativo.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="warn-banner" style="margin-top:20px">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>P01 Gen 1/2 (1997–2000):</strong> frágiles al flashear - evitar para trabajo de tuning. Usar solo el <strong>0411 (2001-2004)</strong>.
+        Para P59, los hardware con chip <strong>Intel (2003)</strong> están limitados a OS Intel-only (12579405, 12593058).
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+
+const P59_HW = [
+  {
+    hw: "12570558", service: "12576106", year: "2003", chip: "Intel", iac: true, throttle: "DBC + DBW",
+    vehicles: ["Chevrolet Express Van 5.3L LM7 (2003-04)", "Chevrolet Silverado LM7 (2003)", "Silverado/Sierra LQ4 6.0L (2003)"],
+    os_compat: ["12587603", "12579405 ✱", "12593058 ✱"],
+    notes: "Chip Intel - solo OS Intel-only. IAC presente (apto para cable throttle).",
+    intel_warn: true, star: false
+  },
+  {
+    hw: "12575502", service: "12576106", year: "2003", chip: "Intel", iac: true, throttle: "DBC + DBW",
+    vehicles: ["Trucks GMT800 2003", "Express Van 2003"],
+    os_compat: ["12587603", "12579405 ✱", "12593058 ✱"],
+    notes: "Variante Intel de 2003. IAC presente.",
+    intel_warn: true, star: false
+  },
+  {
+    hw: "12580786", service: "-", year: "2003", chip: "Intel", iac: false, throttle: "DBW only",
+    vehicles: ["Corvette C5 LS1 DBW 2003-04 (early)", "Silverado/Sierra DBW 2003"],
+    os_compat: ["12587603", "12579405 ✱"],
+    notes: "Intel, sin IAC - solo funciona con DBW. Raro para swaps.",
+    intel_warn: true, star: false
+  },
+  {
+    hw: "12583659", service: "12586243", year: "2004", chip: "AMD", iac: true, throttle: "DBC + DBW",
+    vehicles: ["Pontiac GTO 2004 LS1", "Corvette C5 LS1 2004 (último año C5)", "Express Van 2004", "Silverado DBC 2004"],
+    os_compat: ["12587603", "12592433", "12592618"],
+    notes: "Primer hardware AMD. IAC presente - buena opción para swaps DBC.",
+    intel_warn: false, star: false
+  },
+  {
+    hw: "12583660", service: "-", year: "2004", chip: "AMD", iac: false, throttle: "DBW only",
+    vehicles: ["Silverado/Sierra 4.8L/6.0L 2004 (DBW)", "Tahoe/Yukon 2004"],
+    os_compat: ["12587603", "12592618"],
+    notes: "AMD, sin IAC. El más común en trucks 2004 DBW.",
+    intel_warn: false, star: false
+  },
+  {
+    hw: "12589161", service: "12589462", year: "2004–2007", chip: "AMD", iac: true, throttle: "DBC + DBW",
+    vehicles: ["Express Van 5.3L/6.0L (2004-2007)", "GMT800 vans con cable throttle"],
+    os_compat: ["12587603", "12592433", "12592618"],
+    notes: "⭐ El más deseable para swaps - AMD + IAC + producido hasta 2007. Ideal para LS swap con cable throttle.",
+    intel_warn: false, star: true
+  },
+  {
+    hw: "12589162", service: "12589463 / 12602802", year: "2003–2006", chip: "AMD", iac: false, throttle: "DBW only",
+    vehicles: ["Silverado/Sierra 4.8/5.3/6.0 DBW (2003-07)", "Tahoe/Yukon/Suburban/Escalade", "TrailBlazer 5.3L"],
+    os_compat: ["12587603", "12592618", "12606960"],
+    notes: "El más común en campo - mayoría de trucks GMT800. Sin IAC (solo DBW).",
+    intel_warn: false, star: false
+  }
+];
+
+const P01_HW = [
+  {
+    gen: 1, hw: "desconocido", service: "~9398612", years: "1997–1998", nickname: "Early fragile",
+    chip: "Intel 512KB", status: "fragile",
+    vehicles: ["Corvette C5 LS1 1997-98", "Camaro/Firebird LS1 1998"],
+    os_compat: ["12202088", "12208322"],
+    notes: "⚠️ MUY FRÁGIL - un error de escritura puede dañarlo permanentemente. Si vas a tunar un 97-98, tener al menos 3-4 unidades de repuesto. La comunidad recomienda evitarlos para tuning.",
+    flash_warn: true
+  },
+  {
+    gen: 2, hw: "desconocido", service: "varios", years: "1999–2000", nickname: "Fragile",
+    chip: "Intel 512KB", status: "fragile",
+    vehicles: ["Corvette C5 LS1 1999-00", "Camaro/Firebird LS1 1999-00", "Silverado/Sierra 1999-00 (V8)"],
+    os_compat: ["12202088", "12208322", "12209203"],
+    notes: "⚠️ FRÁGIL - mejora respecto a Gen1 pero aún inestable al flashear. Procesador anterior al 0411.",
+    flash_warn: true
+  },
+  {
+    gen: 3, hw: "09386530", service: "12200411", years: "2001–2004", nickname: "⭐ 0411",
+    chip: "Intel AB28F400B5 (512KB)", status: "recommended",
+    vehicles: [
+      "Camaro/Firebird LS1 2001-02", "Corvette C5/Z06 LS1/LS6 2001-02",
+      "Silverado/Sierra 1500/2500 2001-04", "Express Van 5.7L L31 / 4.8/6.0 LS",
+      "S10/Sonoma/Blazer/Jimmy 4.3L V6 (swap popular)",
+      "Holden Commodore VX/VY (Australia)"
+    ],
+    os_compat: ["12202088", "12212156", "12216125", "12221588", "12225074"],
+    notes: "✅ LA OPCIÓN RECOMENDADA. Procesador actualizado por GM en 2001. Mucho más robusto que generaciones anteriores. Único P01 recomendado para tuning. Usado en Camaro/Firebird, Corvette y toda la línea GMT800 2001-04.",
+    flash_warn: false
+  }
+];
+
+const OS_P59 = [
+  { os: "12587603", chip_req: "AMD + Intel", throttle: "DBC + DBW", flex: true, year: "2003–2006", best_for: "⭐ Universal donor - mejor soporte XDF, tuning, swaps", notes: "El 'Mother of All' OS. Disponible en todas las combinaciones DBC/DBW + 4L60E/4L80E + Flex. Actualizado por GM a 12606960 en 1/2 ton.", warn: false },
+  { os: "12579405", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "HW: 12570558 / 12575502 / 12580786 únicamente", notes: "Intel-only. Solo funciona correctamente en P59 con chip Intel. HW IDs: 12570558, 12575502, 12580786.", warn: true },
+  { os: "12593058", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "Vans ~2003, update de 12579405", notes: "Intel-only. Mayormente en Express Vans 2003. No usar en PCMs AMD.", warn: true },
+  { os: "12592433", chip_req: "AMD", throttle: "DBW", flex: true, year: "2004–2006", best_for: "Holden VZ Commodore / L59 Silverado Flex Fuel", notes: "Flex Fuel (30+ parámetros) + Lean Cruise (9 parámetros). Patch XDF disponible en Workshop. Australia principalmente.", warn: false },
+  { os: "12592618", chip_req: "AMD", throttle: "DBW", flex: false, year: "2004–2006", best_for: "Trucks P59 variante", notes: "HP Tuners UDP XDF disponible. Variante de 7603 para trucks específicos.", warn: false },
+  { os: "12587604 / 12587811", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado/Sierra 2006", notes: "Variantes menores de 7603 para 2006. XDF disponibles.", warn: false },
+  { os: "12605114 / 12606807", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006", notes: "OS 2006 específicos. Soporte XDF disponible.", warn: false },
+  { os: "12606960", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado 1/2 ton (update oficial de 12587603)", notes: "Update oficial de GM del OS 12587603 para vehículos 1/2 ton. Prácticamente idéntico.", warn: false },
+  { os: "12613246 / 12639623", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006 variantes", notes: "OS de 2006, menor documentación disponible.", warn: false },
+];
+
+const OS_P01 = [
+  { os: "12212156", flex: false, year: "2001–02", origin: "Camaro/Firebird, Silverado", notes: "⭐ El más rico en features para P01. HP Tuners UDP XDF disponible. Recomendado para tuning." },
+  { os: "12216125", flex: true, year: "2002", origin: "Tahoe Flex Fuel 2002", notes: "⚠️ ÚNICO OS P01 con Flex Fuel nativo. GM tuvo que hacer trade-offs para caber en 512KB. HP Tuners UDP XDF disponible." },
+  { os: "12202088", flex: false, year: "2001–02", origin: "Silverado/Sierra, Camaro, Holden VX", notes: "El más común en USA y Australia. Base para la mayoría de los XDFs." },
+  { os: "12221588", flex: false, year: "2002–03", origin: "Silverado/Sierra variante", notes: "Variante P01, documentación limitada." },
+  { os: "12225074", flex: false, year: "2003–04", origin: "Holden VY/VZ Commodore (Australia) + HSV", notes: "Australia principalmente. Incluye calibraciones HSV Clubsport." },
+  { os: "12208322 / 12209203", flex: false, year: "1999–2001", origin: "Corvette C5, Camaro/Firebird", notes: "OS tempranos para Gen 1/2 P01. Menos documentados. Evitar para tuning nuevo." },
+];
+
+// Vehicle lookup database
+const VEHICLE_DB = [
+  // CORVETTE
+  { year: [1997,1998], model: "Corvette", engine: "LS1", pcm: "P01", gen: 1, hw: "desconocido", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - frágil al flashear. Tener repuestos." },
+  { year: [1999,2000], model: "Corvette", engine: "LS1", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - frágil. Preferir 0411 si es posible." },
+  { year: [2001,2002], model: "Corvette", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - robusto. 2003 en adelante la C5 pasó a P59." },
+  { year: [2001,2002], model: "Corvette", engine: "LS6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "Z06 LS6 2001-02 - P01 0411. A partir de 2003 la Z06 usa P59." },
+  { year: [2003], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12580786", service: "-", chip: "Intel", iac: false, os_rec: "12587603", notes: "C5 2003 - primer año P59. Chip Intel, DBW-only. HW 12580786." },
+  { year: [2004], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "C5 2004 - último año C5. AMD, IAC presente. HW 12583659. ⚠️ C6 2005+ usa E40 PCM (CAN, no compatible con PcmHammer)." },
+  // CAMARO / FIREBIRD
+  { year: [1998], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 1, hw: "desconocido", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - frágil. F-body 1998." },
+  { year: [1999,2000], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - frágil." },
+  { year: [2001,2002], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - último año F-body. Mejor P01 para tuning." },
+  // SILVERADO / SIERRA
+  { year: [1999,2000], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "P01 en trucks 1999-2000. Frágil." },
+  { year: [2001,2002,2003,2004], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 en Silverado/Sierra LM7 hasta 2004." },
+  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD sin IAC - DBW únicamente. Muy común en campo." },
+  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LQ4", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ4 6.0L - P59 AMD sin IAC. DBW." },
+  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "LQ9", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ9 6.0L SS - P59 AMD sin IAC." },
+  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "L59", pcm: "P59", gen: null, hw: "12589162", service: "12602802", chip: "AMD", iac: false, os_rec: "12592433", notes: "L59 Flex Fuel - OS 12592433 es el ideal para este vehículo. Patch disponible." },
+  // EXPRESS VAN
+  { year: [2001,2002,2003,2004], model: "Express / Savana Van", engine: "L31", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "Express Van 5.7L L31 - P01 0411." },
+  { year: [2003,2004], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12570558", service: "12576106", chip: "Intel", iac: true, os_rec: "12587603", notes: "2003-04 - chip Intel con IAC. Puede usar OS Intel-only." },
+  { year: [2004,2005,2006,2007], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12589161", service: "12589462", chip: "AMD", iac: true, os_rec: "12587603", notes: "⭐ AMD con IAC - el hardware más deseable para swaps DBC." },
+  // GTO
+  { year: [2004], model: "GTO", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "Pontiac GTO 2004 - P59 AMD con IAC. Apto para DBC swap." },
+  // TAHOE / YUKON / SUBURBAN
+  { year: [2001,2002,2003,2004], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "P01 0411 en SUVs GMT800 2001-04. Año 2000 usaba gen 2 (frágil)." },
+  { year: [2003,2004,2005,2006], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD sin IAC - DBW." },
+  // S10 / TRAILBLAZER
+  { year: [2001,2002,2003,2004], model: "S10 / Blazer / Jimmy", engine: "4.3L V6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088", notes: "S10/Blazer 4.3L V6 - swap popular con 0411. Fábrica usó variantes según año. TrailBlazer 4.2L I6 usa PCM diferente (no compatible)." },
+  // HOLDEN
+  { year: [2001,2002,2003], model: "Holden Commodore VX/VY", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088 / 12225074", notes: "Australia - P01 0411. OS 12225074 para VY 2003-04." },
+  { year: [2004,2005,2006], model: "Holden Commodore VZ", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12592433", notes: "Australia - P59 AMD. OS 12592433 con Flex Fuel + Lean Cruise patch disponible." },
+];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+const state = {
+  chip: "all",
+  iac: "all",
+  p01gen: "all"
+};
+
+// ═══════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════
+function toggleGlossary(toggle) {
+  toggle.classList.toggle("open");
+  document.getElementById("glossary-body").classList.toggle("open");
+}
+
+// ═══════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════
+const VALID_TABS = new Set(['p59', 'p01', 'lookup', 'os', 'best']);
+
+function activateTab(name) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
+  const btn = document.querySelector('.tab[data-tab="' + name + '"]');
+  if (btn) btn.classList.add("active");
+}
+
+function switchTab(name) {
+  activateTab(name);
+  history.replaceState(null, '', '#' + name);
+}
+
+// ═══════════════════════════════════════════
+// FILTERS
+// ═══════════════════════════════════════════
+function setFilter(type, val, el) {
+  state[type] = val;
+  el.closest(".filter-group").querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
+  renderP59();
+}
+function setFilterP01(val, el) {
+  state.p01gen = val;
+  el.closest(".filter-group").querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
+  renderP01();
+}
+
+// ═══════════════════════════════════════════
+// HIGHLIGHT
+// ═══════════════════════════════════════════
+function hl(text, query) {
+  if (!query) return text;
+  const re = new RegExp("(" + query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+  return String(text).replace(re, "<mark>$1</mark>");
+}
+
+// ═══════════════════════════════════════════
+// RENDER P59
+// ═══════════════════════════════════════════
+function renderP59() {
+  const q = document.getElementById("p59-search").value.trim().toLowerCase();
+  const tbody = document.getElementById("p59-tbody");
+
+  let rows = P59_HW.filter(r => {
+    if (state.chip !== "all" && r.chip !== state.chip) return false;
+    if (state.iac === "yes" && !r.iac) return false;
+    if (state.iac === "no" && r.iac) return false;
+    if (q) {
+      const hay = [r.hw, r.service, r.year, r.chip, r.throttle, ...r.vehicles, r.notes].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById("p59-no-results").style.display = rows.length === 0 ? "block" : "none";
+
+  tbody.innerHTML = rows.map(r => {
+    const chipBadge = r.chip === "Intel"
+      ? `<span class="badge badge-intel">⚠️ Intel</span>`
+      : `<span class="badge badge-amd">AMD</span>`;
+    const iacBadge = r.iac
+      ? `<span class="badge badge-iac-yes">✅ Sí</span>`
+      : `<span class="badge badge-iac-no">❌ No</span>`;
+    const starBadge = r.star ? `<span class="badge badge-star">⭐ Ideal</span> ` : "";
+    const veh = r.vehicles.slice(0, 2).map(v => hl(v, q)).join("<br>");
+    return `
+    <tr onclick="expandRow('${r.hw}', this)">
+      <td><span class="hw-num">${hl(r.hw, q)}</span></td>
+      <td><span class="svc-num">${hl(r.service, q)}</span></td>
+      <td>${hl(r.year, q)}</td>
+      <td>${chipBadge}</td>
+      <td>${iacBadge}</td>
+      <td style="font-size:12px">${hl(r.throttle, q)}</td>
+      <td style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td>${starBadge}<span class="chevron">▼</span></td>
+    </tr>
+    <tr class="expand-row" id="expand-${r.hw}">
+      <td colspan="8">
+        <div class="expand-inner">
+          <div class="expand-section">
+            <h4>Todos los vehículos</h4>
+            <ul>${r.vehicles.map(v => `<li>${v}</li>`).join("")}</ul>
+          </div>
+          <div class="expand-section">
+            <h4>OS Compatibles</h4>
+            <p>${r.os_compat.map(o => `<span class="os-tag" onclick="goToOS(event,'${o.replace(' ✱','')}')">${o}</span>`).join("")}</p>
+            ${r.intel_warn ? `<p style="margin-top:8px;font-size:11px;color:#fbbf24">✱ Intel-only: solo en chip Intel</p>` : ""}
+          </div>
+          <div class="expand-section">
+            <h4>Notas técnicas</h4>
+            <p>${r.notes}</p>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+// ═══════════════════════════════════════════
+// RENDER P01
+// ═══════════════════════════════════════════
+function renderP01() {
+  const q = document.getElementById("p01-search").value.trim().toLowerCase();
+  const tbody = document.getElementById("p01-tbody");
+
+  let rows = P01_HW.filter(r => {
+    if (state.p01gen !== "all" && String(r.gen) !== state.p01gen) return false;
+    if (q) {
+      const hay = [r.hw, r.service, r.years, r.nickname, r.chip, ...r.vehicles, r.notes].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  tbody.innerHTML = rows.map(r => {
+    const statusBadge = r.status === "recommended"
+      ? `<span class="badge badge-star">⭐ Recomendado</span>`
+      : `<span class="badge badge-fragile">⚠️ Frágil</span>`;
+    const veh = r.vehicles.slice(0, 2).map(v => hl(v, q)).join("<br>");
+    const genColor = r.gen === 3 ? "#4ade80" : "#f87171";
+    return `
+    <tr onclick="expandRow01('${r.service}', this)">
+      <td><span style="font-weight:700;color:${genColor}">Gen ${r.gen}</span></td>
+      <td><span class="hw-num" style="font-size:12px">${hl(r.hw, q)}</span></td>
+      <td><span class="svc-num">${hl(r.service, q)}</span></td>
+      <td>${hl(r.years, q)}</td>
+      <td>${hl(r.nickname, q)}</td>
+      <td style="font-size:11px">${hl(r.chip, q)}</td>
+      <td style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td>${statusBadge}</td>
+      <td><span class="chevron">▼</span></td>
+    </tr>
+    <tr class="expand-row" id="expand01-${r.service.replace(/[^a-z0-9]/gi,'_')}">
+      <td colspan="9">
+        <div class="expand-inner">
+          <div class="expand-section">
+            <h4>Todos los vehículos</h4>
+            <ul>${r.vehicles.map(v => `<li>${v}</li>`).join("")}</ul>
+          </div>
+          <div class="expand-section">
+            <h4>OS Compatibles</h4>
+            <p>${r.os_compat.map(o => `<span class="os-tag" onclick="goToOS(event,'${o}')">${o}</span>`).join("")}</p>
+          </div>
+          <div class="expand-section">
+            <h4>Notas técnicas</h4>
+            <p>${r.notes}</p>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+// ═══════════════════════════════════════════
+// EXPAND ROWS
+// ═══════════════════════════════════════════
+function expandRow(hw, tr) {
+  const expRow = document.getElementById("expand-" + hw);
+  const isOpen = expRow.classList.contains("visible");
+  document.querySelectorAll("#p59-tbody .expand-row").forEach(r => r.classList.remove("visible"));
+  document.querySelectorAll("#p59-tbody tr.expanded").forEach(r => r.classList.remove("expanded"));
+  if (!isOpen) {
+    expRow.classList.add("visible");
+    tr.classList.add("expanded");
+  }
+}
+function expandRow01(service, tr) {
+  const id = "expand01-" + service.replace(/[^a-z0-9]/gi,'_');
+  const expRow = document.getElementById(id);
+  if (!expRow) return;
+  const isOpen = expRow.classList.contains("visible");
+  document.querySelectorAll("#p01-tbody .expand-row").forEach(r => r.classList.remove("visible"));
+  document.querySelectorAll("#p01-tbody tr.expanded").forEach(r => r.classList.remove("expanded"));
+  if (!isOpen) {
+    expRow.classList.add("visible");
+    tr.classList.add("expanded");
+  }
+}
+
+// ═══════════════════════════════════════════
+// RENDER OS
+// ═══════════════════════════════════════════
+function renderOS() {
+  const tbody59 = document.getElementById("os-p59-tbody");
+  tbody59.innerHTML = OS_P59.map(r => {
+    const chipCell = r.warn
+      ? `<span class="badge badge-warn">⚠️ ${r.chip_req}</span>`
+      : `<span class="badge badge-ok">${r.chip_req}</span>`;
+    const flexCell = r.flex
+      ? `<span class="badge badge-flex">✅ Sí</span>`
+      : `<span style="color:var(--text2);font-size:12px">-</span>`;
+    return `<tr>
+      <td><span class="hw-num">${r.os}</span></td>
+      <td>${chipCell}</td>
+      <td style="font-size:12px">${r.throttle}</td>
+      <td>${flexCell}</td>
+      <td style="font-size:12px;color:var(--text2)">${r.year}</td>
+      <td style="font-size:12px">${r.best_for}</td>
+      <td style="font-size:12px;color:var(--text2)">${r.notes}</td>
+    </tr>`;
+  }).join("");
+
+  const tbody01 = document.getElementById("os-p01-tbody");
+  tbody01.innerHTML = OS_P01.map(r => {
+    const flexCell = r.flex
+      ? `<span class="badge badge-flex">✅ Único</span>`
+      : `<span style="color:var(--text2);font-size:12px">-</span>`;
+    return `<tr>
+      <td><span class="hw-num">${r.os}</span></td>
+      <td>${flexCell}</td>
+      <td style="font-size:12px;color:var(--text2)">${r.year}</td>
+      <td style="font-size:12px">${r.origin}</td>
+      <td style="font-size:12px;color:var(--text2)">${r.notes}</td>
+    </tr>`;
+  }).join("");
+}
+
+// ═══════════════════════════════════════════
+// GO TO OS TAB
+// ═══════════════════════════════════════════
+function goToOS(e, os) {
+  e.stopPropagation();
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-os").classList.add("active");
+  document.querySelectorAll(".tab")[3].classList.add("active");
+  setTimeout(() => {
+    const rows = document.querySelectorAll("#os-p59-tbody td, #os-p01-tbody td");
+    rows.forEach(td => {
+      if (td.querySelector(".hw-num") && td.querySelector(".hw-num").textContent.includes(os.substring(0,8))) {
+        td.closest("tr").scrollIntoView({ behavior: "smooth", block: "center" });
+        td.closest("tr").style.outline = "2px solid var(--accent)";
+        setTimeout(() => td.closest("tr").style.outline = "", 2000);
+      }
+    });
+  }, 100);
+}
+
+// ═══════════════════════════════════════════
+// VEHICLE LOOKUP
+// ═══════════════════════════════════════════
+function initLookup() {
+  const years = [...new Set(VEHICLE_DB.flatMap(r => r.year))].sort((a,b)=>a-b);
+  const sel = document.getElementById("lk-year");
+  years.forEach(y => {
+    const o = document.createElement("option");
+    o.value = y; o.textContent = y;
+    sel.appendChild(o);
+  });
+}
+
+function updateModels() {
+  const yr = parseInt(document.getElementById("lk-year").value);
+  const models = [...new Set(VEHICLE_DB.filter(r => r.year.includes(yr)).map(r => r.model))].sort();
+  const sel = document.getElementById("lk-model");
+  sel.innerHTML = '<option value="">-- Seleccionar --</option>';
+  models.forEach(m => { const o = document.createElement("option"); o.value = m; o.textContent = m; sel.appendChild(o); });
+  document.getElementById("lk-engine").innerHTML = '<option value="">-- Seleccionar --</option>';
+  document.getElementById("lookup-result").classList.remove("visible");
+}
+
+function updateEngines() {
+  const yr = parseInt(document.getElementById("lk-year").value);
+  const mdl = document.getElementById("lk-model").value;
+  const engines = [...new Set(VEHICLE_DB.filter(r => r.year.includes(yr) && r.model === mdl).map(r => r.engine))].sort();
+  const sel = document.getElementById("lk-engine");
+  sel.innerHTML = '<option value="">-- Seleccionar --</option>';
+  engines.forEach(e => { const o = document.createElement("option"); o.value = e; o.textContent = e; sel.appendChild(o); });
+  document.getElementById("lookup-result").classList.remove("visible");
+}
+
+function doLookup() {
+  const yr = parseInt(document.getElementById("lk-year").value);
+  const mdl = document.getElementById("lk-model").value;
+  const eng = document.getElementById("lk-engine").value;
+  const res = document.getElementById("lookup-result");
+
+  if (!yr || !mdl || !eng) {
+    res.innerHTML = '<div class="no-match">Selecciona año, modelo y motor para buscar.</div>';
+    res.classList.add("visible");
+    return;
+  }
+
+  const match = VEHICLE_DB.find(r => r.year.includes(yr) && r.model === mdl && r.engine === eng);
+
+  if (!match) {
+    res.innerHTML = '<div class="no-match">No se encontró registro para esta combinación. Puede ser que el vehículo use un PCM no documentado aquí.</div>';
+    res.classList.add("visible");
+    return;
+  }
+
+  const chipBadge = match.chip.includes("Intel")
+    ? `<span class="badge badge-intel">⚠️ Intel</span>`
+    : match.chip.includes("AMD")
+    ? `<span class="badge badge-amd">AMD</span>`
+    : `<span style="font-size:12px">${match.chip}</span>`;
+
+  const iacBadge = match.iac
+    ? `<span class="badge badge-iac-yes">✅ Sí - apto DBC</span>`
+    : `<span class="badge badge-iac-no">❌ No - DBW only</span>`;
+
+  const pcmBadge = match.pcm === "P01"
+    ? `<span class="badge badge-fragile">P01 512KB</span>`
+    : `<span class="badge badge-ok">P59 1MB</span>`;
+
+  const warnHtml = match.pcm === "P01" && match.gen < 3
+    ? `<div class="warn-banner" style="margin-top:12px"><span class="icon">⚠️</span><div><strong>PCM Frágil</strong> - Este vehículo usa P01 Gen${match.gen} (${match.years || yr}). Alta probabilidad de daño permanente al flashear sin repuestos disponibles.</div></div>`
+    : "";
+
+  res.innerHTML = `
+    <h3>Resultado: ${yr} ${mdl} ${eng}</h3>
+    <div class="result-grid">
+      <div class="result-item"><label>Tipo PCM</label><div class="val">${pcmBadge}</div></div>
+      <div class="result-item"><label>HW #</label><div class="val mono">${match.hw}</div></div>
+      <div class="result-item"><label>Service #</label><div class="val mono">${match.service}</div></div>
+      <div class="result-item"><label>Flash Chip</label><div class="val">${chipBadge}</div></div>
+      <div class="result-item"><label>IAC / DBC</label><div class="val">${iacBadge}</div></div>
+      <div class="result-item"><label>OS Recomendado</label><div class="val mono">${match.os_rec}</div></div>
+    </div>
+    <div class="result-note">${match.notes}</div>
+    ${warnHtml}
+    <div class="result-link">
+      <a href="#" onclick="gotoHW(event,'${match.pcm}','${match.hw}')">→ Ver en tabla de hardware ${match.pcm}</a>
+    </div>
+  `;
+  res.classList.add("visible");
+}
+
+function gotoHW(e, pcm, hw) {
+  e.preventDefault();
+  const tabName = pcm === "P01" ? "p01" : "p59";
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + tabName).classList.add("active");
+  document.querySelectorAll(".tab")[tabName === "p59" ? 0 : 1].classList.add("active");
+  setTimeout(() => {
+    const rows = document.querySelectorAll(`#${tabName}-tbody tr:not(.expand-row)`);
+    rows.forEach(tr => {
+      if (tr.textContent.includes(hw.split("/")[0].trim())) {
+        tr.scrollIntoView({ behavior: "smooth", block: "center" });
+        tr.style.outline = "2px solid var(--accent)";
+        setTimeout(() => tr.style.outline = "", 2500);
+      }
+    });
+  }, 100);
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+renderP59();
+renderP01();
+renderOS();
+initLookup();
+
+// Activate tab from URL hash on load
+const _initHash = location.hash.replace('#', '');
+if (VALID_TABS.has(_initHash)) activateTab(_initHash);
+
+// Keep tab in sync with browser back/forward
+window.addEventListener('hashchange', () => {
+  const h = location.hash.replace('#', '');
+  if (VALID_TABS.has(h)) activateTab(h);
+});
+</script>
+
+<footer>
+  <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
+  <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
+</footer>
+
+</body>
+</html>

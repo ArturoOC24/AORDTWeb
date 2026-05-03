@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
-  <title>Decodificador de VIN — AOR Dyno Tuning</title>
+  <title>Decodificador de VIN - AOR Dyno Tuning</title>
   <meta name="description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN. Herramienta gratuita basada en datos NHTSA vPIC.">
   <meta name="author" content="AOR Dyno Tuning">
   <meta name="robots" content="index, follow">
@@ -20,7 +20,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Decodificador de VIN — AOR Dyno Tuning">
+  <meta property="og:title" content="Decodificador de VIN - AOR Dyno Tuning">
   <meta property="og:description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN. Datos NHTSA vPIC.">
   <meta property="og:url" content="https://aordynotuning.com/vin">
   <meta property="og:site_name" content="AOR Dyno Tuning">
@@ -29,7 +29,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Decodificador de VIN — AOR Dyno Tuning">
+  <meta name="twitter:title" content="Decodificador de VIN - AOR Dyno Tuning">
   <meta name="twitter:description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN.">
   <meta name="twitter:image" content="https://aordynotuning.com/logo_mascota.png">
 
@@ -502,7 +502,7 @@
           </div>
         </div>
 
-        <p class="vin-credit">Datos: <a href="https://vpic.nhtsa.dot.gov/api/" target="_blank" rel="noopener">NHTSA vPIC Public API</a> &mdash; resultados pueden variar según el registro del fabricante.</p>
+        <p class="vin-credit">Datos: <a href="https://vpic.nhtsa.dot.gov/api/" target="_blank" rel="noopener">NHTSA vPIC Public API</a> - resultados pueden variar según el registro del fabricante.</p>
       </div>
 
     </div>
@@ -511,7 +511,7 @@
   <!-- FOOTER -->
   <footer>
     <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
-    <p>&copy; 2026 <span>AOR Dyno Tuning</span> &mdash; Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
+    <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
   </footer>
 
   <script>
@@ -524,7 +524,7 @@
       'Series', 'Series2', 'Trim', 'Trim2'
     ];
 
-    // Only exclude API meta fields — all vehicle fields show in full table
+    // Only exclude API meta fields - all vehicle fields show in full table
     const SUMMARY_KEYS = new Set([
       'ErrorCode', 'ErrorText', 'Count', 'Message', 'SearchCriteria'
     ]);
@@ -785,7 +785,7 @@
     });
 
     function loadExample() {
-      // A 2019 VW Jetta — clean NHTSA test VIN
+      // A 2019 VW Jetta - clean NHTSA test VIN
       vinInput.value = '3VWC57BU9KM085869';
       vinCount.textContent = '17';
       clearError();

@@ -1,4 +1,4 @@
-/* ─── AOR Dyno Tuning — Shared Nav Component ─── */
+﻿/* ─── AOR Dyno Tuning - Shared Nav Component ─── */
 (function () {
   const NAV_CSS = `
     aor-nav { display: block; }
@@ -205,6 +205,14 @@
                     <line x1="12" y1="14" x2="17" y2="14"/>
                   </svg>
                   Decodificador VIN
+                </a>
+                <div class="nav-dropdown-divider"></div>
+                <a href="pcm.html"${active === 'pcm' ? ' class="active"' : ''}>
+                  <svg viewBox="0 0 24 24" stroke-width="2">
+                    <rect x="7" y="7" width="10" height="10" rx="1"/>
+                    <path d="M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3"/>
+                  </svg>
+                  Referencia PCM
                 </a>
               </div>
             </div>
