@@ -141,6 +141,11 @@
   body { font-size: 14px; }
 
   /* TABS - sticky below fixed nav */
+  .tabs-outer {
+    position: sticky;
+    top: 64px;
+    z-index: 99;
+  }
   .tabs {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -148,15 +153,40 @@
     justify-content: center;
     padding: 0 24px;
     gap: 4px;
-    position: sticky;
-    top: 64px;
-    z-index: 99;
-    /* mobile horizontal scroll */
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .tabs::-webkit-scrollbar { display: none; }
+  /* scroll hint: gradient + arrow on the right, mobile only */
+  .tabs-outer::after {
+    content: '';
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .tabs-outer {
+      position: sticky; /* kept here so ::after is contained */
+    }
+    .tabs-outer::after {
+      content: '›';
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      position: absolute;
+      top: 0; right: 0;
+      bottom: 1px; /* 1px = border-bottom of .tabs */
+      width: 48px;
+      background: linear-gradient(to right, transparent, var(--bg2) 55%);
+      color: var(--text2);
+      font-size: 20px;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .tabs-outer.tabs-end::after {
+      opacity: 0;
+    }
+  }
   .tab {
     flex: none;
     padding: 12px 20px;
@@ -525,8 +555,8 @@
     .page-header { padding: 72px 16px 28px; }
     .page-header p { font-size: 0.82rem; }
 
-    /* tabs: smaller text/padding, already scrollable */
-    .tabs { justify-content: flex-start; padding: 0 8px; }
+    /* tabs: left-align and reduce padding on mobile */
+    .tabs { justify-content: flex-start; padding: 0 8px 0 8px; }
     .tab { padding: 10px 14px; font-size: 12px; }
 
     /* content */
@@ -606,13 +636,15 @@
   <p>P01 = 512KB · Rojo/Azul &nbsp;|&nbsp; P59 = 1MB · Verde/Azul · Motorola 68k · J1850 VPW</p>
 </div>
 
-<nav class="tabs">
-  <div class="tab active" data-tab="p59"    onclick="switchTab('p59')">P59 Hardware</div>
-  <div class="tab"        data-tab="p01"    onclick="switchTab('p01')">P01 Hardware</div>
-  <div class="tab"        data-tab="lookup" onclick="switchTab('lookup')">Vehicle Lookup</div>
-  <div class="tab"        data-tab="os"     onclick="switchTab('os')">OS Compatibility</div>
-  <div class="tab"        data-tab="best"   onclick="switchTab('best')">⭐ Mejor Combinación</div>
-</nav>
+<div class="tabs-outer" id="tabsOuter">
+  <nav class="tabs" id="tabsNav">
+    <div class="tab active" data-tab="p59"    onclick="switchTab('p59')">P59 Hardware</div>
+    <div class="tab"        data-tab="p01"    onclick="switchTab('p01')">P01 Hardware</div>
+    <div class="tab"        data-tab="lookup" onclick="switchTab('lookup')">Vehicle Lookup</div>
+    <div class="tab"        data-tab="os"     onclick="switchTab('os')">OS Compatibility</div>
+    <div class="tab"        data-tab="best"   onclick="switchTab('best')">⭐ Mejor Combinación</div>
+  </nav>
+</div>
 
 <div class="glossary-bar">
   <div class="glossary-toggle" onclick="toggleGlossary(this)" title="Glosario de abreviaturas">
@@ -1441,6 +1473,21 @@ window.addEventListener('hashchange', () => {
   const h = location.hash.replace('#', '');
   if (VALID_TABS.has(h)) activateTab(h);
 });
+
+// ── Tabs scroll hint ──
+(function () {
+  const nav    = document.getElementById('tabsNav');
+  const outer  = document.getElementById('tabsOuter');
+  if (!nav || !outer) return;
+  function update() {
+    if (window.innerWidth > 768) { outer.classList.remove('tabs-end'); return; }
+    const atEnd = nav.scrollLeft >= nav.scrollWidth - nav.clientWidth - 4;
+    outer.classList.toggle('tabs-end', atEnd);
+  }
+  nav.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 </script>
 
 <footer>
