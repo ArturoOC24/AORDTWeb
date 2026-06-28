@@ -798,6 +798,23 @@
     }
     footer span { color: var(--red); }
     footer img { height: 36px; width: auto; margin-bottom: 12px; }
+    .footer-tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 28px;
+      margin: 0 0 22px;
+      list-style: none;
+      padding: 0;
+    }
+    .footer-tools a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.3px;
+      transition: color 0.3s;
+    }
+    .footer-tools a:hover { color: var(--white); }
 
     /* ─── MODAL CALCULADORA ─── */
     .modal-overlay {
@@ -1615,6 +1632,11 @@
   <!-- FOOTER -->
   <footer>
     <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
+    <nav class="footer-tools" aria-label="Herramientas">
+      <a href="/calculadora">Calculadora de Combustible</a>
+      <a href="/vin">Decodificador de VIN</a>
+      <a href="/pcm">Referencia PCM P01/P59</a>
+    </nav>
     <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. México</p>
   </footer>
 

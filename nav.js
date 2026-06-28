@@ -186,7 +186,7 @@
                 <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="nav-dropdown-menu">
-                <a href="calculadora.html"${active === 'calculadora' ? ' class="active"' : ''}>
+                <a href="/calculadora"${active === 'calculadora' ? ' class="active"' : ''}>
                   <svg viewBox="0 0 24 24" stroke-width="2">
                     <rect x="4" y="2" width="16" height="20" rx="2"/>
                     <line x1="8" y1="6" x2="16" y2="6"/>
@@ -196,7 +196,7 @@
                   Fuel Blending
                 </a>
                 <div class="nav-dropdown-divider"></div>
-                <a href="vin.html"${active === 'vin' ? ' class="active"' : ''}>
+                <a href="/vin"${active === 'vin' ? ' class="active"' : ''}>
                   <svg viewBox="0 0 24 24" stroke-width="2">
                     <rect x="2" y="6" width="20" height="13" rx="2"/>
                     <circle cx="7.5" cy="12.5" r="1.5"/>
@@ -206,7 +206,7 @@
                   Decodificador VIN
                 </a>
                 <div class="nav-dropdown-divider"></div>
-                <a href="pcm.html"${active === 'pcm' ? ' class="active"' : ''}>
+                <a href="/pcm"${active === 'pcm' ? ' class="active"' : ''}>
                   <svg viewBox="0 0 24 24" stroke-width="2">
                     <rect x="7" y="7" width="10" height="10" rx="1"/>
                     <path d="M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3"/>
