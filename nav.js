@@ -156,6 +156,7 @@
     /* ─── Responsive ─── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .nav-links a { display: block; padding: 10px 0; }
       .nav-links.open {
         display: flex;
         flex-direction: column;
