@@ -1,16 +1,18 @@
-﻿<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <title>Fuel Blending Tool - AOR Dyno Tuning</title>
-  <meta name="description" content="Calculadora de mezcla de combustible: octanaje final, dosis de aditivo y porcentaje de etanol. Herramienta gratuita de AOR Dyno Tuning, Tijuana.">
+  <meta name="description" content="Fuel blending calculator: final octane rating, additive dosage, and ethanol percentage. Free tool by AOR Dyno Tuning, Tijuana.">
   <meta name="author" content="AOR Dyno Tuning">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://aordynotuning.com/calculadora">
+  <link rel="canonical" href="https://aordynotuning.com/en/calculadora">
+
+  <!-- hreflang -->
   <link rel="alternate" hreflang="es" href="https://aordynotuning.com/calculadora">
   <link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/calculadora">
   <link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/calculadora">
@@ -24,16 +26,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Fuel Blending Tool - AOR Dyno Tuning">
-  <meta property="og:description" content="Calculadora de mezcla de combustible: octanaje final, dosis de aditivo y porcentaje de etanol. Herramienta gratuita de AOR Dyno Tuning, Tijuana.">
-  <meta property="og:url" content="https://aordynotuning.com/calculadora">
+  <meta property="og:description" content="Fuel blending calculator: final octane rating, additive dosage, and ethanol percentage. Free tool by AOR Dyno Tuning, Tijuana.">
+  <meta property="og:url" content="https://aordynotuning.com/en/calculadora">
   <meta property="og:site_name" content="AOR Dyno Tuning">
-  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://aordynotuning.com/logo_mascota.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fuel Blending Tool - AOR Dyno Tuning">
-  <meta name="twitter:description" content="Calculadora de mezcla de combustible: octanaje final, dosis de aditivo y porcentaje de etanol.">
+  <meta name="twitter:description" content="Fuel blending calculator: final octane rating, additive dosage, and ethanol percentage.">
   <meta name="twitter:image" content="https://aordynotuning.com/logo_mascota.png">
 
   <!-- Schema.org JSON-LD -->
@@ -42,11 +44,11 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Fuel Blending Tool",
-    "description": "Calculadora de mezcla de combustible: octanaje final, dosis de aditivo VP/Boostane y porcentaje de etanol E85.",
-    "url": "https://aordynotuning.com/calculadora",
+    "description": "Fuel blending calculator: final octane rating, VP/Boostane additive dosage, and E85 ethanol percentage.",
+    "url": "https://aordynotuning.com/en/calculadora",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MXN" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": {
       "@type": "LocalBusiness",
       "name": "AOR Dyno Tuning",
@@ -64,7 +66,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="nav.js"></script>
+  <script src="/nav.js"></script>
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -345,18 +347,18 @@
 </head>
 <body>
 
-  <aor-nav active="calculadora"></aor-nav>
+  <aor-nav active="calculadora" lang="en"></aor-nav>
 
   <main>
     <div class="page-header">
-      <div class="page-header-tag">Herramientas</div>
+      <div class="page-header-tag">Tools</div>
       <h1>Fuel Blending Tool</h1>
-      <p>Calculadora de mezcla de combustible. Todos los resultados son estimados y pueden variar seg&uacute;n las condiciones reales del combustible.</p>
+      <p>Fuel blending calculator. All results are estimates and may vary depending on actual fuel conditions.</p>
     </div>
 
     <div class="calc-wrapper">
       <div class="calc-card">
-        <img src="simple_logo.svg" alt="AOR Dyno Tuning" class="calc-card-logo">
+        <img src="/simple_logo.svg" alt="AOR Dyno Tuning" class="calc-card-logo">
 
         <!-- Unit toggle -->
         <div class="calc-unit-toggle">
@@ -366,33 +368,33 @@
 
         <!-- Main tabs -->
         <div class="calc-tabs">
-          <button class="calc-tab active" onclick="showCalcTab('final',   this)">Calcular mezcla</button>
-          <button class="calc-tab"        onclick="showCalcTab('needed',  this)">Calcular dosis</button>
-          <button class="calc-tab"        onclick="showCalcTab('ethanol', this)">Etanol %</button>
+          <button class="calc-tab active" onclick="showCalcTab('final',   this)">Calculate Blend</button>
+          <button class="calc-tab"        onclick="showCalcTab('needed',  this)">Calculate Dosage</button>
+          <button class="calc-tab"        onclick="showCalcTab('ethanol', this)">Ethanol %</button>
         </div>
 
-        <!-- ── TAB 1: Calcular mezcla ── -->
+        <!-- ── TAB 1: Calculate Blend ── -->
         <div id="calcTabFinal">
-          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">Calcula el octanaje resultante al mezclar tu gasolina con un aditivo, E85 o una gasolina de mayor octanaje.</p>
+          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">Calculates the resulting octane when mixing your gasoline with an additive, E85, or a higher-octane fuel.</p>
 
-          <label>Aditivo / Mezcla</label>
+          <label>Additive / Blend</label>
           <select id="calcAdditive" onchange="handleCalcAdditiveChange()">
             <option value="vp">VP Octane Booster</option>
             <option value="boostane">Boostane Professional</option>
             <option value="e85">E85</option>
-            <option value="gasgas">Mezcla de gasolinas</option>
+            <option value="gasgas">Gas + Gas Blend</option>
           </select>
 
           <!-- Volume of base gas (with gauge toggle) -->
           <div class="calc-vol-header">
-            <label id="lblGallons1">Galones de gasolina base</label>
-            <button class="calc-gauge-btn" id="gaugeBtn1" onclick="toggleGauge(1)">⛽ Aguja</button>
+            <label id="lblGallons1">Gallons of base gasoline</label>
+            <button class="calc-gauge-btn" id="gaugeBtn1" onclick="toggleGauge(1)">&#9981; Gauge</button>
           </div>
           <input type="number" id="calcGallons" step="0.1" value="16">
           <div class="calc-gauge-wrap" id="gaugeWrap1" style="display:none;">
-            <label id="lblGaugeTank1">Capacidad del tanque (gal)</label>
+            <label id="lblGaugeTank1">Tank capacity (gal)</label>
             <input type="number" id="gaugeCapacity1" step="0.1" value="16" oninput="updateGauge(1)">
-            <label>Nivel del combustible</label>
+            <label>Fuel level</label>
             <div class="gauge-slider-wrap">
               <input type="range" id="gaugeLevel1" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge(1)" style="--pct:50%">
               <div class="gauge-slider-ticks">
@@ -400,29 +402,29 @@
               </div>
             </div>
             <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1">8.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1">50%</span></div>
-            <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
+            <p class="calc-note" style="text-align:left;margin-top:6px;">* The gauge reading is approximate.</p>
           </div>
 
-          <label>Octanaje base</label>
+          <label>Base octane</label>
           <input type="number" id="calcBaseOctane" step="0.1" value="87">
 
           <!-- Booster fields -->
           <div id="calcBoosterField">
-            <label id="lblBoosterOz1">Onzas de aditivo</label>
+            <label id="lblBoosterOz1">Ounces of additive</label>
             <input type="number" id="calcBoosterOz" step="0.1" value="16">
           </div>
 
           <!-- E85 fields -->
           <div id="calcE85Fields" style="display:none;">
             <div class="calc-vol-header">
-              <label id="lblE85Gallons1">Galones de E85</label>
-              <button class="calc-gauge-btn" id="gaugeBtn1e" onclick="toggleGauge('1e')">⛽ Aguja</button>
+              <label id="lblE85Gallons1">Gallons of E85</label>
+              <button class="calc-gauge-btn" id="gaugeBtn1e" onclick="toggleGauge('1e')">&#9981; Gauge</button>
             </div>
             <input type="number" id="calcE85Gallons" step="0.1" value="5">
             <div class="calc-gauge-wrap" id="gaugeWrap1e" style="display:none;">
-              <label id="lblGaugeTank1e">Capacidad contenedor E85 (gal)</label>
+              <label id="lblGaugeTank1e">E85 container capacity (gal)</label>
               <input type="number" id="gaugeCapacity1e" step="0.1" value="10" oninput="updateGauge('1e')">
-              <label>Nivel</label>
+              <label>Level</label>
               <div class="gauge-slider-wrap">
                 <input type="range" id="gaugeLevel1e" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge('1e')" style="--pct:50%">
                 <div class="gauge-slider-ticks">
@@ -431,21 +433,21 @@
               </div>
               <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1e">5.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1e">½</span></div>
             </div>
-            <label>% de alcohol del E85</label>
+            <label>E85 alcohol %</label>
             <input type="number" id="calcE85Alcohol" step="1" value="85">
           </div>
 
           <!-- Gas + Gas fields -->
           <div id="calcGasGasFields" style="display:none;">
             <div class="calc-vol-header">
-              <label id="lblGas2Vol1">Galones de gasolina a agregar</label>
-              <button class="calc-gauge-btn" id="gaugeBtn1g" onclick="toggleGauge('1g')">⛽ Aguja</button>
+              <label id="lblGas2Vol1">Gallons of gasoline to add</label>
+              <button class="calc-gauge-btn" id="gaugeBtn1g" onclick="toggleGauge('1g')">&#9981; Gauge</button>
             </div>
             <input type="number" id="calcGas2Volume" step="0.1" value="5">
             <div class="calc-gauge-wrap" id="gaugeWrap1g" style="display:none;">
-              <label id="lblGaugeTank1g">Capacidad del tanque 2 (gal)</label>
+              <label id="lblGaugeTank1g">Tank 2 capacity (gal)</label>
               <input type="number" id="gaugeCapacity1g" step="0.1" value="10" oninput="updateGauge('1g')">
-              <label>Nivel</label>
+              <label>Level</label>
               <div class="gauge-slider-wrap">
                 <input type="range" id="gaugeLevel1g" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge('1g')" style="--pct:50%">
                 <div class="gauge-slider-ticks">
@@ -454,7 +456,7 @@
               </div>
               <div class="calc-gauge-computed">&asymp; <span id="gaugeVal1g">5.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl1g">½</span></div>
             </div>
-            <label>Octanaje de la segunda gasolina</label>
+            <label>Second gasoline octane</label>
             <div class="calc-preset-group">
               <button class="calc-preset-btn"        onclick="setPreset('calcGas2Octane',  87, this)">87</button>
               <button class="calc-preset-btn"        onclick="setPreset('calcGas2Octane',  89, this)">89</button>
@@ -464,30 +466,30 @@
             <input type="number" id="calcGas2Octane" step="0.1" value="91">
           </div>
 
-          <button class="calc-btn" onclick="calcFinal()">Calcular</button>
+          <button class="calc-btn" onclick="calcFinal()">Calculate</button>
         </div>
 
-        <!-- ── TAB 2: Calcular dosis ── -->
+        <!-- ── TAB 2: Calculate Dosage ── -->
         <div id="calcTabNeeded" style="display:none;">
-          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">¿Necesitas llegar a un octanaje específico? Calcula cuánto aditivo, E85 o gasolina de mayor octanaje necesitas agregar.</p>
+          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">Need to reach a specific octane? Calculate how much additive, E85, or higher-octane fuel you need to add.</p>
 
-          <label>Aditivo / Mezcla</label>
+          <label>Additive / Blend</label>
           <select id="calcAdditive2" onchange="handleCalcAdditiveChange()">
             <option value="vp">VP Octane Booster</option>
             <option value="boostane">Boostane Professional</option>
             <option value="e85">E85</option>
-            <option value="gasgas">Mezcla de gasolinas</option>
+            <option value="gasgas">Gas + Gas Blend</option>
           </select>
 
           <div class="calc-vol-header">
-            <label id="lblGallons2">Galones de gasolina base</label>
-            <button class="calc-gauge-btn" id="gaugeBtn2" onclick="toggleGauge(2)">⛽ Aguja</button>
+            <label id="lblGallons2">Gallons of base gasoline</label>
+            <button class="calc-gauge-btn" id="gaugeBtn2" onclick="toggleGauge(2)">&#9981; Gauge</button>
           </div>
           <input type="number" id="calcGallonsTarget" step="0.1" value="16">
           <div class="calc-gauge-wrap" id="gaugeWrap2" style="display:none;">
-            <label id="lblGaugeTank2">Capacidad del tanque (gal)</label>
+            <label id="lblGaugeTank2">Tank capacity (gal)</label>
             <input type="number" id="gaugeCapacity2" step="0.1" value="16" oninput="updateGauge(2)">
-            <label>Nivel del combustible</label>
+            <label>Fuel level</label>
             <div class="gauge-slider-wrap">
               <input type="range" id="gaugeLevel2" class="gauge-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateGauge(2)" style="--pct:50%">
               <div class="gauge-slider-ticks">
@@ -495,22 +497,22 @@
               </div>
             </div>
             <div class="calc-gauge-computed">&asymp; <span id="gaugeVal2">8.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl2">½</span></div>
-            <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
+            <p class="calc-note" style="text-align:left;margin-top:6px;">* The gauge reading is approximate.</p>
           </div>
 
-          <label>Octanaje base</label>
+          <label>Base octane</label>
           <input type="number" id="calcBaseOctaneTarget" step="0.1" value="87">
-          <label>Octanaje objetivo</label>
+          <label>Target octane</label>
           <input type="number" id="calcTargetOctane" step="0.1" value="91">
 
           <div id="calcE85AlcoholNeeded" style="display:none;">
-            <label>% de alcohol del E85</label>
+            <label>E85 alcohol %</label>
             <input type="number" id="calcE85AlcoholTarget" step="1" value="85">
           </div>
 
           <!-- Gas+Gas: octane of second gas -->
           <div id="calcGasGasNeededFields" style="display:none;">
-            <label>Octanaje de la gasolina a agregar</label>
+            <label>Octane of gasoline to add</label>
             <div class="calc-preset-group">
               <button class="calc-preset-btn"        onclick="setPreset('calcGas2OctaneTarget', 89, this)">89</button>
               <button class="calc-preset-btn active" onclick="setPreset('calcGas2OctaneTarget', 91, this)">91</button>
@@ -520,29 +522,29 @@
             <input type="number" id="calcGas2OctaneTarget" step="0.1" value="91">
           </div>
 
-          <button class="calc-btn" onclick="calcNeeded()">Calcular</button>
+          <button class="calc-btn" onclick="calcNeeded()">Calculate</button>
         </div>
 
-        <!-- ── TAB 3: Etanol % ── -->
+        <!-- ── TAB 3: Ethanol % ── -->
         <div id="calcTabEthanol" style="display:none;">
-          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">Controla el porcentaje de etanol en tu tanque al cargar o para subir la mezcla actual.</p>
+          <p class="calc-note" style="margin-top:0;margin-bottom:14px;text-align:left;">Control the ethanol percentage in your tank when filling up or increasing the current blend.</p>
           <div class="calc-tabs" style="margin-top:10px;">
-            <button class="calc-tab active" onclick="showCalcEthTab('fill',     this)">Llenar tanque</button>
-            <button class="calc-tab"        onclick="showCalcEthTab('increase', this)">Subir mezcla</button>
+            <button class="calc-tab active" onclick="showCalcEthTab('fill',     this)">Fill Tank</button>
+            <button class="calc-tab"        onclick="showCalcEthTab('increase', this)">Increase Blend</button>
           </div>
 
-          <!-- Sub-tab: Llenar tanque -->
+          <!-- Sub-tab: Fill Tank -->
           <div id="calcEthFill">
-            <label id="lblTankCapacity">Capacidad total del tanque (gal)</label>
+            <label id="lblTankCapacity">Total tank capacity (gal)</label>
             <input type="number" id="calcTankCapacity" step="0.1" value="16" oninput="updateGauge('3f')">
 
             <div class="calc-vol-header">
-              <label id="lblCurrentFuel">Combustible actual (gal)</label>
-              <button class="calc-gauge-btn" id="gaugeBtn3f" onclick="toggleGauge('3f')">⛽ Aguja</button>
+              <label id="lblCurrentFuel">Current fuel (gal)</label>
+              <button class="calc-gauge-btn" id="gaugeBtn3f" onclick="toggleGauge('3f')">&#9981; Gauge</button>
             </div>
             <input type="number" id="calcCurrentFuel" step="0.1" value="4">
             <div class="calc-gauge-wrap" id="gaugeWrap3f" style="display:none;">
-              <label>Nivel del combustible</label>
+              <label>Fuel level</label>
               <div class="gauge-slider-wrap">
                 <input type="range" id="gaugeLevel3f" class="gauge-slider" min="0" max="1" step="0.01" value="0.25" oninput="updateGauge('3f')" style="--pct:25%">
                 <div class="gauge-slider-ticks">
@@ -550,29 +552,29 @@
                 </div>
               </div>
               <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3f">4.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl3f">25%</span></div>
-              <p class="calc-note" style="text-align:left;margin-top:6px;">* Usa la capacidad del tanque ya ingresada arriba.</p>
+              <p class="calc-note" style="text-align:left;margin-top:6px;">* Uses the tank capacity entered above.</p>
             </div>
 
-            <label>% etanol actual</label>
+            <label>Current ethanol %</label>
             <input type="number" id="calcCurrentEthanol" step="1" value="0">
-            <label>% etanol deseado</label>
+            <label>Target ethanol %</label>
             <input type="number" id="calcTargetEthanolFill" step="1" value="10">
-            <label>% etanol del E85</label>
+            <label>E85 ethanol %</label>
             <input type="number" id="calcE85PercentFill" step="1" value="85">
-            <button class="calc-btn" onclick="calcFill()">Calcular</button>
+            <button class="calc-btn" onclick="calcFill()">Calculate</button>
           </div>
 
-          <!-- Sub-tab: Subir mezcla -->
+          <!-- Sub-tab: Increase Blend -->
           <div id="calcEthIncrease" style="display:none;">
             <div class="calc-vol-header">
-              <label id="lblCurrentFuelOnly">Combustible actual (gal)</label>
-              <button class="calc-gauge-btn" id="gaugeBtn3i" onclick="toggleGauge('3i')">⛽ Aguja</button>
+              <label id="lblCurrentFuelOnly">Current fuel (gal)</label>
+              <button class="calc-gauge-btn" id="gaugeBtn3i" onclick="toggleGauge('3i')">&#9981; Gauge</button>
             </div>
             <input type="number" id="calcCurrentFuelOnly" step="0.1" value="10">
             <div class="calc-gauge-wrap" id="gaugeWrap3i" style="display:none;">
-              <label id="lblGaugeTank3i">Capacidad del tanque (gal)</label>
+              <label id="lblGaugeTank3i">Tank capacity (gal)</label>
               <input type="number" id="gaugeCapacity3i" step="0.1" value="16" oninput="updateGauge('3i')">
-              <label>Nivel del combustible</label>
+              <label>Fuel level</label>
               <div class="gauge-slider-wrap">
                 <input type="range" id="gaugeLevel3i" class="gauge-slider" min="0" max="1" step="0.01" value="0.75" oninput="updateGauge('3i')" style="--pct:75%">
                 <div class="gauge-slider-ticks">
@@ -580,16 +582,16 @@
                 </div>
               </div>
               <div class="calc-gauge-computed">&asymp; <span id="gaugeVal3i">12.0</span> <span class="gauge-unit-vol">gal</span><span class="gauge-lvl-lbl" id="gaugeLbl3i">75%</span></div>
-              <p class="calc-note" style="text-align:left;margin-top:6px;">* La aguja es aproximada.</p>
+              <p class="calc-note" style="text-align:left;margin-top:6px;">* The gauge reading is approximate.</p>
             </div>
 
-            <label>% etanol actual</label>
+            <label>Current ethanol %</label>
             <input type="number" id="calcCurrentEthanolOnly" step="1" value="0">
-            <label>% etanol deseado</label>
+            <label>Target ethanol %</label>
             <input type="number" id="calcTargetEthanolOnly" step="1" value="10">
-            <label>% etanol del E85</label>
+            <label>E85 ethanol %</label>
             <input type="number" id="calcE85PercentOnly" step="1" value="85">
-            <button class="calc-btn" onclick="calcIncrease()">Calcular</button>
+            <button class="calc-btn" onclick="calcIncrease()">Calculate</button>
           </div>
         </div>
 
@@ -600,8 +602,8 @@
   </main>
 
   <footer>
-    <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
-    <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
+    <img src="/logo_mascota.svg" alt="AOR Dyno Tuning">
+    <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Advanced Tuning &bull; Tijuana, B.C. Mexico</p>
   </footer>
 
   <script>
@@ -665,19 +667,19 @@
     }
 
     var UNIT_LABELS = {
-      lblGallons1:    { us:'Galones de gasolina base',           metric:'Litros de gasolina base' },
-      lblGallons2:    { us:'Galones de gasolina base',           metric:'Litros de gasolina base' },
-      lblBoosterOz1:  { us:'Onzas de aditivo',                   metric:'mL de aditivo' },
-      lblE85Gallons1: { us:'Galones de E85',                     metric:'Litros de E85' },
-      lblGas2Vol1:    { us:'Galones de gasolina a agregar',      metric:'Litros de gasolina a agregar' },
-      lblTankCapacity:{ us:'Capacidad total del tanque (gal)',    metric:'Capacidad total del tanque (L)' },
-      lblCurrentFuel: { us:'Combustible actual (gal)',            metric:'Combustible actual (L)' },
-      lblCurrentFuelOnly:{ us:'Combustible actual (gal)',         metric:'Combustible actual (L)' },
-      lblGaugeTank1:  { us:'Capacidad del tanque (gal)',          metric:'Capacidad del tanque (L)' },
-      lblGaugeTank1e: { us:'Capacidad contenedor E85 (gal)',      metric:'Capacidad contenedor E85 (L)' },
-      lblGaugeTank1g: { us:'Capacidad del tanque 2 (gal)',        metric:'Capacidad del tanque 2 (L)' },
-      lblGaugeTank2:  { us:'Capacidad del tanque (gal)',          metric:'Capacidad del tanque (L)' },
-      lblGaugeTank3i: { us:'Capacidad del tanque (gal)',          metric:'Capacidad del tanque (L)' }
+      lblGallons1:    { us:'Gallons of base gasoline',              metric:'Liters of base gasoline' },
+      lblGallons2:    { us:'Gallons of base gasoline',              metric:'Liters of base gasoline' },
+      lblBoosterOz1:  { us:'Ounces of additive',                    metric:'mL of additive' },
+      lblE85Gallons1: { us:'Gallons of E85',                        metric:'Liters of E85' },
+      lblGas2Vol1:    { us:'Gallons of gasoline to add',            metric:'Liters of gasoline to add' },
+      lblTankCapacity:{ us:'Total tank capacity (gal)',              metric:'Total tank capacity (L)' },
+      lblCurrentFuel: { us:'Current fuel (gal)',                     metric:'Current fuel (L)' },
+      lblCurrentFuelOnly:{ us:'Current fuel (gal)',                  metric:'Current fuel (L)' },
+      lblGaugeTank1:  { us:'Tank capacity (gal)',                    metric:'Tank capacity (L)' },
+      lblGaugeTank1e: { us:'E85 container capacity (gal)',           metric:'E85 container capacity (L)' },
+      lblGaugeTank1g: { us:'Tank 2 capacity (gal)',                  metric:'Tank 2 capacity (L)' },
+      lblGaugeTank2:  { us:'Tank capacity (gal)',                    metric:'Tank capacity (L)' },
+      lblGaugeTank3i: { us:'Tank capacity (gal)',                    metric:'Tank capacity (L)' }
     };
 
     function updateUnitLabels() {
@@ -841,8 +843,8 @@
 
     // ─── Helpers ───
     function getCalcData(a) {
-      if (a === 'vp')       return { factor: boosterFactor(3.3),  note: '* Basado en gráfica VP.' };
-      if (a === 'boostane') return { factor: boosterFactor(10.8), note: '* Basado en tabla Boostane Professional. Cálculo estimado.' };
+      if (a === 'vp')       return { factor: boosterFactor(3.3),  note: '* Based on VP chart.' };
+      if (a === 'boostane') return { factor: boosterFactor(10.8), note: '* Based on Boostane Professional table. Estimated calculation.' };
       return null;
     }
     function err(msg) { document.getElementById('calcResult').innerText = msg; }
@@ -860,7 +862,7 @@
       return parseFloat(document.getElementById(directId).value);
     }
 
-    // ─── Tab 1: Calcular mezcla ───
+    // ─── Tab 1: Calculate Blend ───
     function calcFinal() {
       var a = document.getElementById('calcAdditive').value;
       var g = readVol('calcGallons', '1');
@@ -869,76 +871,76 @@
       if (a === 'e85') {
         var eg  = readVol('calcE85Gallons', '1e');
         var alc = parseFloat(document.getElementById('calcE85Alcohol').value);
-        if (isNaN(g)||isNaN(b)||isNaN(eg)||isNaN(alc)) { err('Valores inválidos'); return; }
+        if (isNaN(g)||isNaN(b)||isNaN(eg)||isNaN(alc)) { err('Invalid values'); return; }
         var eo = (alc/100)*108 + ((100-alc)/100)*87;
         var f  = ((g*b) + (eg*eo)) / (g+eg);
-        document.getElementById('calcResult').innerText = 'Octanaje final ≈ ' + f.toFixed(1);
-        document.getElementById('calcNote').innerText   = '* Promedio ponderado volumétrico (mezcla real)';
+        document.getElementById('calcResult').innerText = 'Final octane ≈ ' + f.toFixed(1);
+        document.getElementById('calcNote').innerText   = '* Volume-weighted average (actual blend)';
 
       } else if (a === 'gasgas') {
         var g2 = readVol('calcGas2Volume', '1g');
         var o2 = parseFloat(document.getElementById('calcGas2Octane').value);
-        if (isNaN(g)||isNaN(b)||isNaN(g2)||isNaN(o2)) { err('Valores inválidos'); return; }
+        if (isNaN(g)||isNaN(b)||isNaN(g2)||isNaN(o2)) { err('Invalid values'); return; }
         var f = ((g*b) + (g2*o2)) / (g+g2);
-        document.getElementById('calcResult').innerText = 'Octanaje final ≈ ' + f.toFixed(1);
-        document.getElementById('calcNote').innerText   = '* Promedio ponderado volumétrico';
+        document.getElementById('calcResult').innerText = 'Final octane ≈ ' + f.toFixed(1);
+        document.getElementById('calcNote').innerText   = '* Volume-weighted average';
 
       } else {
         var oz = parseFloat(document.getElementById('calcBoosterOz').value);
-        if (isNaN(g)||isNaN(b)||isNaN(oz)||g<=0) { err('Valores inválidos'); return; }
+        if (isNaN(g)||isNaN(b)||isNaN(oz)||g<=0) { err('Invalid values'); return; }
         var d = getCalcData(a);
         var f = b + (oz/g)*d.factor;
-        document.getElementById('calcResult').innerText = 'Octanaje final ≈ ' + f.toFixed(1);
+        document.getElementById('calcResult').innerText = 'Final octane ≈ ' + f.toFixed(1);
         document.getElementById('calcNote').innerText   = d.note;
       }
     }
 
-    // ─── Tab 2: Calcular dosis ───
+    // ─── Tab 2: Calculate Dosage ───
     function calcNeeded() {
       var a = document.getElementById('calcAdditive2').value;
       var g = readVol('calcGallonsTarget', '2');
       var b = parseFloat(document.getElementById('calcBaseOctaneTarget').value);
       var t = parseFloat(document.getElementById('calcTargetOctane').value);
-      if (isNaN(g)||isNaN(b)||isNaN(t)||t<=b) { err('Valores inválidos'); return; }
+      if (isNaN(g)||isNaN(b)||isNaN(t)||t<=b) { err('Invalid values'); return; }
 
       if (a === 'e85') {
         var alc = parseFloat(document.getElementById('calcE85AlcoholTarget').value);
-        if (isNaN(alc)) { err('Valores inválidos'); return; }
+        if (isNaN(alc)) { err('Invalid values'); return; }
         var eo = (alc/100)*108 + ((100-alc)/100)*87;
         var r  = (g*(t-b)) / (eo-t);
-        if (r<0||!isFinite(r)) { err('No es posible alcanzar ese octanaje con E85 al '+alc+'%'); return; }
-        document.getElementById('calcResult').innerText = volU() + ' de E85 necesarios ≈ ' + r.toFixed(2);
-        document.getElementById('calcNote').innerText   = '* Octanaje E85 estimado: ' + eo.toFixed(1) + ' AKI';
+        if (r<0||!isFinite(r)) { err('Cannot reach that octane with E85 at '+alc+'%'); return; }
+        document.getElementById('calcResult').innerText = volU() + ' of E85 needed ≈ ' + r.toFixed(2);
+        document.getElementById('calcNote').innerText   = '* Estimated E85 octane: ' + eo.toFixed(1) + ' AKI';
 
       } else if (a === 'gasgas') {
         var o2 = parseFloat(document.getElementById('calcGas2OctaneTarget').value);
-        if (isNaN(o2)||o2<=t) { err('El octanaje de la segunda gasolina debe ser mayor al objetivo'); return; }
+        if (isNaN(o2)||o2<=t) { err('The second gasoline octane must be higher than the target'); return; }
         var r = (g*(t-b)) / (o2-t);
-        if (r<0||!isFinite(r)) { err('No es posible alcanzar ese octanaje con esa combinación'); return; }
-        document.getElementById('calcResult').innerText = volU() + ' de gasolina ('+o2+' oct) a agregar ≈ ' + r.toFixed(2);
-        document.getElementById('calcNote').innerText   = '* Promedio ponderado volumétrico';
+        if (r<0||!isFinite(r)) { err('Cannot reach that octane with this combination'); return; }
+        document.getElementById('calcResult').innerText = volU() + ' of gasoline ('+o2+' oct) to add ≈ ' + r.toFixed(2);
+        document.getElementById('calcNote').innerText   = '* Volume-weighted average';
 
       } else {
         var d = getCalcData(a);
         var r = ((t-b)*g) / d.factor;
-        document.getElementById('calcResult').innerText = 'Cantidad necesaria ≈ ' + r.toFixed(1) + ' ' + addU();
+        document.getElementById('calcResult').innerText = 'Amount needed ≈ ' + r.toFixed(1) + ' ' + addU();
         document.getElementById('calcNote').innerText   = d.note;
       }
     }
 
-    // ─── Tab 3: Etanol % ───
+    // ─── Tab 3: Ethanol % ───
     function calcFill() {
       var T   = parseFloat(document.getElementById('calcTankCapacity').value);
       var C   = readVol('calcCurrentFuel', '3f');
       var E0  = parseFloat(document.getElementById('calcCurrentEthanol').value)/100;
       var Et  = parseFloat(document.getElementById('calcTargetEthanolFill').value)/100;
       var E85 = parseFloat(document.getElementById('calcE85PercentFill').value)/100;
-      if (isNaN(T)||isNaN(C)||isNaN(E0)||isNaN(Et)||isNaN(E85)||C>T) { err('Valores inválidos'); return; }
+      if (isNaN(T)||isNaN(C)||isNaN(E0)||isNaN(Et)||isNaN(E85)||C>T) { err('Invalid values'); return; }
       var x   = ((Et*T)-(E0*C))/E85;
       var gas = (T-C)-x;
-      if (x<0||gas<0) { err('No es posible lograr ese % llenando el tanque.'); return; }
-      document.getElementById('calcResult').innerText = 'Agregar:\nE85 ≈ '+x.toFixed(2)+' '+volU()+'\nGasolina ≈ '+gas.toFixed(2)+' '+volU();
-      document.getElementById('calcNote').innerText   = '* Cálculo volumétrico real';
+      if (x<0||gas<0) { err('Cannot achieve that % by filling the tank.'); return; }
+      document.getElementById('calcResult').innerText = 'Add:\nE85 ≈ '+x.toFixed(2)+' '+volU()+'\nGasoline ≈ '+gas.toFixed(2)+' '+volU();
+      document.getElementById('calcNote').innerText   = '* Actual volumetric calculation';
     }
 
     function calcIncrease() {
@@ -946,11 +948,11 @@
       var E0  = parseFloat(document.getElementById('calcCurrentEthanolOnly').value)/100;
       var Et  = parseFloat(document.getElementById('calcTargetEthanolOnly').value)/100;
       var E85 = parseFloat(document.getElementById('calcE85PercentOnly').value)/100;
-      if (isNaN(C)||isNaN(E0)||isNaN(Et)||isNaN(E85)||Et<=E0) { err('Valores inválidos'); return; }
+      if (isNaN(C)||isNaN(E0)||isNaN(Et)||isNaN(E85)||Et<=E0) { err('Invalid values'); return; }
       var x = (C*(Et-E0))/(E85-Et);
-      if (x<0) { err('No es posible lograr ese % agregando solo E85.'); return; }
-      document.getElementById('calcResult').innerText = 'Agregar E85 ≈ '+x.toFixed(2)+' '+volU();
-      document.getElementById('calcNote').innerText   = '* Cálculo volumétrico real';
+      if (x<0) { err('Cannot achieve that % by adding E85 alone.'); return; }
+      document.getElementById('calcResult').innerText = 'Add E85 ≈ '+x.toFixed(2)+' '+volU();
+      document.getElementById('calcNote').innerText   = '* Actual volumetric calculation';
     }
   </script>
 </body>

@@ -1,4 +1,4 @@
-﻿/* ─── AOR Dyno Tuning - Shared Nav Component ─── */
+/* ─── AOR Dyno Tuning - Shared Nav Component ─── */
 (function () {
   const NAV_CSS = `
     aor-nav { display: block; }
@@ -49,6 +49,31 @@
       background: var(--white);
       transition: transform 0.3s, opacity 0.3s;
     }
+    /* ─── Right controls ─── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    /* ─── Language Switcher ─── */
+    .nav-lang {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--gray);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .nav-lang:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
     /* ─── Herramientas Dropdown ─── */
     .nav-dropdown { position: relative; }
     .nav-dropdown-btn {
@@ -162,60 +187,90 @@
     document.head.appendChild(style);
   }
 
+  const LABELS = {
+    es: {
+      services: 'Servicios', dyno: 'Dinamómetro', brands: 'Marcas',
+      faq: 'FAQ', social: 'Redes', contact: 'Contacto',
+      tools: 'Herramientas', menu: 'Menú',
+      fuel: 'Fuel Blending', vin: 'Decodificador VIN', pcm: 'Referencia P01/P59',
+      langLabel: 'EN', langHref: '/en/'
+    },
+    en: {
+      services: 'Services', dyno: 'Dynamometer', brands: 'Brands',
+      faq: 'FAQ', social: 'Social', contact: 'Contact',
+      tools: 'Tools', menu: 'Menu',
+      fuel: 'Fuel Blending', vin: 'VIN Decoder', pcm: 'P01/P59 Reference',
+      langLabel: 'ES', langHref: '/'
+    }
+  };
+
   class AorNav extends HTMLElement {
     connectedCallback() {
       const active = this.getAttribute('active') || '';
+      const lang = this.getAttribute('lang') || 'es';
+      const L = LABELS[lang] || LABELS.es;
+      const prefix = lang === 'en' ? '/en' : '';
+      const homeHref = lang === 'en' ? '/en/' : '/';
+
+      // Build the lang switcher href for subpages
+      let langHref = L.langHref;
+      if (active) {
+        langHref = lang === 'en' ? '/' + active : '/en/' + active;
+      }
 
       this.innerHTML = `
         <nav>
           <div class="nav-inner">
-            <a href="/" class="nav-logo">
-              <img src="simple_logo.svg" alt="AOR Dyno Tuning">
+            <a href="${homeHref}" class="nav-logo">
+              <img src="/simple_logo.svg" alt="AOR Dyno Tuning">
             </a>
             <ul class="nav-links" id="navLinks">
-              <li><a href="/#servicios">Servicios</a></li>
-              <li><a href="/#dyno">Dinamómetro</a></li>
-              <li><a href="/#marcas">Marcas</a></li>
-              <li><a href="/#faq">FAQ</a></li>
-              <li><a href="/#redes">Redes</a></li>
-              <li><a href="/#contacto">Contacto</a></li>
+              <li><a href="${homeHref}#servicios">${L.services}</a></li>
+              <li><a href="${homeHref}#dyno">${L.dyno}</a></li>
+              <li><a href="${homeHref}#marcas">${L.brands}</a></li>
+              <li><a href="${homeHref}#faq">${L.faq}</a></li>
+              <li><a href="${homeHref}#redes">${L.social}</a></li>
+              <li><a href="${homeHref}#contacto">${L.contact}</a></li>
             </ul>
-            <div class="nav-dropdown" id="toolsDropdown">
-              <button class="nav-dropdown-btn" id="toolsDropdownBtn">
-                Herramientas
-                <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="nav-dropdown-menu">
-                <a href="/calculadora"${active === 'calculadora' ? ' class="active"' : ''}>
-                  <svg viewBox="0 0 24 24" stroke-width="2">
-                    <rect x="4" y="2" width="16" height="20" rx="2"/>
-                    <line x1="8" y1="6" x2="16" y2="6"/>
-                    <line x1="8" y1="10" x2="16" y2="10"/>
-                    <line x1="8" y1="14" x2="12" y2="14"/>
-                  </svg>
-                  Fuel Blending
-                </a>
-                <div class="nav-dropdown-divider"></div>
-                <a href="/vin"${active === 'vin' ? ' class="active"' : ''}>
-                  <svg viewBox="0 0 24 24" stroke-width="2">
-                    <rect x="2" y="6" width="20" height="13" rx="2"/>
-                    <circle cx="7.5" cy="12.5" r="1.5"/>
-                    <line x1="12" y1="10" x2="19" y2="10"/>
-                    <line x1="12" y1="14" x2="17" y2="14"/>
-                  </svg>
-                  Decodificador VIN
-                </a>
-                <div class="nav-dropdown-divider"></div>
-                <a href="/pcm"${active === 'pcm' ? ' class="active"' : ''}>
-                  <svg viewBox="0 0 24 24" stroke-width="2">
-                    <rect x="7" y="7" width="10" height="10" rx="1"/>
-                    <path d="M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3"/>
-                  </svg>
-                  Referencia P01/P59
-                </a>
+            <div class="nav-right">
+              <div class="nav-dropdown" id="toolsDropdown">
+                <button class="nav-dropdown-btn" id="toolsDropdownBtn">
+                  ${L.tools}
+                  <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="nav-dropdown-menu">
+                  <a href="${prefix}/calculadora"${active === 'calculadora' ? ' class="active"' : ''}>
+                    <svg viewBox="0 0 24 24" stroke-width="2">
+                      <rect x="4" y="2" width="16" height="20" rx="2"/>
+                      <line x1="8" y1="6" x2="16" y2="6"/>
+                      <line x1="8" y1="10" x2="16" y2="10"/>
+                      <line x1="8" y1="14" x2="12" y2="14"/>
+                    </svg>
+                    ${L.fuel}
+                  </a>
+                  <div class="nav-dropdown-divider"></div>
+                  <a href="${prefix}/vin"${active === 'vin' ? ' class="active"' : ''}>
+                    <svg viewBox="0 0 24 24" stroke-width="2">
+                      <rect x="2" y="6" width="20" height="13" rx="2"/>
+                      <circle cx="7.5" cy="12.5" r="1.5"/>
+                      <line x1="12" y1="10" x2="19" y2="10"/>
+                      <line x1="12" y1="14" x2="17" y2="14"/>
+                    </svg>
+                    ${L.vin}
+                  </a>
+                  <div class="nav-dropdown-divider"></div>
+                  <a href="${prefix}/pcm"${active === 'pcm' ? ' class="active"' : ''}>
+                    <svg viewBox="0 0 24 24" stroke-width="2">
+                      <rect x="7" y="7" width="10" height="10" rx="1"/>
+                      <path d="M7 9H4M7 12H4M7 15H4M17 9h3M17 12h3M17 15h3M9 7V4M12 7V4M15 7V4M9 17v3M12 17v3M15 17v3"/>
+                    </svg>
+                    ${L.pcm}
+                  </a>
+                </div>
               </div>
+              <a href="${langHref}" class="nav-lang">${L.langLabel}</a>
             </div>
-            <button class="hamburger" id="hamburger" aria-label="Menú">
+            <button class="hamburger" id="hamburger" aria-label="${L.menu}">
               <span></span><span></span><span></span>
             </button>
           </div>

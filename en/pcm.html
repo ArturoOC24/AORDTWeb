@@ -1,16 +1,17 @@
-﻿<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
-<title>Referencia PCM P01/P59 - AOR Dyno Tuning</title>
-<meta name="description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup. Herramienta gratuita de AOR Dyno Tuning.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<title>PCM P01/P59 Reference - AOR Dyno Tuning</title>
+<meta name="description" content="GM P01 and P59 hardware technical reference: versions, Intel/AMD chip, IAC, compatible OS and vehicle lookup. Free tool by AOR Dyno Tuning.">
 <meta name="author" content="AOR Dyno Tuning">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://aordynotuning.com/pcm">
+<link rel="canonical" href="https://aordynotuning.com/en/pcm">
+
 <link rel="alternate" hreflang="es" href="https://aordynotuning.com/pcm">
 <link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/pcm">
 <link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/pcm">
@@ -23,17 +24,17 @@
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Referencia PCM P01/P59 - AOR Dyno Tuning">
-<meta property="og:description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup.">
-<meta property="og:url" content="https://aordynotuning.com/pcm">
+<meta property="og:title" content="PCM P01/P59 Reference - AOR Dyno Tuning">
+<meta property="og:description" content="GM P01 and P59 hardware technical reference: versions, Intel/AMD chip, IAC, compatible OS and vehicle lookup.">
+<meta property="og:url" content="https://aordynotuning.com/en/pcm">
 <meta property="og:site_name" content="AOR Dyno Tuning">
-<meta property="og:locale" content="es_MX">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://aordynotuning.com/logo_mascota.png">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Referencia PCM P01/P59 - AOR Dyno Tuning">
-<meta name="twitter:description" content="Referencia técnica de hardware GM P01 y P59: versiones, chip Intel/AMD, IAC, OS compatibles y vehicle lookup.">
+<meta name="twitter:title" content="PCM P01/P59 Reference - AOR Dyno Tuning">
+<meta name="twitter:description" content="GM P01 and P59 hardware technical reference: versions, Intel/AMD chip, IAC, compatible OS and vehicle lookup.">
 <meta name="twitter:image" content="https://aordynotuning.com/logo_mascota.png">
 
 <!-- Schema.org JSON-LD -->
@@ -41,12 +42,12 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Referencia PCM P01/P59",
-  "description": "Referencia técnica de hardware GM P01 y P59: versiones de HW, compatibilidad de chip Intel/AMD, IAC, OS compatibles y vehicle lookup.",
-  "url": "https://aordynotuning.com/pcm",
+  "name": "PCM P01/P59 Reference",
+  "description": "GM P01 and P59 hardware technical reference: HW versions, Intel/AMD chip compatibility, IAC, compatible OS and vehicle lookup.",
+  "url": "https://aordynotuning.com/en/pcm",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MXN" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "author": {
     "@type": "LocalBusiness",
     "name": "AOR Dyno Tuning",
@@ -64,7 +65,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="nav.js"></script>
+<script src="/nav.js"></script>
 
 <style>
   /* ── Base (previously from theme.css) ── */
@@ -618,12 +619,12 @@
 </head>
 <body>
 
-<aor-nav active="pcm"></aor-nav>
+<aor-nav active="pcm" lang="en"></aor-nav>
 
 <div class="page-header" style="padding-top:88px">
-  <div class="section-tag">Referencia Técnica</div>
+  <div class="section-tag">Technical Reference</div>
   <h1>GM P01 / P59 PCM Hardware Reference</h1>
-  <p>P01 = 512KB · Rojo/Azul &nbsp;|&nbsp; P59 = 1MB · Verde/Azul · Motorola 68k · J1850 VPW</p>
+  <p>P01 = 512KB · Red/Blue &nbsp;|&nbsp; P59 = 1MB · Green/Blue · Motorola 68k · J1850 VPW</p>
 </div>
 
 <nav class="tabs" id="tabsNav">
@@ -631,27 +632,27 @@
   <div class="tab"        data-tab="p01"    onclick="switchTab('p01')">P01 Hardware</div>
   <div class="tab"        data-tab="lookup" onclick="switchTab('lookup')">Vehicle Lookup</div>
   <div class="tab"        data-tab="os"     onclick="switchTab('os')">OS Compatibility</div>
-  <div class="tab"        data-tab="best"   onclick="switchTab('best')">⭐ Mejor Combinación</div>
+  <div class="tab"        data-tab="best"   onclick="switchTab('best')">Best Combination</div>
   <span class="tab-hint" aria-hidden="true">›</span>
 </nav>
 
 <div class="glossary-bar">
-  <div class="glossary-toggle" onclick="toggleGlossary(this)" title="Glosario de abreviaturas">
-    <span class="arrow">▶</span> Abreviaturas / Glosario
+  <div class="glossary-toggle" onclick="toggleGlossary(this)" title="Abbreviations glossary">
+    <span class="arrow">▶</span> Abbreviations / Glossary
   </div>
   <div class="glossary-body" id="glossary-body">
-    <dl class="glossary-entry"><dt>PCM</dt><dd>Powertrain Control Module - la computadora que controla motor y transmisión.</dd></dl>
-    <dl class="glossary-entry"><dt>OS</dt><dd>Operating System - el firmware base programado en el PCM (número de calibración GM).</dd></dl>
-    <dl class="glossary-entry"><dt>HW</dt><dd>Hardware - número de revisión del circuito físico del PCM.</dd></dl>
-    <dl class="glossary-entry"><dt>IAC</dt><dd>Idle Air Control - circuito para controlar el ralentí mediante un motor paso a paso. Requiere hardware específico en la placa.</dd></dl>
-    <dl class="glossary-entry"><dt>DBC</dt><dd>Drive By Cable - acelerador mecánico tradicional con cable físico entre pedal y cuerpo de aceleración.</dd></dl>
-    <dl class="glossary-entry"><dt>DBW</dt><dd>Drive By Wire - acelerador electrónico sin cable; el PCM controla el cuerpo de aceleración directamente.</dd></dl>
-    <dl class="glossary-entry"><dt>BDM</dt><dd>Background Debug Mode - puerto de depuración de bajo nivel del Motorola 68k; permite flashear el PCM directamente en la placa (bench flash).</dd></dl>
-    <dl class="glossary-entry"><dt>VPW</dt><dd>Variable Pulse Width - protocolo J1850 VPW usado por P01/P59 en el conector OBD-II. Velocidades: 10.4 Kbps (1X) o 41.6 Kbps (4X).</dd></dl>
-    <dl class="glossary-entry"><dt>4X</dt><dd>Modo VPW 4X - duplica la velocidad del bus a ~41.6 Kbps; reduce el tiempo de lectura/escritura del PCM.</dd></dl>
-    <dl class="glossary-entry"><dt>XDF</dt><dd>eXternal Data File - archivo de definición de mapas para TunerPro; describe dónde están las tablas y escalares en la memoria del PCM.</dd></dl>
-    <dl class="glossary-entry"><dt>Flex Fuel</dt><dd>Compatibilidad nativa con mezclas gasolina/etanol (E10–E85); requiere sensor de contenido de alcohol y OS con soporte.</dd></dl>
-    <dl class="glossary-entry"><dt>AMD / Intel</dt><dd>Fabricante del chip de flash soldado en la placa. Determina qué OS es compatible: algunos OS solo funcionan con chip Intel.</dd></dl>
+    <dl class="glossary-entry"><dt>PCM</dt><dd>Powertrain Control Module - the computer that controls engine and transmission.</dd></dl>
+    <dl class="glossary-entry"><dt>OS</dt><dd>Operating System - the base firmware programmed into the PCM (GM calibration number).</dd></dl>
+    <dl class="glossary-entry"><dt>HW</dt><dd>Hardware - revision number of the PCM's physical circuit board.</dd></dl>
+    <dl class="glossary-entry"><dt>IAC</dt><dd>Idle Air Control - circuit to control idle speed via a stepper motor. Requires specific hardware on the board.</dd></dl>
+    <dl class="glossary-entry"><dt>DBC</dt><dd>Drive By Cable - traditional mechanical throttle with a physical cable between pedal and throttle body.</dd></dl>
+    <dl class="glossary-entry"><dt>DBW</dt><dd>Drive By Wire - electronic throttle with no cable; the PCM controls the throttle body directly.</dd></dl>
+    <dl class="glossary-entry"><dt>BDM</dt><dd>Background Debug Mode - low-level debug port on the Motorola 68k; allows flashing the PCM directly on the board (bench flash).</dd></dl>
+    <dl class="glossary-entry"><dt>VPW</dt><dd>Variable Pulse Width - J1850 VPW protocol used by P01/P59 on the OBD-II connector. Speeds: 10.4 Kbps (1X) or 41.6 Kbps (4X).</dd></dl>
+    <dl class="glossary-entry"><dt>4X</dt><dd>VPW 4X Mode - doubles the bus speed to ~41.6 Kbps; reduces PCM read/write time.</dd></dl>
+    <dl class="glossary-entry"><dt>XDF</dt><dd>eXternal Data File - map definition file for TunerPro; describes where tables and scalars are located in PCM memory.</dd></dl>
+    <dl class="glossary-entry"><dt>Flex Fuel</dt><dd>Native compatibility with gasoline/ethanol blends (E10-E85); requires an alcohol content sensor and OS with support.</dd></dl>
+    <dl class="glossary-entry"><dt>AMD / Intel</dt><dd>Flash chip manufacturer soldered on the board. Determines which OS is compatible: some OS only work with Intel chips.</dd></dl>
   </div>
 </div>
 
@@ -659,35 +660,35 @@
 
   <!-- ═══════════════ TAB: P59 ═══════════════ -->
   <div id="tab-p59" class="tab-panel active">
-    <div class="section-title">P59 - Versiones de Hardware Físico</div>
-    <div class="section-sub">1MB Flash · Conectores Verde/Azul · Motorola 68k · GM 1999–2007</div>
+    <div class="section-title">P59 - Physical Hardware Versions</div>
+    <div class="section-sub">1MB Flash · Green/Blue Connectors · Motorola 68k · GM 1999-2007</div>
 
     <div class="warn-banner">
       <span class="icon">⚠️</span>
       <div>
-        <strong>Intel vs AMD flash:</strong> Los P59 con chip Intel (hw 12570558, 12575502, 12580786) solo funcionan correctamente con OS Intel-only.
-        Flashear un OS AMD en chip Intel no guarda parámetros (no brick, pero tampoco funciona).
-        Desde 2004 en adelante GM cambió a chips AMD.
+        <strong>Intel vs AMD flash:</strong> P59 units with Intel chips (hw 12570558, 12575502, 12580786) only work correctly with Intel-only OS.
+        Flashing an AMD OS onto an Intel chip won't save parameters (no brick, but won't work either).
+        From 2004 onward GM switched to AMD chips.
       </div>
     </div>
 
     <div class="filter-bar">
       <span class="filter-label">Chip:</span>
       <div class="filter-group" id="chip-filters">
-        <span class="filter-chip active" data-filter="chip" data-val="all" onclick="setFilter('chip','all',this)">Todos</span>
+        <span class="filter-chip active" data-filter="chip" data-val="all" onclick="setFilter('chip','all',this)">All</span>
         <span class="filter-chip" data-filter="chip" data-val="Intel" onclick="setFilter('chip','Intel',this)">⚠️ Intel only</span>
         <span class="filter-chip" data-filter="chip" data-val="AMD" onclick="setFilter('chip','AMD',this)">AMD</span>
       </div>
       <div class="filter-sep"></div>
       <span class="filter-label">IAC:</span>
       <div class="filter-group" id="iac-filters">
-        <span class="filter-chip active" data-filter="iac" data-val="all" onclick="setFilter('iac','all',this)">Todos</span>
-        <span class="filter-chip" data-filter="iac" data-val="yes" onclick="setFilter('iac','yes',this)">✅ Con IAC (DBC)</span>
-        <span class="filter-chip" data-filter="iac" data-val="no" onclick="setFilter('iac','no',this)">❌ Sin IAC (DBW only)</span>
+        <span class="filter-chip active" data-filter="iac" data-val="all" onclick="setFilter('iac','all',this)">All</span>
+        <span class="filter-chip" data-filter="iac" data-val="yes" onclick="setFilter('iac','yes',this)">✅ With IAC (DBC)</span>
+        <span class="filter-chip" data-filter="iac" data-val="no" onclick="setFilter('iac','no',this)">❌ No IAC (DBW only)</span>
       </div>
       <div class="search-box">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="p59-search" placeholder="Buscar hw#, service#, vehículo..." oninput="renderP59()">
+        <input type="text" id="p59-search" placeholder="Search hw#, service#, vehicle..." oninput="renderP59()">
       </div>
     </div>
 
@@ -697,45 +698,45 @@
           <tr>
             <th>HW #<span class="cell-sub">Service #</span></th>
             <th class="col-mobile-hide">Service #</th>
-            <th class="col-mobile-hide">Año</th>
-            <th>Flash Chip<span class="cell-sub">Año</span></th>
+            <th class="col-mobile-hide">Year</th>
+            <th>Flash Chip<span class="cell-sub">Year</span></th>
             <th>IAC / DBC<span class="cell-sub">Throttle</span></th>
             <th class="col-mobile-hide">Throttle</th>
-            <th class="col-mobile-hide">Vehículos</th>
+            <th class="col-mobile-hide">Vehicles</th>
             <th></th>
           </tr>
         </thead>
         <tbody id="p59-tbody"></tbody>
       </table>
     </div>
-    <div id="p59-no-results" class="no-results" style="display:none">Sin resultados para los filtros seleccionados.</div>
+    <div id="p59-no-results" class="no-results" style="display:none">No results for the selected filters.</div>
 
   </div>
 
   <!-- ═══════════════ TAB: P01 ═══════════════ -->
   <div id="tab-p01" class="tab-panel">
-    <div class="section-title">P01 - Versiones de Hardware Físico</div>
-    <div class="section-sub">512KB Flash · Conectores Rojo/Azul · Motorola 68k · GM 1997–2004 · Solo DBC (cable throttle)</div>
+    <div class="section-title">P01 - Physical Hardware Versions</div>
+    <div class="section-sub">512KB Flash · Red/Blue Connectors · Motorola 68k · GM 1997-2004 · DBC only (cable throttle)</div>
 
     <div class="warn-banner">
       <span class="icon">⚠️</span>
       <div>
-        <strong>P01 1997–2000 son frágiles al flashear.</strong> Un error durante la escritura puede dañarlos permanentemente.
-        Si vas a tuner un 97-00, tener unidades de repuesto en el banco. El <strong>0411</strong> (2001-2004) es la única versión recomendada para trabajo de tuning.
+        <strong>P01 1997-2000 are fragile when flashing.</strong> An error during writing can permanently damage them.
+        If you're going to tune a 97-00, have spare units on hand. The <strong>0411</strong> (2001-2004) is the only version recommended for tuning work.
       </div>
     </div>
 
     <div class="filter-bar">
-      <span class="filter-label">Generación:</span>
+      <span class="filter-label">Generation:</span>
       <div class="filter-group">
-        <span class="filter-chip active" data-filter="p01gen" data-val="all" onclick="setFilterP01('all',this)">Todas</span>
+        <span class="filter-chip active" data-filter="p01gen" data-val="all" onclick="setFilterP01('all',this)">All</span>
         <span class="filter-chip" data-filter="p01gen" data-val="1" onclick="setFilterP01('1',this)">Gen 1 (97-98)</span>
         <span class="filter-chip" data-filter="p01gen" data-val="2" onclick="setFilterP01('2',this)">Gen 2 (99-00)</span>
         <span class="filter-chip" data-filter="p01gen" data-val="3" onclick="setFilterP01('3',this)">Gen 3 "0411"</span>
       </div>
       <div class="search-box">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="p01-search" placeholder="Buscar..." oninput="renderP01()">
+        <input type="text" id="p01-search" placeholder="Search..." oninput="renderP01()">
       </div>
     </div>
 
@@ -745,12 +746,12 @@
           <tr>
             <th>Gen<span class="cell-sub">HW #</span></th>
             <th class="col-mobile-hide">HW #</th>
-            <th>Service #<span class="cell-sub">Años</span></th>
-            <th class="col-mobile-hide">Años</th>
+            <th>Service #<span class="cell-sub">Years</span></th>
+            <th class="col-mobile-hide">Years</th>
             <th class="col-mobile-hide">Nickname</th>
             <th class="col-mobile-hide">Flash Chip</th>
-            <th class="col-mobile-hide">Vehículos</th>
-            <th>Estado</th>
+            <th class="col-mobile-hide">Vehicles</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
@@ -763,30 +764,30 @@
   <!-- ═══════════════ TAB: VEHICLE LOOKUP ═══════════════ -->
   <div id="tab-lookup" class="tab-panel">
     <div class="section-title">Vehicle → PCM Lookup</div>
-    <div class="section-sub">Selecciona año, modelo y motor para identificar el hardware PCM</div>
+    <div class="section-sub">Select year, model and engine to identify the PCM hardware</div>
 
     <div class="lookup-card">
       <div class="lookup-grid">
         <div>
-          <label>Año</label>
+          <label>Year</label>
           <select id="lk-year" onchange="updateModels()">
-            <option value="">-- Seleccionar --</option>
+            <option value="">-- Select --</option>
           </select>
         </div>
         <div>
-          <label>Modelo</label>
+          <label>Model</label>
           <select id="lk-model" onchange="updateEngines()">
-            <option value="">-- Seleccionar --</option>
+            <option value="">-- Select --</option>
           </select>
         </div>
         <div>
-          <label>Motor</label>
+          <label>Engine</label>
           <select id="lk-engine">
-            <option value="">-- Seleccionar --</option>
+            <option value="">-- Select --</option>
           </select>
         </div>
       </div>
-      <button class="lookup-btn" onclick="doLookup()">Buscar PCM</button>
+      <button class="lookup-btn" onclick="doLookup()">Search PCM</button>
     </div>
 
     <div class="result-card" id="lookup-result"></div>
@@ -798,18 +799,18 @@
     <div class="warn-banner">
       <span class="icon">⚠️</span>
       <div>
-        <strong>OS Intel-only (12579405, 12593058):</strong> Solo funcionan correctamente en P59 con chip Intel (hw 12570558, 12575502, 12580786).
-        En chip AMD el OS carga pero no puede guardar parámetros. No hace brick, pero el PCM queda inutilizable para tuning hasta reflashear con OS correcto.
+        <strong>Intel-only OS (12579405, 12593058):</strong> Only work correctly on P59 with Intel chip (hw 12570558, 12575502, 12580786).
+        On an AMD chip the OS loads but cannot save parameters. It won't brick, but the PCM becomes unusable for tuning until reflashed with the correct OS.
       </div>
     </div>
 
     <div class="os-section">
-      <div class="section-title">P59 - OS Numbers &amp; Compatibilidad de Hardware</div>
-      <div class="section-sub">1MB · Conectores Verde/Azul</div>
+      <div class="section-title">P59 - OS Numbers &amp; Hardware Compatibility</div>
+      <div class="section-sub">1MB · Green/Blue Connectors</div>
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>OS #<span class="cell-sub">Año</span></th><th>Chip req.<span class="cell-sub">Throttle</span></th><th class="col-mobile-hide">Throttle</th><th>Flex Fuel</th><th class="col-mobile-hide">Año típico</th><th class="col-mobile-hide">Mejor para</th><th class="col-mobile-hide">Notas</th>
+            <th>OS #<span class="cell-sub">Year</span></th><th>Chip Req.<span class="cell-sub">Throttle</span></th><th class="col-mobile-hide">Throttle</th><th>Flex Fuel</th><th class="col-mobile-hide">Typical Year</th><th class="col-mobile-hide">Best For</th><th class="col-mobile-hide">Notes</th>
           </tr></thead>
           <tbody id="os-p59-tbody"></tbody>
         </table>
@@ -817,12 +818,12 @@
     </div>
 
     <div class="os-section">
-      <div class="section-title">P01 - OS Numbers &amp; Compatibilidad de Hardware</div>
-      <div class="section-sub">512KB · Conectores Rojo/Azul · Solo hw 09386530 (0411) recomendado</div>
+      <div class="section-title">P01 - OS Numbers &amp; Hardware Compatibility</div>
+      <div class="section-sub">512KB · Red/Blue Connectors · Only hw 09386530 (0411) recommended</div>
       <div class="table-wrap">
         <table>
           <thead><tr>
-            <th>OS #<span class="cell-sub">Año</span></th><th>Flex Fuel</th><th class="col-mobile-hide">Año típico</th><th class="col-mobile-hide">Vehículo origen</th><th class="col-mobile-hide">Notas</th>
+            <th>OS #<span class="cell-sub">Year</span></th><th>Flex Fuel</th><th class="col-mobile-hide">Typical Year</th><th class="col-mobile-hide">Original Vehicle</th><th class="col-mobile-hide">Notes</th>
           </tr></thead>
           <tbody id="os-p01-tbody"></tbody>
         </table>
@@ -831,53 +832,53 @@
 
   </div>
 
-  <!-- ═══════════════ TAB: MEJOR COMBINACIÓN ═══════════════ -->
+  <!-- ═══════════════ TAB: BEST COMBINATION ═══════════════ -->
   <div id="tab-best" class="tab-panel">
-    <div class="section-title">⭐ Mejor Combinación para LS Swap / Tuning</div>
-    <div class="section-sub">Las unidades más versátiles y recomendadas según tipo de PCM</div>
+    <div class="section-title">Best Combination for LS Swap / Tuning</div>
+    <div class="section-sub">The most versatile and recommended units by PCM type</div>
 
     <div class="compare-grid">
 
       <div class="compare-card p59">
         <div class="compare-card-header">
           <h3>P59 - HW 12589161</h3>
-          <span>El hardware P59 más deseable para swaps LS</span>
+          <span>The most desirable P59 hardware for LS swaps</span>
         </div>
         <dl>
           <div><dt>HW #</dt><dd>12589161</dd></div>
           <div><dt>Service #</dt><dd>12589462</dd></div>
-          <div><dt>Años</dt><dd>2004–2007</dd></div>
+          <div><dt>Years</dt><dd>2004-2007</dd></div>
           <div><dt>Flash</dt><dd>AMD AM29F800BB (1MB)</dd></div>
-          <div><dt>Conectores</dt><dd>Verde + Azul</dd></div>
-          <div><dt>IAC / DBC</dt><dd>✅ Sí</dd></div>
+          <div><dt>Connectors</dt><dd>Green + Blue</dd></div>
+          <div><dt>IAC / DBC</dt><dd>✅ Yes</dd></div>
           <div><dt>Throttle</dt><dd>DBC + DBW</dd></div>
-          <div><dt>OS recomendado</dt><dd>12587603</dd></div>
-          <div><dt>BDM pads</dt><dd>✅ Accesibles</dd></div>
-          <div><dt>Origen</dt><dd>Express Van 5.3/6.0 2004-2007</dd></div>
+          <div><dt>Recommended OS</dt><dd>12587603</dd></div>
+          <div><dt>BDM pads</dt><dd>✅ Accessible</dd></div>
+          <div><dt>Origin</dt><dd>Express Van 5.3/6.0 2004-2007</dd></div>
         </dl>
         <div class="compare-card-note">
-          ✅ AMD · IAC presente · BDM accesible · OS universal 12587603 - Ideal para cualquier swap LS con cable throttle.
+          ✅ AMD · IAC present · BDM accessible · Universal OS 12587603 - Ideal for any LS swap with cable throttle.
         </div>
       </div>
 
       <div class="compare-card p01">
         <div class="compare-card-header">
           <h3>P01 - HW 09386530 "0411"</h3>
-          <span>El único P01 recomendado para tuning</span>
+          <span>The only P01 recommended for tuning</span>
         </div>
         <dl>
           <div><dt>HW #</dt><dd>09386530</dd></div>
           <div><dt>Service #</dt><dd>12200411</dd></div>
-          <div><dt>Años</dt><dd>2001–2004</dd></div>
+          <div><dt>Years</dt><dd>2001-2004</dd></div>
           <div><dt>Flash</dt><dd>Intel AB28F400B5 (512KB)</dd></div>
-          <div><dt>Conectores</dt><dd>Rojo + Azul</dd></div>
-          <div><dt>Throttle</dt><dd>DBC (cable) únicamente</dd></div>
-          <div><dt>OS recomendado</dt><dd>12212156 / 12216125</dd></div>
-          <div><dt>BDM pads</dt><dd>✅ Accesibles</dd></div>
-          <div><dt>Origen</dt><dd>Camaro/Firebird 01-02, Corvette 01-02, Silverado 01-04</dd></div>
+          <div><dt>Connectors</dt><dd>Red + Blue</dd></div>
+          <div><dt>Throttle</dt><dd>DBC (cable) only</dd></div>
+          <div><dt>Recommended OS</dt><dd>12212156 / 12216125</dd></div>
+          <div><dt>BDM pads</dt><dd>✅ Accessible</dd></div>
+          <div><dt>Origin</dt><dd>Camaro/Firebird 01-02, Corvette 01-02, Silverado 01-04</dd></div>
         </dl>
         <div class="compare-card-note">
-          ✅ Procesador actualizado (2001+), robusto al flashear - OS 12212156 = más features · 12216125 = único P01 con Flex Fuel nativo.
+          ✅ Updated processor (2001+), robust when flashing - OS 12212156 = most features · 12216125 = only P01 with native Flex Fuel.
         </div>
       </div>
 
@@ -886,8 +887,8 @@
     <div class="warn-banner" style="margin-top:20px">
       <span class="icon">⚠️</span>
       <div>
-        <strong>P01 Gen 1/2 (1997–2000):</strong> frágiles al flashear - evitar para trabajo de tuning. Usar solo el <strong>0411 (2001-2004)</strong>.
-        Para P59, los hardware con chip <strong>Intel (2003)</strong> están limitados a OS Intel-only (12579405, 12593058).
+        <strong>P01 Gen 1/2 (1997-2000):</strong> fragile when flashing - avoid for tuning work. Use only the <strong>0411 (2001-2004)</strong>.
+        For P59, hardware with <strong>Intel chips (2003)</strong> are limited to Intel-only OS (12579405, 12593058).
       </div>
     </div>
   </div>
@@ -904,68 +905,68 @@ const P59_HW = [
     hw: "12570558", service: "12576106", year: "2003", chip: "Intel", iac: true, throttle: "DBC + DBW",
     vehicles: ["Chevrolet Express Van 5.3L LM7 (2003-04)", "Chevrolet Silverado LM7 (2003)", "Silverado/Sierra LQ4 6.0L (2003)"],
     os_compat: ["12587603", "12579405 ✱", "12593058 ✱"],
-    notes: "Chip Intel - solo OS Intel-only. IAC presente (apto para cable throttle).",
+    notes: "Intel chip - Intel-only OS required. IAC present (suitable for cable throttle).",
     intel_warn: true, star: false
   },
   {
     hw: "12575502", service: "12576106", year: "2003", chip: "Intel", iac: true, throttle: "DBC + DBW",
     vehicles: ["Trucks GMT800 2003", "Express Van 2003"],
     os_compat: ["12587603", "12579405 ✱", "12593058 ✱"],
-    notes: "Variante Intel de 2003. IAC presente.",
+    notes: "2003 Intel variant. IAC present.",
     intel_warn: true, star: false
   },
   {
     hw: "12580786", service: "-", year: "2003", chip: "Intel", iac: false, throttle: "DBW only",
     vehicles: ["Corvette C5 LS1 DBW 2003-04 (early)", "Silverado/Sierra DBW 2003"],
     os_compat: ["12587603", "12579405 ✱"],
-    notes: "Intel, sin IAC - solo funciona con DBW. Raro para swaps.",
+    notes: "Intel, no IAC - only works with DBW. Rare for swaps.",
     intel_warn: true, star: false
   },
   {
     hw: "12583659", service: "12586243", year: "2004", chip: "AMD", iac: true, throttle: "DBC + DBW",
-    vehicles: ["Pontiac GTO 2004 LS1", "Corvette C5 LS1 2004 (último año C5)", "Express Van 2004", "Silverado DBC 2004"],
+    vehicles: ["Pontiac GTO 2004 LS1", "Corvette C5 LS1 2004 (last C5 year)", "Express Van 2004", "Silverado DBC 2004"],
     os_compat: ["12587603", "12592433", "12592618"],
-    notes: "Primer hardware AMD. IAC presente - buena opción para swaps DBC.",
+    notes: "First AMD hardware. IAC present - good option for DBC swaps.",
     intel_warn: false, star: false
   },
   {
     hw: "12583660", service: "-", year: "2004", chip: "AMD", iac: false, throttle: "DBW only",
     vehicles: ["Silverado/Sierra 4.8L/6.0L 2004 (DBW)", "Tahoe/Yukon 2004"],
     os_compat: ["12587603", "12592618"],
-    notes: "AMD, sin IAC. El más común en trucks 2004 DBW.",
+    notes: "AMD, no IAC. The most common in 2004 DBW trucks.",
     intel_warn: false, star: false
   },
   {
     hw: "12589161", service: "12589462", year: "2004–2007", chip: "AMD", iac: true, throttle: "DBC + DBW",
-    vehicles: ["Express Van 5.3L/6.0L (2004-2007)", "GMT800 vans con cable throttle"],
+    vehicles: ["Express Van 5.3L/6.0L (2004-2007)", "GMT800 vans with cable throttle"],
     os_compat: ["12587603", "12592433", "12592618"],
-    notes: "⭐ El más deseable para swaps - AMD + IAC + producido hasta 2007. Ideal para LS swap con cable throttle.",
+    notes: "⭐ The most desirable for swaps - AMD + IAC + produced until 2007. Ideal for LS swap with cable throttle.",
     intel_warn: false, star: true
   },
   {
     hw: "12589162", service: "12589463 / 12602802", year: "2003–2006", chip: "AMD", iac: false, throttle: "DBW only",
     vehicles: ["Silverado/Sierra 4.8/5.3/6.0 DBW (2003-07)", "Tahoe/Yukon/Suburban/Escalade", "TrailBlazer 5.3L"],
     os_compat: ["12587603", "12592618", "12606960"],
-    notes: "El más común en campo - mayoría de trucks GMT800. Sin IAC (solo DBW).",
+    notes: "The most common in the field - majority of GMT800 trucks. No IAC (DBW only).",
     intel_warn: false, star: false
   }
 ];
 
 const P01_HW = [
   {
-    gen: 1, hw: "desconocido", service: "~9398612", years: "1997–1998", nickname: "Early fragile",
+    gen: 1, hw: "unknown", service: "~9398612", years: "1997–1998", nickname: "Early fragile",
     chip: "Intel 512KB", status: "fragile",
     vehicles: ["Corvette C5 LS1 1997-98", "Camaro/Firebird LS1 1998"],
     os_compat: ["12202088", "12208322"],
-    notes: "⚠️ MUY FRÁGIL - un error de escritura puede dañarlo permanentemente. Si vas a tunar un 97-98, tener al menos 3-4 unidades de repuesto. La comunidad recomienda evitarlos para tuning.",
+    notes: "⚠️ VERY FRAGILE - a write error can permanently damage it. If you're going to tune a 97-98, have at least 3-4 spare units. The community recommends avoiding these for tuning.",
     flash_warn: true
   },
   {
-    gen: 2, hw: "desconocido", service: "varios", years: "1999–2000", nickname: "Fragile",
+    gen: 2, hw: "unknown", service: "various", years: "1999–2000", nickname: "Fragile",
     chip: "Intel 512KB", status: "fragile",
     vehicles: ["Corvette C5 LS1 1999-00", "Camaro/Firebird LS1 1999-00", "Silverado/Sierra 1999-00 (V8)"],
     os_compat: ["12202088", "12208322", "12209203"],
-    notes: "⚠️ FRÁGIL - mejora respecto a Gen1 pero aún inestable al flashear. Procesador anterior al 0411.",
+    notes: "⚠️ FRAGILE - improvement over Gen1 but still unstable when flashing. Processor prior to the 0411.",
     flash_warn: true
   },
   {
@@ -974,70 +975,70 @@ const P01_HW = [
     vehicles: [
       "Camaro/Firebird LS1 2001-02", "Corvette C5/Z06 LS1/LS6 2001-02",
       "Silverado/Sierra 1500/2500 2001-04", "Express Van 5.7L L31 / 4.8/6.0 LS",
-      "S10/Sonoma/Blazer/Jimmy 4.3L V6 (swap popular)",
+      "S10/Sonoma/Blazer/Jimmy 4.3L V6 (popular swap)",
       "Holden Commodore VX/VY (Australia)"
     ],
     os_compat: ["12202088", "12212156", "12216125", "12221588", "12225074"],
-    notes: "✅ LA OPCIÓN RECOMENDADA. Procesador actualizado por GM en 2001. Mucho más robusto que generaciones anteriores. Único P01 recomendado para tuning. Usado en Camaro/Firebird, Corvette y toda la línea GMT800 2001-04.",
+    notes: "✅ THE RECOMMENDED OPTION. Processor updated by GM in 2001. Much more robust than previous generations. Only P01 recommended for tuning. Used in Camaro/Firebird, Corvette and the entire GMT800 line 2001-04.",
     flash_warn: false
   }
 ];
 
 const OS_P59 = [
-  { os: "12587603", chip_req: "AMD + Intel", throttle: "DBC + DBW", flex: true, year: "2003–2006", best_for: "⭐ Universal donor - mejor soporte XDF, tuning, swaps", notes: "El 'Mother of All' OS. Disponible en todas las combinaciones DBC/DBW + 4L60E/4L80E + Flex. Actualizado por GM a 12606960 en 1/2 ton.", warn: false },
-  { os: "12579405", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "HW: 12570558 / 12575502 / 12580786 únicamente", notes: "Intel-only. Solo funciona correctamente en P59 con chip Intel. HW IDs: 12570558, 12575502, 12580786.", warn: true },
-  { os: "12593058", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "Vans ~2003, update de 12579405", notes: "Intel-only. Mayormente en Express Vans 2003. No usar en PCMs AMD.", warn: true },
-  { os: "12592433", chip_req: "AMD", throttle: "DBW", flex: true, year: "2004–2006", best_for: "Holden VZ Commodore / L59 Silverado Flex Fuel", notes: "Flex Fuel (30+ parámetros) + Lean Cruise (9 parámetros). Patch XDF disponible en Workshop. Australia principalmente.", warn: false },
-  { os: "12592618", chip_req: "AMD", throttle: "DBW", flex: false, year: "2004–2006", best_for: "Trucks P59 variante", notes: "HP Tuners UDP XDF disponible. Variante de 7603 para trucks específicos.", warn: false },
-  { os: "12587604 / 12587811", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado/Sierra 2006", notes: "Variantes menores de 7603 para 2006. XDF disponibles.", warn: false },
-  { os: "12605114 / 12606807", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006", notes: "OS 2006 específicos. Soporte XDF disponible.", warn: false },
-  { os: "12606960", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado 1/2 ton (update oficial de 12587603)", notes: "Update oficial de GM del OS 12587603 para vehículos 1/2 ton. Prácticamente idéntico.", warn: false },
-  { os: "12613246 / 12639623", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006 variantes", notes: "OS de 2006, menor documentación disponible.", warn: false },
+  { os: "12587603", chip_req: "AMD + Intel", throttle: "DBC + DBW", flex: true, year: "2003–2006", best_for: "⭐ Universal donor - best XDF support, tuning, swaps", notes: "The 'Mother of All' OS. Available in all DBC/DBW + 4L60E/4L80E + Flex combinations. Updated by GM to 12606960 for 1/2 ton.", warn: false },
+  { os: "12579405", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "HW: 12570558 / 12575502 / 12580786 only", notes: "Intel-only. Only works correctly on P59 with Intel chip. HW IDs: 12570558, 12575502, 12580786.", warn: true },
+  { os: "12593058", chip_req: "⚠️ INTEL ONLY", throttle: "DBC", flex: false, year: "2003", best_for: "Vans ~2003, update of 12579405", notes: "Intel-only. Mostly in Express Vans 2003. Do not use on AMD PCMs.", warn: true },
+  { os: "12592433", chip_req: "AMD", throttle: "DBW", flex: true, year: "2004–2006", best_for: "Holden VZ Commodore / L59 Silverado Flex Fuel", notes: "Flex Fuel (30+ parameters) + Lean Cruise (9 parameters). Patch XDF available in Workshop. Mainly Australia.", warn: false },
+  { os: "12592618", chip_req: "AMD", throttle: "DBW", flex: false, year: "2004–2006", best_for: "P59 trucks variant", notes: "HP Tuners UDP XDF available. Variant of 7603 for specific trucks.", warn: false },
+  { os: "12587604 / 12587811", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado/Sierra 2006", notes: "Minor variants of 7603 for 2006. XDFs available.", warn: false },
+  { os: "12605114 / 12606807", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006", notes: "2006-specific OS. XDF support available.", warn: false },
+  { os: "12606960", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Silverado 1/2 ton (official update of 12587603)", notes: "Official GM update of OS 12587603 for 1/2 ton vehicles. Practically identical.", warn: false },
+  { os: "12613246 / 12639623", chip_req: "AMD", throttle: "DBW", flex: false, year: "2006", best_for: "Trucks 2006 variants", notes: "2006 OS, less documentation available.", warn: false },
 ];
 
 const OS_P01 = [
-  { os: "12212156", flex: false, year: "2001–02", origin: "Camaro/Firebird, Silverado", notes: "⭐ El más rico en features para P01. HP Tuners UDP XDF disponible. Recomendado para tuning." },
-  { os: "12216125", flex: true, year: "2002", origin: "Tahoe Flex Fuel 2002", notes: "⚠️ ÚNICO OS P01 con Flex Fuel nativo. GM tuvo que hacer trade-offs para caber en 512KB. HP Tuners UDP XDF disponible." },
-  { os: "12202088", flex: false, year: "2001–02", origin: "Silverado/Sierra, Camaro, Holden VX", notes: "El más común en USA y Australia. Base para la mayoría de los XDFs." },
-  { os: "12221588", flex: false, year: "2002–03", origin: "Silverado/Sierra variante", notes: "Variante P01, documentación limitada." },
-  { os: "12225074", flex: false, year: "2003–04", origin: "Holden VY/VZ Commodore (Australia) + HSV", notes: "Australia principalmente. Incluye calibraciones HSV Clubsport." },
-  { os: "12208322 / 12209203", flex: false, year: "1999–2001", origin: "Corvette C5, Camaro/Firebird", notes: "OS tempranos para Gen 1/2 P01. Menos documentados. Evitar para tuning nuevo." },
+  { os: "12212156", flex: false, year: "2001–02", origin: "Camaro/Firebird, Silverado", notes: "⭐ The most feature-rich OS for P01. HP Tuners UDP XDF available. Recommended for tuning." },
+  { os: "12216125", flex: true, year: "2002", origin: "Tahoe Flex Fuel 2002", notes: "⚠️ ONLY P01 OS with native Flex Fuel. GM had to make trade-offs to fit in 512KB. HP Tuners UDP XDF available." },
+  { os: "12202088", flex: false, year: "2001–02", origin: "Silverado/Sierra, Camaro, Holden VX", notes: "The most common in USA and Australia. Base for most XDFs." },
+  { os: "12221588", flex: false, year: "2002–03", origin: "Silverado/Sierra variant", notes: "P01 variant, limited documentation." },
+  { os: "12225074", flex: false, year: "2003–04", origin: "Holden VY/VZ Commodore (Australia) + HSV", notes: "Mainly Australia. Includes HSV Clubsport calibrations." },
+  { os: "12208322 / 12209203", flex: false, year: "1999–2001", origin: "Corvette C5, Camaro/Firebird", notes: "Early OS for Gen 1/2 P01. Less documented. Avoid for new tuning." },
 ];
 
 // Vehicle lookup database
 const VEHICLE_DB = [
   // CORVETTE
-  { year: [1997,1998], model: "Corvette", engine: "LS1", pcm: "P01", gen: 1, hw: "desconocido", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - frágil al flashear. Tener repuestos." },
-  { year: [1999,2000], model: "Corvette", engine: "LS1", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - frágil. Preferir 0411 si es posible." },
-  { year: [2001,2002], model: "Corvette", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - robusto. 2003 en adelante la C5 pasó a P59." },
-  { year: [2001,2002], model: "Corvette", engine: "LS6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "Z06 LS6 2001-02 - P01 0411. A partir de 2003 la Z06 usa P59." },
-  { year: [2003], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12580786", service: "-", chip: "Intel", iac: false, os_rec: "12587603", notes: "C5 2003 - primer año P59. Chip Intel, DBW-only. HW 12580786." },
-  { year: [2004], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "C5 2004 - último año C5. AMD, IAC presente. HW 12583659. ⚠️ C6 2005+ usa E40 PCM (CAN, no compatible con PcmHammer)." },
+  { year: [1997,1998], model: "Corvette", engine: "LS1", pcm: "P01", gen: 1, hw: "unknown", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - fragile when flashing. Have spares." },
+  { year: [1999,2000], model: "Corvette", engine: "LS1", pcm: "P01", gen: 2, hw: "unknown", service: "various", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - fragile. Prefer 0411 if possible." },
+  { year: [2001,2002], model: "Corvette", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - robust. From 2003 onward the C5 moved to P59." },
+  { year: [2001,2002], model: "Corvette", engine: "LS6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "Z06 LS6 2001-02 - P01 0411. Starting in 2003 the Z06 uses P59." },
+  { year: [2003], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12580786", service: "-", chip: "Intel", iac: false, os_rec: "12587603", notes: "C5 2003 - first P59 year. Intel chip, DBW-only. HW 12580786." },
+  { year: [2004], model: "Corvette", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "C5 2004 - last C5 year. AMD, IAC present. HW 12583659. ⚠️ C6 2005+ uses E40 PCM (CAN, not compatible with PcmHammer)." },
   // CAMARO / FIREBIRD
-  { year: [1998], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 1, hw: "desconocido", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - frágil. F-body 1998." },
-  { year: [1999,2000], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - frágil." },
-  { year: [2001,2002], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - último año F-body. Mejor P01 para tuning." },
+  { year: [1998], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 1, hw: "unknown", service: "~9398612", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 1 - fragile. F-body 1998." },
+  { year: [1999,2000], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 2, hw: "unknown", service: "various", chip: "Intel", iac: true, os_rec: "12202088", notes: "Gen 2 - fragile." },
+  { year: [2001,2002], model: "Camaro / Firebird", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 - last F-body year. Best P01 for tuning." },
   // SILVERADO / SIERRA
-  { year: [1999,2000], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 2, hw: "desconocido", service: "varios", chip: "Intel", iac: true, os_rec: "12202088", notes: "P01 en trucks 1999-2000. Frágil." },
-  { year: [2001,2002,2003,2004], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 en Silverado/Sierra LM7 hasta 2004." },
-  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD sin IAC - DBW únicamente. Muy común en campo." },
-  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LQ4", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ4 6.0L - P59 AMD sin IAC. DBW." },
-  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "LQ9", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ9 6.0L SS - P59 AMD sin IAC." },
-  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "L59", pcm: "P59", gen: null, hw: "12589162", service: "12602802", chip: "AMD", iac: false, os_rec: "12592433", notes: "L59 Flex Fuel - OS 12592433 es el ideal para este vehículo. Patch disponible." },
+  { year: [1999,2000], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 2, hw: "unknown", service: "various", chip: "Intel", iac: true, os_rec: "12202088", notes: "P01 in 1999-2000 trucks. Fragile." },
+  { year: [2001,2002,2003,2004], model: "Silverado / Sierra", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "0411 in Silverado/Sierra LM7 through 2004." },
+  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD without IAC - DBW only. Very common in the field." },
+  { year: [2003,2004,2005,2006], model: "Silverado / Sierra", engine: "LQ4", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ4 6.0L - P59 AMD without IAC. DBW." },
+  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "LQ9", pcm: "P59", gen: null, hw: "12589162", service: "12589463 / 12602802", chip: "AMD", iac: false, os_rec: "12587603", notes: "LQ9 6.0L SS - P59 AMD without IAC." },
+  { year: [2004,2005,2006], model: "Silverado / Sierra", engine: "L59", pcm: "P59", gen: null, hw: "12589162", service: "12602802", chip: "AMD", iac: false, os_rec: "12592433", notes: "L59 Flex Fuel - OS 12592433 is the ideal one for this vehicle. Patch available." },
   // EXPRESS VAN
   { year: [2001,2002,2003,2004], model: "Express / Savana Van", engine: "L31", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "Express Van 5.7L L31 - P01 0411." },
-  { year: [2003,2004], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12570558", service: "12576106", chip: "Intel", iac: true, os_rec: "12587603", notes: "2003-04 - chip Intel con IAC. Puede usar OS Intel-only." },
-  { year: [2004,2005,2006,2007], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12589161", service: "12589462", chip: "AMD", iac: true, os_rec: "12587603", notes: "⭐ AMD con IAC - el hardware más deseable para swaps DBC." },
+  { year: [2003,2004], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12570558", service: "12576106", chip: "Intel", iac: true, os_rec: "12587603", notes: "2003-04 - Intel chip with IAC. Can use Intel-only OS." },
+  { year: [2004,2005,2006,2007], model: "Express / Savana Van", engine: "LM7", pcm: "P59", gen: null, hw: "12589161", service: "12589462", chip: "AMD", iac: true, os_rec: "12587603", notes: "⭐ AMD with IAC - the most desirable hardware for DBC swaps." },
   // GTO
-  { year: [2004], model: "GTO", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "Pontiac GTO 2004 - P59 AMD con IAC. Apto para DBC swap." },
+  { year: [2004], model: "GTO", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12587603", notes: "Pontiac GTO 2004 - P59 AMD with IAC. Suitable for DBC swap." },
   // TAHOE / YUKON / SUBURBAN
-  { year: [2001,2002,2003,2004], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "P01 0411 en SUVs GMT800 2001-04. Año 2000 usaba gen 2 (frágil)." },
-  { year: [2003,2004,2005,2006], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD sin IAC - DBW." },
+  { year: [2001,2002,2003,2004], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12212156", notes: "P01 0411 in GMT800 SUVs 2001-04. Year 2000 used gen 2 (fragile)." },
+  { year: [2003,2004,2005,2006], model: "Tahoe / Yukon / Suburban", engine: "LM7", pcm: "P59", gen: null, hw: "12589162", service: "12589463", chip: "AMD", iac: false, os_rec: "12587603", notes: "P59 AMD without IAC - DBW." },
   // S10 / TRAILBLAZER
-  { year: [2001,2002,2003,2004], model: "S10 / Blazer / Jimmy", engine: "4.3L V6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088", notes: "S10/Blazer 4.3L V6 - swap popular con 0411. Fábrica usó variantes según año. TrailBlazer 4.2L I6 usa PCM diferente (no compatible)." },
+  { year: [2001,2002,2003,2004], model: "S10 / Blazer / Jimmy", engine: "4.3L V6", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088", notes: "S10/Blazer 4.3L V6 - popular swap with 0411. Factory used variants depending on year. TrailBlazer 4.2L I6 uses a different PCM (not compatible)." },
   // HOLDEN
-  { year: [2001,2002,2003], model: "Holden Commodore VX/VY", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088 / 12225074", notes: "Australia - P01 0411. OS 12225074 para VY 2003-04." },
-  { year: [2004,2005,2006], model: "Holden Commodore VZ", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12592433", notes: "Australia - P59 AMD. OS 12592433 con Flex Fuel + Lean Cruise patch disponible." },
+  { year: [2001,2002,2003], model: "Holden Commodore VX/VY", engine: "LS1", pcm: "P01", gen: 3, hw: "09386530", service: "12200411", chip: "Intel", iac: true, os_rec: "12202088 / 12225074", notes: "Australia - P01 0411. OS 12225074 for VY 2003-04." },
+  { year: [2004,2005,2006], model: "Holden Commodore VZ", engine: "LS1", pcm: "P59", gen: null, hw: "12583659", service: "12586243", chip: "AMD", iac: true, os_rec: "12592433", notes: "Australia - P59 AMD. OS 12592433 with Flex Fuel + Lean Cruise patch available." },
 ];
 
 // ═══════════════════════════════════════════
@@ -1125,7 +1126,7 @@ function renderP59() {
       ? `<span class="badge badge-intel">⚠️ Intel</span>`
       : `<span class="badge badge-amd">AMD</span>`;
     const iacBadge = r.iac
-      ? `<span class="badge badge-iac-yes">✅ Sí</span>`
+      ? `<span class="badge badge-iac-yes">✅ Yes</span>`
       : `<span class="badge badge-iac-no">❌ No</span>`;
     const starBadge = r.star ? `<span class="badge badge-star">⭐ Ideal</span> ` : "";
     const veh = r.vehicles.slice(0, 2).map(v => hl(v, q)).join("<br>");
@@ -1146,7 +1147,7 @@ function renderP59() {
         <span class="cell-sub">${hl(r.throttle, q)}</span>
       </td>
       <td class="col-mobile-hide" style="font-size:12px">${hl(r.throttle, q)}</td>
-      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} more</span>` : ""}</td>
       <td>${starBadge}<span class="chevron">▼</span></td>
     </tr>
     <tr class="expand-row" id="expand-${r.hw}">
@@ -1154,20 +1155,20 @@ function renderP59() {
         <div class="expand-meta">
           <span><strong>${hl(r.year, q)}</strong>${r.star ? ' &nbsp;<span class="badge badge-star" style="font-size:10px;vertical-align:middle">⭐ Ideal swap</span>' : ''}</span>
           <span style="color:var(--accent);font-size:11px">${hl(r.throttle, q)}</span>
-          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} más` : ""}</span>
+          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} more` : ""}</span>
         </div>
         <div class="expand-inner">
           <div class="expand-section">
-            <h4>Todos los vehículos</h4>
+            <h4>All Vehicles</h4>
             <ul>${r.vehicles.map(v => `<li>${v}</li>`).join("")}</ul>
           </div>
           <div class="expand-section">
-            <h4>OS Compatibles</h4>
+            <h4>Compatible OS</h4>
             <p>${r.os_compat.map(o => `<span class="os-tag" onclick="goToOS(event,'${o.replace(' ✱','')}')">${o}</span>`).join("")}</p>
-            ${r.intel_warn ? `<p style="margin-top:8px;font-size:11px;color:#fbbf24">✱ Intel-only: solo en chip Intel</p>` : ""}
+            ${r.intel_warn ? `<p style="margin-top:8px;font-size:11px;color:#fbbf24">✱ Intel-only: only on Intel chip</p>` : ""}
           </div>
           <div class="expand-section">
-            <h4>Notas técnicas</h4>
+            <h4>Technical Notes</h4>
             <p>${r.notes}</p>
           </div>
         </div>
@@ -1194,8 +1195,8 @@ function renderP01() {
 
   tbody.innerHTML = rows.map(r => {
     const statusBadge = r.status === "recommended"
-      ? `<span class="badge badge-star">⭐ Recomendado</span>`
-      : `<span class="badge badge-fragile">⚠️ Frágil</span>`;
+      ? `<span class="badge badge-star">⭐ Recommended</span>`
+      : `<span class="badge badge-fragile">⚠️ Fragile</span>`;
     const veh = r.vehicles.slice(0, 2).map(v => hl(v, q)).join("<br>");
     const genColor = r.gen === 3 ? "#4ade80" : "#f87171";
     return `
@@ -1212,7 +1213,7 @@ function renderP01() {
       <td class="col-mobile-hide">${hl(r.years, q)}</td>
       <td class="col-mobile-hide">${hl(r.nickname, q)}</td>
       <td class="col-mobile-hide" style="font-size:11px">${hl(r.chip, q)}</td>
-      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} más</span>` : ""}</td>
+      <td class="col-mobile-hide" style="font-size:12px;line-height:1.6">${veh}${r.vehicles.length > 2 ? `<br><span style="color:var(--text2)">+${r.vehicles.length-2} more</span>` : ""}</td>
       <td>${statusBadge}</td>
       <td><span class="chevron">▼</span></td>
     </tr>
@@ -1221,19 +1222,19 @@ function renderP01() {
         <div class="expand-meta">
           <span><strong>${hl(r.years, q)}</strong> &nbsp;·&nbsp; ${hl(r.nickname, q)}</span>
           <span style="color:var(--text2);font-size:11px">${hl(r.chip, q)}</span>
-          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} más` : ""}</span>
+          <span>${r.vehicles.slice(0,2).map(v => hl(v,q)).join(" · ")}${r.vehicles.length > 2 ? ` · +${r.vehicles.length-2} more` : ""}</span>
         </div>
         <div class="expand-inner">
           <div class="expand-section">
-            <h4>Todos los vehículos</h4>
+            <h4>All Vehicles</h4>
             <ul>${r.vehicles.map(v => `<li>${v}</li>`).join("")}</ul>
           </div>
           <div class="expand-section">
-            <h4>OS Compatibles</h4>
+            <h4>Compatible OS</h4>
             <p>${r.os_compat.map(o => `<span class="os-tag" onclick="goToOS(event,'${o}')">${o}</span>`).join("")}</p>
           </div>
           <div class="expand-section">
-            <h4>Notas técnicas</h4>
+            <h4>Technical Notes</h4>
             <p>${r.notes}</p>
           </div>
         </div>
@@ -1278,7 +1279,7 @@ function renderOS() {
       ? `<span class="badge badge-warn">⚠️ ${r.chip_req}</span>`
       : `<span class="badge badge-ok">${r.chip_req}</span>`;
     const flexCell = r.flex
-      ? `<span class="badge badge-flex">✅ Sí</span>`
+      ? `<span class="badge badge-flex">✅ Yes</span>`
       : `<span style="color:var(--text2);font-size:12px">-</span>`;
     return `<tr>
       <td>
@@ -1300,7 +1301,7 @@ function renderOS() {
   const tbody01 = document.getElementById("os-p01-tbody");
   tbody01.innerHTML = OS_P01.map(r => {
     const flexCell = r.flex
-      ? `<span class="badge badge-flex">✅ Único</span>`
+      ? `<span class="badge badge-flex">✅ Only</span>`
       : `<span style="color:var(--text2);font-size:12px">-</span>`;
     return `<tr>
       <td>
@@ -1353,9 +1354,9 @@ function updateModels() {
   const yr = parseInt(document.getElementById("lk-year").value);
   const models = [...new Set(VEHICLE_DB.filter(r => r.year.includes(yr)).map(r => r.model))].sort();
   const sel = document.getElementById("lk-model");
-  sel.innerHTML = '<option value="">-- Seleccionar --</option>';
+  sel.innerHTML = '<option value="">-- Select --</option>';
   models.forEach(m => { const o = document.createElement("option"); o.value = m; o.textContent = m; sel.appendChild(o); });
-  document.getElementById("lk-engine").innerHTML = '<option value="">-- Seleccionar --</option>';
+  document.getElementById("lk-engine").innerHTML = '<option value="">-- Select --</option>';
   document.getElementById("lookup-result").classList.remove("visible");
 }
 
@@ -1364,7 +1365,7 @@ function updateEngines() {
   const mdl = document.getElementById("lk-model").value;
   const engines = [...new Set(VEHICLE_DB.filter(r => r.year.includes(yr) && r.model === mdl).map(r => r.engine))].sort();
   const sel = document.getElementById("lk-engine");
-  sel.innerHTML = '<option value="">-- Seleccionar --</option>';
+  sel.innerHTML = '<option value="">-- Select --</option>';
   engines.forEach(e => { const o = document.createElement("option"); o.value = e; o.textContent = e; sel.appendChild(o); });
   document.getElementById("lookup-result").classList.remove("visible");
 }
@@ -1376,7 +1377,7 @@ function doLookup() {
   const res = document.getElementById("lookup-result");
 
   if (!yr || !mdl || !eng) {
-    res.innerHTML = '<div class="no-match">Selecciona año, modelo y motor para buscar.</div>';
+    res.innerHTML = '<div class="no-match">Select year, model and engine to search.</div>';
     res.classList.add("visible");
     return;
   }
@@ -1384,7 +1385,7 @@ function doLookup() {
   const match = VEHICLE_DB.find(r => r.year.includes(yr) && r.model === mdl && r.engine === eng);
 
   if (!match) {
-    res.innerHTML = '<div class="no-match">No se encontró registro para esta combinación. Puede ser que el vehículo use un PCM no documentado aquí.</div>';
+    res.innerHTML = '<div class="no-match">No record found for this combination. The vehicle may use a PCM not documented here.</div>';
     res.classList.add("visible");
     return;
   }
@@ -1396,7 +1397,7 @@ function doLookup() {
     : `<span style="font-size:12px">${match.chip}</span>`;
 
   const iacBadge = match.iac
-    ? `<span class="badge badge-iac-yes">✅ Sí - apto DBC</span>`
+    ? `<span class="badge badge-iac-yes">✅ Yes - DBC capable</span>`
     : `<span class="badge badge-iac-no">❌ No - DBW only</span>`;
 
   const pcmBadge = match.pcm === "P01"
@@ -1404,23 +1405,23 @@ function doLookup() {
     : `<span class="badge badge-ok">P59 1MB</span>`;
 
   const warnHtml = match.pcm === "P01" && match.gen < 3
-    ? `<div class="warn-banner" style="margin-top:12px"><span class="icon">⚠️</span><div><strong>PCM Frágil</strong> - Este vehículo usa P01 Gen${match.gen} (${match.years || yr}). Alta probabilidad de daño permanente al flashear sin repuestos disponibles.</div></div>`
+    ? `<div class="warn-banner" style="margin-top:12px"><span class="icon">⚠️</span><div><strong>Fragile PCM</strong> - This vehicle uses P01 Gen${match.gen} (${match.years || yr}). High chance of permanent damage when flashing without spares available.</div></div>`
     : "";
 
   res.innerHTML = `
-    <h3>Resultado: ${yr} ${mdl} ${eng}</h3>
+    <h3>Result: ${yr} ${mdl} ${eng}</h3>
     <div class="result-grid">
-      <div class="result-item"><label>Tipo PCM</label><div class="val">${pcmBadge}</div></div>
+      <div class="result-item"><label>PCM Type</label><div class="val">${pcmBadge}</div></div>
       <div class="result-item"><label>HW #</label><div class="val mono">${match.hw}</div></div>
       <div class="result-item"><label>Service #</label><div class="val mono">${match.service}</div></div>
       <div class="result-item"><label>Flash Chip</label><div class="val">${chipBadge}</div></div>
       <div class="result-item"><label>IAC / DBC</label><div class="val">${iacBadge}</div></div>
-      <div class="result-item"><label>OS Recomendado</label><div class="val mono">${match.os_rec}</div></div>
+      <div class="result-item"><label>Recommended OS</label><div class="val mono">${match.os_rec}</div></div>
     </div>
     <div class="result-note">${match.notes}</div>
     ${warnHtml}
     <div class="result-link">
-      <a href="#" onclick="gotoHW(event,'${match.pcm}','${match.hw}')">→ Ver en tabla de hardware ${match.pcm}</a>
+      <a href="#" onclick="gotoHW(event,'${match.pcm}','${match.hw}')">→ View in ${match.pcm} hardware table</a>
     </div>
   `;
   res.classList.add("visible");
@@ -1479,8 +1480,8 @@ window.addEventListener('hashchange', () => {
 </script>
 
 <footer>
-  <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
-  <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
+  <img src="/logo_mascota.svg" alt="AOR Dyno Tuning">
+  <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Advanced Reprogramming &bull; Tijuana, B.C. M&eacute;xico</p>
 </footer>
 
 </body>

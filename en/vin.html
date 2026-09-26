@@ -1,16 +1,18 @@
-﻿<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <title>Decodificador de VIN - AOR Dyno Tuning</title>
-  <meta name="description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN. Herramienta gratuita basada en datos NHTSA vPIC.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <title>VIN Decoder - AOR Dyno Tuning</title>
+  <meta name="description" content="Look up the factory specifications of any vehicle using its VIN number. Free tool powered by NHTSA vPIC data.">
   <meta name="author" content="AOR Dyno Tuning">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://aordynotuning.com/vin">
+  <link rel="canonical" href="https://aordynotuning.com/en/vin">
+
+  <!-- hreflang -->
   <link rel="alternate" hreflang="es" href="https://aordynotuning.com/vin">
   <link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/vin">
   <link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/vin">
@@ -23,17 +25,17 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Decodificador de VIN - AOR Dyno Tuning">
-  <meta property="og:description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN. Datos NHTSA vPIC.">
-  <meta property="og:url" content="https://aordynotuning.com/vin">
+  <meta property="og:title" content="VIN Decoder - AOR Dyno Tuning">
+  <meta property="og:description" content="Look up the factory specifications of any vehicle using its VIN number. NHTSA vPIC data.">
+  <meta property="og:url" content="https://aordynotuning.com/en/vin">
   <meta property="og:site_name" content="AOR Dyno Tuning">
-  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://aordynotuning.com/logo_mascota.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Decodificador de VIN - AOR Dyno Tuning">
-  <meta name="twitter:description" content="Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN.">
+  <meta name="twitter:title" content="VIN Decoder - AOR Dyno Tuning">
+  <meta name="twitter:description" content="Look up the factory specifications of any vehicle using its VIN number.">
   <meta name="twitter:image" content="https://aordynotuning.com/logo_mascota.png">
 
   <!-- Schema.org JSON-LD -->
@@ -41,12 +43,12 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Decodificador de VIN",
-    "description": "Consulta las especificaciones de fábrica de cualquier vehículo con su número VIN. Datos proporcionados por NHTSA vPIC.",
-    "url": "https://aordynotuning.com/vin",
+    "name": "VIN Decoder",
+    "description": "Look up the factory specifications of any vehicle using its VIN number. Data provided by NHTSA vPIC.",
+    "url": "https://aordynotuning.com/en/vin",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MXN" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": {
       "@type": "LocalBusiness",
       "name": "AOR Dyno Tuning",
@@ -64,7 +66,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="nav.js"></script>
+  <script src="/nav.js"></script>
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -428,15 +430,15 @@
 <body>
 
   <!-- NAV -->
-  <aor-nav active="vin"></aor-nav>
+  <aor-nav active="vin" lang="en"></aor-nav>
 
   <!-- MAIN -->
   <main>
 
     <div class="page-header">
-      <div class="page-header-tag">Herramientas</div>
-      <h1>Decodificador de VIN</h1>
-      <p>Ingresa el número VIN de 17 caracteres para consultar las especificaciones de fábrica. Datos provistos por <strong style="color:#bbb;">NHTSA vPIC</strong>.</p>
+      <div class="page-header-tag">Tools</div>
+      <h1>VIN Decoder</h1>
+      <p>Enter a 17-character VIN number to look up the factory specifications. Data provided by <strong style="color:#bbb;">NHTSA vPIC</strong>.</p>
     </div>
 
     <div class="vin-wrapper">
@@ -447,17 +449,17 @@
           <input
             type="text"
             id="vinInput"
-            placeholder="Ej: 1VWBH7A39DC062610"
+            placeholder="e.g. 1VWBH7A39DC062610"
             maxlength="17"
             autocomplete="off"
             autocorrect="off"
             autocapitalize="characters"
             spellcheck="false"
           >
-          <button id="decodeBtn" onclick="decodeVin()">Decodificar</button>
+          <button id="decodeBtn" onclick="decodeVin()">Decode</button>
         </div>
         <div class="vin-input-meta">
-          <button class="vin-example-link" onclick="loadExample()">Cargar ejemplo</button>
+          <button class="vin-example-link" onclick="loadExample()">Load example</button>
           <span class="vin-char-count"><span id="vinCount">0</span> / 17</span>
         </div>
         <div id="vinError" class="vin-error" style="display:none;"></div>
@@ -466,7 +468,7 @@
       <!-- LOADING -->
       <div id="vinLoading" class="vin-loading" style="display:none;">
         <div class="vin-spinner"></div>
-        <span>Decodificando VIN&hellip;</span>
+        <span>Decoding VIN&hellip;</span>
       </div>
 
       <!-- RESULTS -->
@@ -480,32 +482,32 @@
 
         <!-- B) Summary -->
         <div class="vin-card">
-          <div class="vin-card-header">Especificaciones</div>
+          <div class="vin-card-header">Specifications</div>
           <div id="vinSummary" class="vin-summary-list"></div>
         </div>
 
         <div id="vinInductionWarning" class="vin-induction-warning" style="display:none;">
           <svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>NHTSA no reporta el tipo de inducción para este vehículo. El campo <strong>Motor</strong> no incluye turbo/supercargador pero esto no confirma que sea aspiración natural. Verifica las especificaciones del fabricante.</span>
+          <span>NHTSA does not report the induction type for this vehicle. The <strong>Engine</strong> field does not include turbo/supercharger, but this does not confirm it is naturally aspirated. Check the manufacturer's specifications.</span>
         </div>
 
         <!-- C) Full table (collapsible) -->
         <div>
           <button class="vin-toggle-btn" id="toggleFullBtn" onclick="toggleFullTable()">
-            <span id="toggleFullLabel">Ver todos los campos</span>
+            <span id="toggleFullLabel">View all fields</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
           <div id="vinFullTable" style="display:none;">
             <table class="vin-table">
-              <thead><tr><th>Campo</th><th>Valor</th></tr></thead>
+              <thead><tr><th>Field</th><th>Value</th></tr></thead>
               <tbody id="vinTableBody"></tbody>
             </table>
           </div>
         </div>
 
-        <p class="vin-credit">Datos: <a href="https://vpic.nhtsa.dot.gov/api/" target="_blank" rel="noopener">NHTSA vPIC Public API</a> - resultados pueden variar según el registro del fabricante.</p>
+        <p class="vin-credit">Data: <a href="https://vpic.nhtsa.dot.gov/api/" target="_blank" rel="noopener">NHTSA vPIC Public API</a> - results may vary depending on the manufacturer's records.</p>
       </div>
 
     </div>
@@ -513,8 +515,8 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="logo_mascota.svg" alt="AOR Dyno Tuning">
-    <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Reprogramaciones Avanzadas &bull; Tijuana, B.C. M&eacute;xico</p>
+    <img src="/logo_mascota.svg" alt="AOR Dyno Tuning">
+    <p>&copy; 2026 <span>AOR Dyno Tuning</span> - Advanced Tuning &bull; Tijuana, B.C. Mexico</p>
   </footer>
 
   <script>
@@ -593,7 +595,7 @@
       document.getElementById('vinLoading').style.display = on ? 'flex' : 'none';
       const btn = document.getElementById('decodeBtn');
       btn.disabled = on;
-      btn.textContent = on ? 'Decodificando…' : 'Decodificar';
+      btn.textContent = on ? 'Decoding…' : 'Decode';
     }
     function hideResults() {
       document.getElementById('vinResults').style.display = 'none';
@@ -602,15 +604,15 @@
     // ─── Validation ───
     function validateVin(vin) {
       if (vin.length === 0) {
-        showError('Ingresa un VIN para decodificar.');
+        showError('Enter a VIN to decode.');
         return false;
       }
       if (vin.length !== 17) {
-        showError(`El VIN debe tener exactamente 17 caracteres (tienes ${vin.length}).`);
+        showError(`The VIN must be exactly 17 characters (you have ${vin.length}).`);
         return false;
       }
       if (!VIN_REGEX.test(vin)) {
-        showError('El VIN contiene caracteres inválidos. Las letras <strong>I</strong>, <strong>O</strong> y <strong>Q</strong> no están permitidas en un VIN.');
+        showError('The VIN contains invalid characters. The letters <strong>I</strong>, <strong>O</strong>, and <strong>Q</strong> are not allowed in a VIN.');
         return false;
       }
       return true;
@@ -631,7 +633,7 @@
         const data = await res.json();
 
         if (!data.Results || !data.Results.length) {
-          showError('No se encontraron resultados para este VIN.');
+          showError('No results found for this VIN.');
           return;
         }
 
@@ -639,14 +641,14 @@
 
         // Hard fail: no usable data at all
         if (!r.Make && !r.Model && !r.ModelYear) {
-          showError('NHTSA no pudo identificar este VIN. ' + (r.ErrorText ? '<br>' + escapeHtml(r.ErrorText) : ''));
+          showError('NHTSA could not identify this VIN. ' + (r.ErrorText ? '<br>' + escapeHtml(r.ErrorText) : ''));
           return;
         }
 
         renderResults(r, vin);
 
       } catch (e) {
-        showError('No se pudo conectar con NHTSA. Verifica tu conexión e intenta de nuevo.');
+        showError('Could not connect to NHTSA. Check your connection and try again.');
       } finally {
         setLoading(false);
       }
@@ -672,7 +674,7 @@
       const engineStr = disp ? `${disp}${induction}` : '';
       const parts     = [make, model, engineStr, year].filter(Boolean);
 
-      document.getElementById('vinTitle').textContent      = parts.join(' ') || 'Vehículo desconocido';
+      document.getElementById('vinTitle').textContent      = parts.join(' ') || 'Unknown vehicle';
       document.getElementById('vinVinDisplay').textContent = vin;
     }
 
@@ -691,13 +693,13 @@
       // Engine composite
       const disp    = formatDisplacement(r.DisplacementL);
       const dispStr = disp ? disp + 'L' : '';
-      const cylStr  = r.EngineCylinders && r.EngineCylinders !== '0' ? r.EngineCylinders + ' cil' : '';
+      const cylStr  = r.EngineCylinders && r.EngineCylinders !== '0' ? r.EngineCylinders + ' cyl' : '';
       const hpStr   = r.EngineHP && r.EngineHP !== '0' ? r.EngineHP + ' HP' : '';
       const engineStr = [dispStr, cylStr, inductionLabel, hpStr].filter(Boolean).join(' · ');
 
       // Transmission composite
       const transStyle  = !isSkippable(r.TransmissionStyle)  ? r.TransmissionStyle  : '';
-      const transSpeeds = !isSkippable(r.TransmissionSpeeds) ? r.TransmissionSpeeds + ' vel.' : '';
+      const transSpeeds = !isSkippable(r.TransmissionSpeeds) ? r.TransmissionSpeeds + ' spd' : '';
       const transStr    = [transStyle, transSpeeds].filter(Boolean).join(' · ');
 
       // Plant composite
@@ -706,25 +708,25 @@
         .map(v => smartCase(v))
         .join(', ');
 
-      // Trim / Serie: prefer Trim, fallback to Series
-      const trimSerie = (!isSkippable(r.Trim) ? r.Trim : null)
-                     || (!isSkippable(r.Series) ? r.Series : null)
-                     || '';
+      // Trim / Series: prefer Trim, fallback to Series
+      const trimSeries = (!isSkippable(r.Trim) ? r.Trim : null)
+                      || (!isSkippable(r.Series) ? r.Series : null)
+                      || '';
 
       const fields = [
-        { label: 'Año',                value: r.ModelYear },
-        { label: 'Marca',              value: smartCase(r.Make) },
-        { label: 'Modelo',             value: smartCase(r.Model) },
-        { label: 'Trim / Serie',       value: trimSerie },
-        { label: 'Carrocería',         value: r.BodyClass },
-        { label: 'Motor',              value: engineStr },
-        { label: 'Transmisión',        value: transStr },
-        { label: 'Tracción',           value: r.DriveType },
-        { label: 'Combustible',        value: r.FuelTypePrimary },
-        { label: 'Fabricante',         value: smartCase(r.Manufacturer) },
-        { label: 'Planta de ensamble', value: plantStr },
-        { label: 'Tipo de vehículo',   value: r.VehicleType },
-        { label: 'GVWR',               value: r.GVWR },
+        { label: 'Year',              value: r.ModelYear },
+        { label: 'Make',              value: smartCase(r.Make) },
+        { label: 'Model',             value: smartCase(r.Model) },
+        { label: 'Trim / Series',     value: trimSeries },
+        { label: 'Body Style',        value: r.BodyClass },
+        { label: 'Engine',            value: engineStr },
+        { label: 'Transmission',      value: transStr },
+        { label: 'Drivetrain',        value: r.DriveType },
+        { label: 'Fuel',              value: r.FuelTypePrimary },
+        { label: 'Manufacturer',      value: smartCase(r.Manufacturer) },
+        { label: 'Assembly Plant',    value: plantStr },
+        { label: 'Vehicle Type',      value: r.VehicleType },
+        { label: 'GVWR',              value: r.GVWR },
       ];
 
       const container = document.getElementById('vinSummary');
@@ -747,7 +749,7 @@
       const toggleBtn = document.getElementById('toggleFullBtn');
       toggleBtn.classList.remove('open');
       document.getElementById('vinFullTable').style.display = 'none';
-      document.getElementById('toggleFullLabel').textContent = 'Ver todos los campos';
+      document.getElementById('toggleFullLabel').textContent = 'View all fields';
 
       Object.entries(r).forEach(([key, value]) => {
         if (SUMMARY_KEYS.has(key)) return;
@@ -768,7 +770,7 @@
       const isOpen  = table.style.display !== 'none';
       table.style.display = isOpen ? 'none' : 'block';
       btn.classList.toggle('open', !isOpen);
-      label.textContent = isOpen ? 'Ver todos los campos' : 'Ocultar campos';
+      label.textContent = isOpen ? 'View all fields' : 'Hide fields';
     }
 
     // ─── Input UX ───

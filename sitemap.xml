@@ -1,26 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://aordynotuning.com/</loc>
-    <lastmod>2026-04-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://aordynotuning.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/"/>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://aordynotuning.com/calculadora</loc>
-    <lastmod>2026-04-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/calculadora"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/calculadora"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/calculadora"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aordynotuning.com/en/calculadora</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/calculadora"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/calculadora"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/calculadora"/>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aordynotuning.com/vin</loc>
-    <lastmod>2026-04-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/vin"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/vin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/vin"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aordynotuning.com/en/vin</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/vin"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/vin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/vin"/>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aordynotuning.com/pcm</loc>
-    <lastmod>2026-05-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/pcm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/pcm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/pcm"/>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aordynotuning.com/en/pcm</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aordynotuning.com/pcm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aordynotuning.com/en/pcm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aordynotuning.com/pcm"/>
+    <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
